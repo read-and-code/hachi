@@ -1,2 +1,3 @@
 rootProject.name = 'corgi'
 include 'corgi-antlr'
+include 'corgi-lang'
