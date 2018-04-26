@@ -1,4 +1,4 @@
-package corgi.lang.bytecode
+package corgi.lang.bytecode.instructions
 
 import jdk.internal.org.objectweb.asm.MethodVisitor
 

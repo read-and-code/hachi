@@ -2,7 +2,7 @@ package corgi.lang
 
 import corgi.antlr.CorgiLexer
 import corgi.antlr.CorgiParser
-import corgi.lang.bytecode.Instruction
+import corgi.lang.bytecode.instructions.Instruction
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import java.util.*

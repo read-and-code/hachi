@@ -2,9 +2,9 @@ package corgi.lang
 
 import corgi.antlr.CorgiBaseListener
 import corgi.antlr.CorgiParser
-import corgi.lang.bytecode.Instruction
-import corgi.lang.bytecode.PrintVariable
-import corgi.lang.bytecode.VariableDeclaration
+import corgi.lang.bytecode.instructions.Instruction
+import corgi.lang.bytecode.instructions.PrintVariable
+import corgi.lang.bytecode.instructions.VariableDeclaration
 import org.antlr.v4.runtime.tree.TerminalNode
 import java.util.*
 import kotlin.collections.HashMap
