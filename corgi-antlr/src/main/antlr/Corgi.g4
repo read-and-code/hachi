@@ -1,22 +1,21 @@
-//header
 grammar Corgi;
 
 @header {
     package corgi.antlr;
 }
 
-//RULES
-compilationUnit : ( variable | print )* EOF; //root rule - our code consist consist only of variables and prints (see definition below)
-variable : VARIABLE ID EQUALS value; //requires VAR token followed by ID token followed by EQUALS TOKEN ...
-print : PRINT ID ; //print statement must consist of 'print' keyword and ID
+// RULES
+compilationUnit : ( variable | print )* EOF;
+variable : VARIABLE ID EQUALS value;
+print : PRINT ID;
 value : op=NUMBER
-      | op=STRING ; //must be NUMBER or STRING value (defined below)
+      | op=STRING;
 
-//TOKENS
-VARIABLE : 'var' ; //VARIABLE TOKEN must match exactly 'var'
-PRINT : 'print' ;
-EQUALS : '=' ; //must be '='
-NUMBER : [0-9]+ ; //must consist only of digits
-STRING : '"'.*'"' ; //must be anything in qutoes
-ID : [a-zA-Z0-9]+ ; //must be any alphanumeric value
-WS: [ \t\n\r]+ -> skip ; //special TOKEN for skipping whitespaces
+// TOKENS
+VARIABLE : 'var';
+PRINT : 'print';
+EQUALS : '=';
+NUMBER : [0-9]+;
+STRING : '"'.*'"';
+ID : [a-zA-Z0-9]+;
+WHITE_SPACE: [ \t\n\r]+ -> skip;

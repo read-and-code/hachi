@@ -19,7 +19,7 @@ public class CorgiParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		VARIABLE=1, PRINT=2, EQUALS=3, NUMBER=4, STRING=5, ID=6, WS=7;
+		VARIABLE=1, PRINT=2, EQUALS=3, NUMBER=4, STRING=5, ID=6, WHITE_SPACE=7;
 	public static final int
 		RULE_compilationUnit = 0, RULE_variable = 1, RULE_print = 2, RULE_value = 3;
 	public static final String[] ruleNames = {
@@ -30,7 +30,7 @@ public class CorgiParser extends Parser {
 		null, "'var'", "'print'", "'='"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "ID", "WS"
+		null, "VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "ID", "WHITE_SPACE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 

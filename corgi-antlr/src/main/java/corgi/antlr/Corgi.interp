@@ -16,7 +16,7 @@ EQUALS
 NUMBER
 STRING
 ID
-WS
+WHITE_SPACE
 
 rule names:
 compilationUnit

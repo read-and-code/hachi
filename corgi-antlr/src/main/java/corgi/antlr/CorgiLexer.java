@@ -19,7 +19,7 @@ public class CorgiLexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		VARIABLE=1, PRINT=2, EQUALS=3, NUMBER=4, STRING=5, ID=6, WS=7;
+		VARIABLE=1, PRINT=2, EQUALS=3, NUMBER=4, STRING=5, ID=6, WHITE_SPACE=7;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -29,14 +29,14 @@ public class CorgiLexer extends Lexer {
 	};
 
 	public static final String[] ruleNames = {
-		"VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "ID", "WS"
+		"VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "ID", "WHITE_SPACE"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'var'", "'print'", "'='"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "ID", "WS"
+		null, "VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "ID", "WHITE_SPACE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
