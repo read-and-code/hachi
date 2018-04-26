@@ -1,1 +1,1 @@
-# corgi [![CircleCI](https://circleci.com/gh/Frederick-S/corgi.svg?style=shield)](https://circleci.com/gh/Frederick-S/corgi)
+# corgi [![CircleCI](https://circleci.com/gh/Frederick-S/corgi.svg?style=shield)](https://circleci.com/gh/Frederick-S/corgi) [![Build status](https://ci.appveyor.com/api/projects/status/396ql9h7g2fb3g2u/branch/master?svg=true)](https://ci.appveyor.com/project/Frederick-S/corgi/branch/master)
