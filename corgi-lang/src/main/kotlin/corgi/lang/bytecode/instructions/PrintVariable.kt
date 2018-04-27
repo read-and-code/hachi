@@ -5,7 +5,7 @@ import corgi.lang.Variable
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class PrintVariable(var variable: Variable) : Instruction, Opcodes {
+class PrintVariable(var variable: Variable) : ClassScopeInstruction, Opcodes {
     override fun apply(methodVisitor: MethodVisitor) {
         methodVisitor.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
 

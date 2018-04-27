@@ -5,7 +5,7 @@ import corgi.lang.Variable
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class VariableDeclaration(var variable: Variable) : Instruction, Opcodes {
+class VariableDeclaration(var variable: Variable) : ClassScopeInstruction, Opcodes {
     override fun apply(methodVisitor: MethodVisitor) {
         when (this.variable.type) {
             CorgiParser.NUMBER -> {

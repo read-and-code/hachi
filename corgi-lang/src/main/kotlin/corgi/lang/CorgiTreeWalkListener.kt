@@ -2,7 +2,7 @@ package corgi.lang
 
 import corgi.antlr.CorgiBaseListener
 import corgi.antlr.CorgiParser
-import corgi.lang.bytecode.instructions.Instruction
+import corgi.lang.bytecode.instructions.ClassScopeInstruction
 import corgi.lang.bytecode.instructions.PrintVariable
 import corgi.lang.bytecode.instructions.VariableDeclaration
 import org.antlr.v4.runtime.tree.TerminalNode
@@ -10,9 +10,13 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class CorgiTreeWalkListener : CorgiBaseListener() {
-    val instructions = ArrayDeque<Instruction>()
+    val classScopeInstructions = ArrayDeque<ClassScopeInstruction>()
 
     val variables = HashMap<String, Variable>()
+
+    lateinit var compilationUnit: CompilationUnit
+
+    lateinit var classDeclaration: ClassDeclaration
 
     override fun exitVariable(variableContext: CorgiParser.VariableContext) {
         val variableName = variableContext.ID()
@@ -23,7 +27,7 @@ class CorgiTreeWalkListener : CorgiBaseListener() {
         val variable = Variable(variableIndex, variableType, variableText)
 
         this.variables[variableName.text] = variable
-        this.instructions.add(VariableDeclaration(variable))
+        this.classScopeInstructions.add(VariableDeclaration(variable))
         this.logVariableDeclarationStatementFound(variableName, valueContext)
     }
 
@@ -35,7 +39,7 @@ class CorgiTreeWalkListener : CorgiBaseListener() {
             true -> {
                 val variable = this.variables[variableName.text]
 
-                this.instructions.add(PrintVariable(variable!!))
+                this.classScopeInstructions.add(PrintVariable(variable!!))
                 this.logPrintStatementFound(variableName, variable)
             }
             false -> {
@@ -44,6 +48,20 @@ class CorgiTreeWalkListener : CorgiBaseListener() {
                 println(message.format(variableName.text))
             }
         }
+    }
+
+    override fun exitCompilationUnit(compilationUnitContext: CorgiParser.CompilationUnitContext) {
+        super.enterCompilationUnit(compilationUnitContext)
+
+        this.compilationUnit = CompilationUnit(this.classDeclaration)
+    }
+
+    override fun exitClassDeclaration(classDeclarationContext: CorgiParser.ClassDeclarationContext) {
+        super.enterClassDeclaration(classDeclarationContext)
+
+        val className = classDeclarationContext.className().text
+
+        this.classDeclaration = ClassDeclaration(this.classScopeInstructions, className)
     }
 
     private fun logVariableDeclarationStatementFound(variableName: TerminalNode, valueContext: CorgiParser.ValueContext) {

@@ -1,24 +1,20 @@
 package corgi.lang
 
-import corgi.lang.bytecode.ByteCodeGenerator
 import java.io.File
 import java.io.FileOutputStream
 
 class Compiler {
     fun compile(file: File) {
-        val fileName = file.name
-        val className = fileName.replace(".cg", "")
-        val instructions = SyntaxTreeTraverser().getInstructions(file.absolutePath)
-        val byteCode = ByteCodeGenerator().generateByteCode(instructions, className)
+        val compilationUnit = SyntaxTreeTraverser().getCompilationUnit(file.absolutePath)
 
-        this.saveByteCodeToClassFile(file.absolutePath, byteCode)
+        this.saveByteCodeToClassFile(compilationUnit)
     }
 
-    private fun saveByteCodeToClassFile(fileName: String, byteCode: ByteArray) {
-        val classFile = fileName.replace(".cg", ".class")
+    private fun saveByteCodeToClassFile(compilationUnit: CompilationUnit) {
+        val classFile = compilationUnit.classDeclaration.name + ".class"
         val outputStream = FileOutputStream(classFile)
 
-        outputStream.write(byteCode)
+        outputStream.write(compilationUnit.getByteCode())
         outputStream.close()
     }
 }

@@ -5,7 +5,10 @@ grammar Corgi;
 }
 
 // RULES
-compilationUnit : ( variable | print )* EOF;
+compilationUnit : classDeclaration EOF;
+classDeclaration : className '{' classBody '}';
+className : ID;
+classBody : ( variable | print )*;
 variable : VARIABLE ID EQUALS value;
 print : PRINT ID;
 value : op=NUMBER
@@ -16,6 +19,6 @@ VARIABLE : 'var';
 PRINT : 'print';
 EQUALS : '=';
 NUMBER : [0-9]+;
-STRING : '"'.*'"';
+STRING : '"'.*?'"';
 ID : [a-zA-Z0-9]+;
 WHITE_SPACE: [ \t\n\r]+ -> skip;
