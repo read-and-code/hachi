@@ -11,7 +11,7 @@ import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
 class StatementGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
-    val expressionGenerator = ExpressionGenerator(methodVisitor, scope)
+    private val expressionGenerator = ExpressionGenerator(methodVisitor, scope)
 
     fun generate(printStatement: PrintStatement) {
         this.methodVisitor.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;")
@@ -24,7 +24,7 @@ class StatementGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
         val owner = ClassType("java.io.PrintStream")
         val fieldDescriptor = owner.getDescriptor()
 
-        methodVisitor.visitFieldInsn(Opcodes.INVOKEVIRTUAL, fieldDescriptor, "println", descriptor)
+        methodVisitor.visitMethodInsn(Opcodes.INVOKEVIRTUAL, fieldDescriptor, "println", descriptor, false)
     }
 
     fun generate(variableDeclarationStatement: VariableDeclarationStatement) {
