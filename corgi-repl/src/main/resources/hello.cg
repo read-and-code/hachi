@@ -1,6 +1,8 @@
 app {
-    var five = 5
-    print five
-    var dupa = "dupa"
-    print dupa
+    void main(string[] args) {
+        var five = 5
+        print five
+        var dupa = "dupa"
+        print dupa
+    }
 }
