@@ -1,4 +1,4 @@
-package corgi.lang
+package corgi.lang.parsing
 
 import org.antlr.v4.runtime.BaseErrorListener
 import org.antlr.v4.runtime.RecognitionException

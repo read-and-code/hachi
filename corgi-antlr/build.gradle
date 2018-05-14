@@ -10,4 +10,5 @@ dependencies {
 
 generateGrammarSource {
     outputDirectory = file("src/main/java/corgi/antlr")
+    arguments += ["-visitor"]
 }
