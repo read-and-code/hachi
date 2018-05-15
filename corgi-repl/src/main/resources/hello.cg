@@ -1,8 +1,9 @@
 app {
     void main(string[] args) {
         var five = 5
+        var hello = "hello"
+
         print five
-        var dupa = "dupa"
-        print dupa
+        print hello
     }
 }

@@ -42,7 +42,7 @@ object TypeResolver {
 
     private fun getBuiltInType(typeName: String): BuiltInType? {
         return BuiltInType.values()
-                .filter { it -> it.name == typeName }
+                .filter { it -> it.getName() == typeName }
                 .firstOrNull()
     }
 }
