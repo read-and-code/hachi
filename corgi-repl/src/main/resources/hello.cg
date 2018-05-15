@@ -1,6 +1,7 @@
 app {
     void main(string[] args) {
-        var x = 25
+        var x = "hello"
+
         metoda(x)
     }
 

@@ -41,7 +41,7 @@ class ExpressionGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
 
         when (type) {
             BuiltInType.INT -> this.methodVisitor.visitIntInsn(Opcodes.BIPUSH, stringValue.toInt())
-            BuiltInType.STRING -> this.methodVisitor.visitLdcInsn(stringValue)
+            BuiltInType.STRING -> this.methodVisitor.visitLdcInsn(stringValue.removePrefix("\"").removeSuffix("\""))
         }
     }
 
