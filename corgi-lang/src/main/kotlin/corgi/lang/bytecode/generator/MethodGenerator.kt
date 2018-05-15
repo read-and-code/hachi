@@ -5,7 +5,7 @@ import corgi.lang.util.DescriptorFactory
 import jdk.internal.org.objectweb.asm.ClassWriter
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class MethodGenerator(val classWriter: ClassWriter) {
+class MethodGenerator(private val classWriter: ClassWriter) {
     fun generate(function: Function) {
         val scope = function.scope
         val functionName = function.name
@@ -17,7 +17,7 @@ class MethodGenerator(val classWriter: ClassWriter) {
         methodVisitor.visitCode()
 
         val statementGenerator = StatementGenerator(methodVisitor, scope)
-        statements.forEach { it -> it.accept(statementGenerator) }
+        statements.forEach { it.accept(statementGenerator) }
 
         methodVisitor.visitInsn(Opcodes.RETURN)
         methodVisitor.visitMaxs(-1, -1)

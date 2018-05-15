@@ -10,7 +10,7 @@ import corgi.lang.domain.type.ClassType
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class StatementGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
+class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Scope) {
     private val expressionGenerator = ExpressionGenerator(methodVisitor, scope)
 
     fun generate(printStatement: PrintStatement) {

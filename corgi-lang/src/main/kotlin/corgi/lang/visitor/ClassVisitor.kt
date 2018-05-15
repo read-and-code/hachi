@@ -17,11 +17,11 @@ class ClassVisitor : CorgiBaseVisitor<ClassDeclaration>() {
 
         this.scope = Scope(metaData)
 
-        val functionSignatures = functionContexts.map { it -> it.functionDeclaration().accept(functionSignatureVisitor) }
+        val functionSignatures = functionContexts.map { it.functionDeclaration().accept(functionSignatureVisitor) }
 
-        functionSignatures.forEach { it -> this.scope.addFunctionSignature(it) }
+        functionSignatures.forEach { this.scope.addFunctionSignature(it) }
 
-        val methods = functionContexts.map { it -> it.accept(FunctionVisitor(this.scope)) }
+        val methods = functionContexts.map { it.accept(FunctionVisitor(this.scope)) }
 
         return ClassDeclaration(className, methods)
     }

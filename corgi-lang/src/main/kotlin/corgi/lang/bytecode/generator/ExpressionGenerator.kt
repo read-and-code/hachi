@@ -13,7 +13,7 @@ import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 import jdk.internal.org.objectweb.asm.Type
 
-class ExpressionGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
+class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: Scope) {
     fun generate(variableReference: VariableReference) {
         val variableName = variableReference.variableName
         val index = this.scope.getLocalVariableIndex(variableName)
@@ -48,12 +48,9 @@ class ExpressionGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
 
     fun generate(functionCall: FunctionCall) {
         val parameters = functionCall.parameters
-        parameters.forEach { it -> it.accept(this) }
+        parameters.forEach { it.accept(this) }
 
-        val owner = when (functionCall.owner) {
-            null -> ClassType(this.scope.getClassName())
-            else -> functionCall.owner
-        }
+        val owner = functionCall.owner ?: ClassType(this.scope.getClassName())
         val methodDescriptor = this.getFunctionDescriptor(functionCall)
         val ownerDescriptor = owner.getInternalName()
         val functionName = functionCall.getFunctionName()
@@ -72,21 +69,18 @@ class ExpressionGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
     }
 
     private fun getDescriptorForFunctionOnClasspath(functionCall: FunctionCall): String? {
-        try {
+        return try {
             val functionName = functionCall.getFunctionName()
             val owner = functionCall.owner
-            val className = when (owner) {
-                null -> this.scope.getClassName()
-                else -> owner.getName()
-            }
+            val className = owner?.getName() ?: this.scope.getClassName()
             val clazz = Class.forName(className)
             val method = clazz.getMethod(functionName)
 
-            return Type.getMethodDescriptor(method)
+            Type.getMethodDescriptor(method)
         } catch (e: ReflectiveOperationException) {
             e.printStackTrace()
 
-            return ""
+            ""
         }
     }
 }

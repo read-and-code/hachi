@@ -28,8 +28,8 @@ class Scope {
     }
 
     fun getFunctionSignature(methodName: String): FunctionSignature {
-        return this.functionSignatures.filter { it -> it.name == methodName }
-                .firstOrNull() ?: throw MethodSignatureNotFoundException(this, methodName)
+        return this.functionSignatures.firstOrNull { it.name == methodName }
+                ?: throw MethodSignatureNotFoundException(this, methodName)
     }
 
     fun addLocalVariable(localVariable: LocalVariable) {
@@ -37,8 +37,8 @@ class Scope {
     }
 
     fun getLocalVariable(variableName: String): LocalVariable {
-        return this.localVariables.filter { it -> it.name == variableName }
-                .firstOrNull() ?: throw LocalVariableNotFoundException(this, variableName)
+        return this.localVariables.firstOrNull { it.name == variableName }
+                ?: throw LocalVariableNotFoundException(this, variableName)
     }
 
     fun getLocalVariableIndex(variableName: String): Int {

@@ -16,7 +16,7 @@ class Compiler {
         val byteCodeGenerator = ByteCodeGenerator()
         val byteCode = byteCodeGenerator.generate(compilationUnit)
         val className = compilationUnit.getClassName()
-        val fileName = className + ".class"
+        val fileName = "%s.class".format(className)
         val outputStream = FileOutputStream(fileName)
 
         outputStream.write(byteCode)

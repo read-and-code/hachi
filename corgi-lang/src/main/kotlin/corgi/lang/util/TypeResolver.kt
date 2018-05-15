@@ -13,17 +13,10 @@ object TypeResolver {
 
         val typeName = typeContext.text
 
-        if (typeName == "java.lang.String") {
-            return BuiltInType.STRING
+        return when (typeName) {
+            "java.lang.String" -> BuiltInType.STRING
+            else -> this.getBuiltInType(typeName) ?: ClassType(typeName)
         }
-
-        val builtInType = this.getBuiltInType(typeName)
-
-        if (builtInType != null) {
-            return builtInType
-        }
-
-        return ClassType(typeName)
     }
 
     fun getFromValue(value: String): Type {
@@ -42,7 +35,6 @@ object TypeResolver {
 
     private fun getBuiltInType(typeName: String): BuiltInType? {
         return BuiltInType.values()
-                .filter { it -> it.getName() == typeName }
-                .firstOrNull()
+                .firstOrNull { it.getName() == typeName }
     }
 }

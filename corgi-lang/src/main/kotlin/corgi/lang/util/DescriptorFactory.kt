@@ -14,8 +14,8 @@ object DescriptorFactory {
         return this.getMethodDescriptor(functionSignature.arguments, functionSignature.returnType)
     }
 
-    fun getMethodDescriptor(arguments: Collection<FunctionParameter>, returnType: Type): String {
-        val argumentDescriptors = arguments.map { it -> it.type.getDescriptor() }
+    private fun getMethodDescriptor(arguments: Collection<FunctionParameter>, returnType: Type): String {
+        val argumentDescriptors = arguments.map { it.type.getDescriptor() }
                 .joinToString("", "(", ")")
 
         return argumentDescriptors + returnType.getDescriptor()

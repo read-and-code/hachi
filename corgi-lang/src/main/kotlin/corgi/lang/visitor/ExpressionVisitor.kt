@@ -28,7 +28,7 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
         val functionName = functionCallContext.functionName().text
         val functionSignature = this.scope.getFunctionSignature(functionName)
         val calledParameters = functionCallContext.expressionList().expression()
-        val arguments = calledParameters.map { it -> it.accept(this) }
+        val arguments = calledParameters.map { it.accept(this) }
 
         return FunctionCall(null, functionSignature, arguments)
     }

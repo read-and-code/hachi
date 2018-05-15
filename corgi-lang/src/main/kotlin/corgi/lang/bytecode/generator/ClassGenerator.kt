@@ -14,7 +14,7 @@ class ClassGenerator {
 
         this.classWriter.visit(this.classVersion, Opcodes.ACC_PUBLIC + Opcodes.ACC_SUPER, name, null, "java/lang/Object", null)
 
-        classDeclaration.methods.forEach { it -> MethodGenerator(this.classWriter).generate(it) }
+        classDeclaration.methods.forEach { MethodGenerator(this.classWriter).generate(it) }
 
         this.classWriter.visitEnd()
 

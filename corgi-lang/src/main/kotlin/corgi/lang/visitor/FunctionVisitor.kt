@@ -39,11 +39,11 @@ class FunctionVisitor : CorgiBaseVisitor<Function> {
     private fun getArguments(functionContext: CorgiParser.FunctionContext): List<FunctionParameter> {
         val functionArgumentContexts = functionContext.functionDeclaration().functionArgument()
 
-        val functionParameters = functionArgumentContexts.map { it ->
+        val functionParameters = functionArgumentContexts.map {
             FunctionParameter(it.ID().text, TypeResolver.getFromTypeName(it.type()))
         }
 
-        functionParameters.forEach { it -> this.scope.addLocalVariable(LocalVariable(it.name, it.type)) }
+        functionParameters.forEach { this.scope.addLocalVariable(LocalVariable(it.name, it.type)) }
 
         return functionParameters
     }
@@ -51,6 +51,6 @@ class FunctionVisitor : CorgiBaseVisitor<Function> {
     private fun getStatements(functionContext: CorgiParser.FunctionContext): List<Statement> {
         val statementVisitor = StatementVisitor(this.scope)
 
-        return functionContext.blockStatement().map { it -> it.accept(statementVisitor) }
+        return functionContext.blockStatement().map { it.accept(statementVisitor) }
     }
 }
