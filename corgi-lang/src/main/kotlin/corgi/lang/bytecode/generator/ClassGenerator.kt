@@ -1,4 +1,4 @@
-package corgi.lang.bytecode.generators
+package corgi.lang.bytecode.generator
 
 import corgi.lang.domain.global.ClassDeclaration
 import jdk.internal.org.objectweb.asm.ClassWriter

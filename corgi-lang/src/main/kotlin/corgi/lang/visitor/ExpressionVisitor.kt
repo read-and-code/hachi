@@ -1,13 +1,13 @@
-package corgi.lang.visitors
+package corgi.lang.visitor
 
 import corgi.antlr.CorgiBaseVisitor
 import corgi.antlr.CorgiParser
-import corgi.lang.domain.expressions.Expression
-import corgi.lang.domain.expressions.FunctionCall
-import corgi.lang.domain.expressions.Value
-import corgi.lang.domain.expressions.VariableReference
+import corgi.lang.domain.expression.Expression
+import corgi.lang.domain.expression.FunctionCall
+import corgi.lang.domain.expression.Value
+import corgi.lang.domain.expression.VariableReference
 import corgi.lang.domain.scope.Scope
-import corgi.lang.utils.TypeResolver
+import corgi.lang.util.TypeResolver
 
 class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
     override fun visitVariableReference(variableReferenceContext: CorgiParser.VariableReferenceContext): Expression {

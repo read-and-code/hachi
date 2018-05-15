@@ -1,7 +1,7 @@
-package corgi.lang.utils
+package corgi.lang.util
 
 import corgi.lang.domain.`class`.Function
-import corgi.lang.domain.expressions.FunctionParameter
+import corgi.lang.domain.expression.FunctionParameter
 import corgi.lang.domain.scope.FunctionSignature
 import corgi.lang.domain.type.Type
 

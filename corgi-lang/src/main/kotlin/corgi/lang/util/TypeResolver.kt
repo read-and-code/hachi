@@ -1,4 +1,4 @@
-package corgi.lang.utils
+package corgi.lang.util
 
 import corgi.antlr.CorgiParser
 import corgi.lang.domain.type.BuiltInType

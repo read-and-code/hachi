@@ -1,10 +1,10 @@
-package corgi.lang.visitors
+package corgi.lang.visitor
 
 import corgi.antlr.CorgiBaseVisitor
 import corgi.antlr.CorgiParser
-import corgi.lang.domain.expressions.FunctionParameter
+import corgi.lang.domain.expression.FunctionParameter
 import corgi.lang.domain.scope.FunctionSignature
-import corgi.lang.utils.TypeResolver
+import corgi.lang.util.TypeResolver
 
 class FunctionSignatureVisitor : CorgiBaseVisitor<FunctionSignature>() {
     override fun visitFunctionDeclaration(functionDeclarationContext: CorgiParser.FunctionDeclarationContext): FunctionSignature {

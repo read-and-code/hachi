@@ -1,6 +1,6 @@
 package corgi.lang
 
-import corgi.lang.bytecode.generators.ByteCodeGenerator
+import corgi.lang.bytecode.generator.ByteCodeGenerator
 import corgi.lang.domain.global.CompilationUnit
 import java.io.File
 import java.io.FileOutputStream

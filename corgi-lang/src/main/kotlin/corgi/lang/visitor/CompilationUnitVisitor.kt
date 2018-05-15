@@ -1,4 +1,4 @@
-package corgi.lang.visitors
+package corgi.lang.visitor
 
 import corgi.antlr.CorgiBaseVisitor
 import corgi.antlr.CorgiParser

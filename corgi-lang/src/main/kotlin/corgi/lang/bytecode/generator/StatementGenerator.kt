@@ -1,6 +1,6 @@
-package corgi.lang.bytecode.generators
+package corgi.lang.bytecode.generator
 
-import corgi.lang.domain.expressions.FunctionCall
+import corgi.lang.domain.expression.FunctionCall
 import corgi.lang.domain.scope.LocalVariable
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.statement.PrintStatement

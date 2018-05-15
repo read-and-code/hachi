@@ -1,14 +1,14 @@
-package corgi.lang.visitors
+package corgi.lang.visitor
 
 import corgi.antlr.CorgiBaseVisitor
 import corgi.antlr.CorgiParser
 import corgi.lang.domain.`class`.Function
-import corgi.lang.domain.expressions.FunctionParameter
+import corgi.lang.domain.expression.FunctionParameter
 import corgi.lang.domain.scope.LocalVariable
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.statement.Statement
 import corgi.lang.domain.type.Type
-import corgi.lang.utils.TypeResolver
+import corgi.lang.util.TypeResolver
 
 class FunctionVisitor : CorgiBaseVisitor<Function> {
     var scope: Scope

@@ -1,7 +1,7 @@
-package corgi.lang.bytecode.generators
+package corgi.lang.bytecode.generator
 
 import corgi.lang.domain.`class`.Function
-import corgi.lang.utils.DescriptorFactory
+import corgi.lang.util.DescriptorFactory
 import jdk.internal.org.objectweb.asm.ClassWriter
 import jdk.internal.org.objectweb.asm.Opcodes
 

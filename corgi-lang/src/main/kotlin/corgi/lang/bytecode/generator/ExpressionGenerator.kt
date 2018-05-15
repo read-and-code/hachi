@@ -1,13 +1,13 @@
-package corgi.lang.bytecode.generators
+package corgi.lang.bytecode.generator
 
-import corgi.lang.domain.expressions.FunctionCall
-import corgi.lang.domain.expressions.FunctionParameter
-import corgi.lang.domain.expressions.Value
-import corgi.lang.domain.expressions.VariableReference
+import corgi.lang.domain.expression.FunctionCall
+import corgi.lang.domain.expression.FunctionParameter
+import corgi.lang.domain.expression.Value
+import corgi.lang.domain.expression.VariableReference
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
-import corgi.lang.utils.DescriptorFactory
+import corgi.lang.util.DescriptorFactory
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 import jdk.internal.org.objectweb.asm.Type

@@ -4,7 +4,7 @@ import corgi.antlr.CorgiLexer
 import corgi.antlr.CorgiParser
 import corgi.lang.domain.global.CompilationUnit
 import corgi.lang.parsing.CorgiTreeWalkErrorListener
-import corgi.lang.visitors.CompilationUnitVisitor
+import corgi.lang.visitor.CompilationUnitVisitor
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 

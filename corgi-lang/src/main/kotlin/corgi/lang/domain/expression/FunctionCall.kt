@@ -1,7 +1,7 @@
-package corgi.lang.domain.expressions
+package corgi.lang.domain.expression
 
-import corgi.lang.bytecode.generators.ExpressionGenerator
-import corgi.lang.bytecode.generators.StatementGenerator
+import corgi.lang.bytecode.generator.ExpressionGenerator
+import corgi.lang.bytecode.generator.StatementGenerator
 import corgi.lang.domain.scope.FunctionSignature
 import corgi.lang.domain.statement.Statement
 import corgi.lang.domain.type.Type
