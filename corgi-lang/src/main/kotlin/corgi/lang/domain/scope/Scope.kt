@@ -1,6 +1,8 @@
 package corgi.lang.domain.scope
 
 import corgi.lang.domain.global.MetaData
+import corgi.lang.expression.LocalVariableNotFoundException
+import corgi.lang.expression.MethodSignatureNotFoundException
 
 class Scope {
     var localVariables: MutableList<LocalVariable>
@@ -27,7 +29,7 @@ class Scope {
 
     fun getFunctionSignature(methodName: String): FunctionSignature {
         return this.functionSignatures.filter { it -> it.name == methodName }
-                .first()
+                .firstOrNull() ?: throw MethodSignatureNotFoundException(this, methodName)
     }
 
     fun addLocalVariable(localVariable: LocalVariable) {
@@ -36,7 +38,7 @@ class Scope {
 
     fun getLocalVariable(variableName: String): LocalVariable {
         return this.localVariables.filter { it -> it.name == variableName }
-                .first()
+                .firstOrNull() ?: throw LocalVariableNotFoundException(this, variableName)
     }
 
     fun getLocalVariableIndex(variableName: String): Int {
@@ -46,6 +48,10 @@ class Scope {
     }
 
     fun getClassName(): String {
+        return this.metaData.className
+    }
+
+    override fun toString(): String {
         return this.metaData.className
     }
 }

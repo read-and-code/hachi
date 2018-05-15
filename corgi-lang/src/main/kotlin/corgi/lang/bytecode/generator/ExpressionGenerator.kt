@@ -7,6 +7,7 @@ import corgi.lang.domain.expression.VariableReference
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
+import corgi.lang.expression.CalledFunctionDoesNotExistException
 import corgi.lang.util.DescriptorFactory
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
@@ -60,9 +61,10 @@ class ExpressionGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
         this.methodVisitor.visitMethodInsn(Opcodes.INVOKESTATIC, ownerDescriptor, functionName, methodDescriptor, false)
     }
 
-    private fun getFunctionDescriptor(functionCall: FunctionCall): String? {
+    private fun getFunctionDescriptor(functionCall: FunctionCall): String {
         return this.getDescriptorForFunctionInScope(functionCall)
-                ?: this.getDescriptorForFunctionOnClasspath(functionCall)
+                ?: (this.getDescriptorForFunctionOnClasspath(functionCall)
+                        ?: throw CalledFunctionDoesNotExistException(functionCall))
     }
 
     private fun getDescriptorForFunctionInScope(functionCall: FunctionCall): String? {
