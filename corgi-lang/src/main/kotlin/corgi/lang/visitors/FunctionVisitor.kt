@@ -10,7 +10,13 @@ import corgi.lang.domain.statement.Statement
 import corgi.lang.domain.type.Type
 import corgi.lang.utils.TypeResolver
 
-class FunctionVisitor(val scope: Scope) : CorgiBaseVisitor<Function>() {
+class FunctionVisitor : CorgiBaseVisitor<Function> {
+    var scope: Scope
+
+    constructor(scope: Scope) {
+        this.scope = Scope(scope)
+    }
+
     override fun visitFunction(functionContext: CorgiParser.FunctionContext): Function {
         val functionName = this.getName(functionContext)
         val returnType = this.getReturnType(functionContext)

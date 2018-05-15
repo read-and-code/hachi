@@ -1,9 +1,10 @@
 app {
     void main(string[] args) {
-        var five = 5
-        var hello = "hello"
+        var x = 25
+        metoda(x)
+    }
 
-        print five
-        print hello
+    void metoda(int param) {
+        print param
     }
 }

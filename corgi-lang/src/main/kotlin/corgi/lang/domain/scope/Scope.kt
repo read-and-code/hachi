@@ -7,7 +7,7 @@ class Scope {
 
     var functionSignatures: MutableList<FunctionSignature>
 
-    lateinit var metaData: MetaData
+    var metaData: MetaData
 
     constructor(metaData: MetaData) {
         this.localVariables = mutableListOf()
@@ -18,6 +18,7 @@ class Scope {
     constructor(scope: Scope) {
         this.localVariables = mutableListOf()
         this.functionSignatures = ArrayList(scope.functionSignatures)
+        this.metaData = scope.metaData
     }
 
     fun addFunctionSignature(functionSignature: FunctionSignature) {
