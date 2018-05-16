@@ -65,7 +65,7 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
     }
 
     private fun getDescriptorForFunctionInScope(functionCall: FunctionCall): String? {
-        return DescriptorFactory.getMethodDescriptor(functionCall.signature)
+        return DescriptorFactory.getMethodDescriptor(functionCall.functionSignature)
     }
 
     private fun getDescriptorForFunctionOnClasspath(functionCall: FunctionCall): String? {
