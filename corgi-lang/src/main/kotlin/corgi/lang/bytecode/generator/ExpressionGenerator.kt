@@ -4,6 +4,7 @@ import corgi.lang.domain.expression.FunctionCall
 import corgi.lang.domain.expression.FunctionParameter
 import corgi.lang.domain.expression.Value
 import corgi.lang.domain.expression.VariableReference
+import corgi.lang.domain.math.*
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
@@ -56,6 +57,35 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
         val functionName = functionCall.getFunctionName()
 
         this.methodVisitor.visitMethodInsn(Opcodes.INVOKESTATIC, ownerDescriptor, functionName, methodDescriptor, false)
+    }
+
+    fun generate(addition: Addition) {
+        this.evaluateArithmeticComponents(addition)
+
+        this.methodVisitor.visitInsn(Opcodes.IADD)
+    }
+
+    fun generate(subtraction: Subtraction) {
+        this.evaluateArithmeticComponents(subtraction)
+
+        this.methodVisitor.visitInsn(Opcodes.ISUB)
+    }
+
+    fun generate(multiplication: Multiplication) {
+        this.evaluateArithmeticComponents(multiplication)
+
+        this.methodVisitor.visitInsn(Opcodes.IMUL)
+    }
+
+    fun generate(division: Division) {
+        this.evaluateArithmeticComponents(division)
+
+        this.methodVisitor.visitInsn(Opcodes.IDIV)
+    }
+
+    private fun evaluateArithmeticComponents(arithmeticExpression: ArithmeticExpression) {
+        arithmeticExpression.leftExpression.accept(this)
+        arithmeticExpression.rightExpression.accept(this)
     }
 
     private fun getFunctionDescriptor(functionCall: FunctionCall): String {
