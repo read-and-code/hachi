@@ -34,17 +34,17 @@ printStatement : PRINT expression;
 functionCall : functionName '('expressionList ')';
 name : ID;
 expressionList : expression (',' expression)*;
-expression : variableReference
-           | value
-           | functionCall
-           | '('expression '*' expression')'
-           | expression '*' expression
-           | '(' expression '/' expression ')'
-           | expression '/' expression
-           | '(' expression '+' expression ')'
-           | expression '+' expression
-           | '(' expression '-' expression ')'
-           | expression '-' expression;
+expression : variableReference #VARIABLE_REFERENCE
+           | value #VALUE
+           | functionCall #FUNCTION_CALL
+           | '('expression '*' expression')' #MULTIPLY
+           | expression '*' expression #MULTIPLY
+           | '(' expression '/' expression ')' #DIVIDE
+           | expression '/' expression #DIVIDE
+           | '(' expression '+' expression ')' #ADD
+           | expression '+' expression #ADD
+           | '(' expression '-' expression ')' #SUBTRACT
+           | expression '-' expression #SUBTRACT;
 variableReference : ID;
 value : op=NUMBER
       | op=STRING;

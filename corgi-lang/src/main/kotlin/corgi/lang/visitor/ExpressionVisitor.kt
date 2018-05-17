@@ -6,6 +6,10 @@ import corgi.lang.domain.expression.Expression
 import corgi.lang.domain.expression.FunctionCall
 import corgi.lang.domain.expression.Value
 import corgi.lang.domain.expression.VariableReference
+import corgi.lang.domain.math.Addition
+import corgi.lang.domain.math.Division
+import corgi.lang.domain.math.Multiplication
+import corgi.lang.domain.math.Subtraction
 import corgi.lang.domain.scope.Scope
 import corgi.lang.util.TypeResolver
 
@@ -31,5 +35,41 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
         val arguments = calledParameters.map { it.accept(this) }
 
         return FunctionCall(null, functionSignature, arguments)
+    }
+
+    override fun visitADD(addContext: CorgiParser.ADDContext): Expression {
+        val leftExpressionContext = addContext.expression(0)
+        val rightExpressionContext = addContext.expression(1)
+        val leftExpression = leftExpressionContext.accept(this)
+        val rightExpression = rightExpressionContext.accept(this)
+
+        return Addition(leftExpression, rightExpression)
+    }
+
+    override fun visitMULTIPLY(multiplyContext: CorgiParser.MULTIPLYContext): Expression {
+        val leftExpressionContext = multiplyContext.expression(0)
+        val rightExpressionContext = multiplyContext.expression(1)
+        val leftExpression = leftExpressionContext.accept(this)
+        val rightExpression = rightExpressionContext.accept(this)
+
+        return Multiplication(leftExpression, rightExpression)
+    }
+
+    override fun visitSUBTRACT(subtractContext: CorgiParser.SUBTRACTContext): Expression {
+        val leftExpressionContext = subtractContext.expression(0)
+        val rightExpressionContext = subtractContext.expression(1)
+        val leftExpression = leftExpressionContext.accept(this)
+        val rightExpression = rightExpressionContext.accept(this)
+
+        return Subtraction(leftExpression, rightExpression)
+    }
+
+    override fun visitDIVIDE(divideContext: CorgiParser.DIVIDEContext): Expression {
+        val leftExpressionContext = divideContext.expression(0)
+        val rightExpressionContext = divideContext.expression(1)
+        val leftExpression = leftExpressionContext.accept(this)
+        val rightExpression = rightExpressionContext.accept(this)
+
+        return Division(leftExpression, rightExpression)
     }
 }

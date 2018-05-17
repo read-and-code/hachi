@@ -121,11 +121,54 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpressionList(CorgiParser.ExpressionListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CorgiParser#expression}.
+	 * Visit a parse tree produced by the {@code ADD}
+	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(CorgiParser.ExpressionContext ctx);
+	T visitADD(CorgiParser.ADDContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code VARIABLE_REFERENCE}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVARIABLE_REFERENCE(CorgiParser.VARIABLE_REFERENCEContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FUNCTION_CALL}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFUNCTION_CALL(CorgiParser.FUNCTION_CALLContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code MULTIPLY}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMULTIPLY(CorgiParser.MULTIPLYContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code VALUE}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVALUE(CorgiParser.VALUEContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SUBTRACT}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSUBTRACT(CorgiParser.SUBTRACTContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code DIVIDE}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDIVIDE(CorgiParser.DIVIDEContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CorgiParser#variableReference}.
 	 * @param ctx the parse tree

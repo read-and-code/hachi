@@ -234,13 +234,85 @@ public class CorgiBaseListener implements CorgiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression(CorgiParser.ExpressionContext ctx) { }
+	@Override public void enterADD(CorgiParser.ADDContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression(CorgiParser.ExpressionContext ctx) { }
+	@Override public void exitADD(CorgiParser.ADDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVARIABLE_REFERENCE(CorgiParser.VARIABLE_REFERENCEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVARIABLE_REFERENCE(CorgiParser.VARIABLE_REFERENCEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFUNCTION_CALL(CorgiParser.FUNCTION_CALLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFUNCTION_CALL(CorgiParser.FUNCTION_CALLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMULTIPLY(CorgiParser.MULTIPLYContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMULTIPLY(CorgiParser.MULTIPLYContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVALUE(CorgiParser.VALUEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVALUE(CorgiParser.VALUEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSUBTRACT(CorgiParser.SUBTRACTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSUBTRACT(CorgiParser.SUBTRACTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDIVIDE(CorgiParser.DIVIDEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDIVIDE(CorgiParser.DIVIDEContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
