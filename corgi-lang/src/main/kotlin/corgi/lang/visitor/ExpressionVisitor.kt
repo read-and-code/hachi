@@ -37,7 +37,7 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
         return FunctionCall(null, functionSignature, arguments)
     }
 
-    override fun visitADD(addContext: CorgiParser.ADDContext): Expression {
+    override fun visitAdd(addContext: CorgiParser.AddContext): Expression {
         val leftExpressionContext = addContext.expression(0)
         val rightExpressionContext = addContext.expression(1)
         val leftExpression = leftExpressionContext.accept(this)
@@ -46,7 +46,7 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
         return Addition(leftExpression, rightExpression)
     }
 
-    override fun visitMULTIPLY(multiplyContext: CorgiParser.MULTIPLYContext): Expression {
+    override fun visitMultiply(multiplyContext: CorgiParser.MultiplyContext): Expression {
         val leftExpressionContext = multiplyContext.expression(0)
         val rightExpressionContext = multiplyContext.expression(1)
         val leftExpression = leftExpressionContext.accept(this)
@@ -55,7 +55,7 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
         return Multiplication(leftExpression, rightExpression)
     }
 
-    override fun visitSUBTRACT(subtractContext: CorgiParser.SUBTRACTContext): Expression {
+    override fun visitSubtract(subtractContext: CorgiParser.SubtractContext): Expression {
         val leftExpressionContext = subtractContext.expression(0)
         val rightExpressionContext = subtractContext.expression(1)
         val leftExpression = leftExpressionContext.accept(this)
@@ -64,7 +64,7 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
         return Subtraction(leftExpression, rightExpression)
     }
 
-    override fun visitDIVIDE(divideContext: CorgiParser.DIVIDEContext): Expression {
+    override fun visitDivide(divideContext: CorgiParser.DivideContext): Expression {
         val leftExpressionContext = divideContext.expression(0)
         val rightExpressionContext = divideContext.expression(1)
         val leftExpression = leftExpressionContext.accept(this)

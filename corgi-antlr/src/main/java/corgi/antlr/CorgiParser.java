@@ -1347,148 +1347,148 @@ public class CorgiParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class ADDContext extends ExpressionContext {
+	public static class AddContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public ADDContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public AddContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterADD(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterAdd(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitADD(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitAdd(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitADD(this);
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitAdd(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class VARIABLE_REFERENCEContext extends ExpressionContext {
-		public VariableReferenceContext variableReference() {
-			return getRuleContext(VariableReferenceContext.class,0);
-		}
-		public VARIABLE_REFERENCEContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterVARIABLE_REFERENCE(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitVARIABLE_REFERENCE(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitVARIABLE_REFERENCE(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FUNCTION_CALLContext extends ExpressionContext {
-		public FunctionCallContext functionCall() {
-			return getRuleContext(FunctionCallContext.class,0);
-		}
-		public FUNCTION_CALLContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterFUNCTION_CALL(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitFUNCTION_CALL(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitFUNCTION_CALL(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class MULTIPLYContext extends ExpressionContext {
+	public static class DivideContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public MULTIPLYContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public DivideContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterMULTIPLY(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterDivide(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitMULTIPLY(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitDivide(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitMULTIPLY(this);
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitDivide(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class VALUEContext extends ExpressionContext {
+	public static class Value1Context extends ExpressionContext {
 		public ValueContext value() {
 			return getRuleContext(ValueContext.class,0);
 		}
-		public VALUEContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public Value1Context(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterVALUE(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterValue1(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitVALUE(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitValue1(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitVALUE(this);
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitValue1(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class SUBTRACTContext extends ExpressionContext {
+	public static class MultiplyContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public SUBTRACTContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public MultiplyContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterSUBTRACT(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterMultiply(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitSUBTRACT(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitMultiply(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitSUBTRACT(this);
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitMultiply(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class DIVIDEContext extends ExpressionContext {
+	public static class VariableReference1Context extends ExpressionContext {
+		public VariableReferenceContext variableReference() {
+			return getRuleContext(VariableReferenceContext.class,0);
+		}
+		public VariableReference1Context(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterVariableReference1(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitVariableReference1(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitVariableReference1(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class SubtractContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public DIVIDEContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public SubtractContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterDIVIDE(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterSubtract(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitDIVIDE(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitSubtract(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitDIVIDE(this);
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitSubtract(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FunctionCall1Context extends ExpressionContext {
+		public FunctionCallContext functionCall() {
+			return getRuleContext(FunctionCallContext.class,0);
+		}
+		public FunctionCall1Context(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterFunctionCall1(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitFunctionCall1(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitFunctionCall1(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1513,7 +1513,7 @@ public class CorgiParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
 			case 1:
 				{
-				_localctx = new VARIABLE_REFERENCEContext(_localctx);
+				_localctx = new VariableReference1Context(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
@@ -1523,7 +1523,7 @@ public class CorgiParser extends Parser {
 				break;
 			case 2:
 				{
-				_localctx = new VALUEContext(_localctx);
+				_localctx = new Value1Context(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(215);
@@ -1532,7 +1532,7 @@ public class CorgiParser extends Parser {
 				break;
 			case 3:
 				{
-				_localctx = new FUNCTION_CALLContext(_localctx);
+				_localctx = new FunctionCall1Context(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(216);
@@ -1541,7 +1541,7 @@ public class CorgiParser extends Parser {
 				break;
 			case 4:
 				{
-				_localctx = new MULTIPLYContext(_localctx);
+				_localctx = new MultiplyContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(217);
@@ -1558,7 +1558,7 @@ public class CorgiParser extends Parser {
 				break;
 			case 5:
 				{
-				_localctx = new DIVIDEContext(_localctx);
+				_localctx = new DivideContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(223);
@@ -1575,7 +1575,7 @@ public class CorgiParser extends Parser {
 				break;
 			case 6:
 				{
-				_localctx = new ADDContext(_localctx);
+				_localctx = new AddContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(229);
@@ -1592,7 +1592,7 @@ public class CorgiParser extends Parser {
 				break;
 			case 7:
 				{
-				_localctx = new SUBTRACTContext(_localctx);
+				_localctx = new SubtractContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(235);
@@ -1622,7 +1622,7 @@ public class CorgiParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
 					case 1:
 						{
-						_localctx = new MULTIPLYContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new MultiplyContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(243);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
@@ -1634,7 +1634,7 @@ public class CorgiParser extends Parser {
 						break;
 					case 2:
 						{
-						_localctx = new DIVIDEContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new DivideContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(246);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
@@ -1646,7 +1646,7 @@ public class CorgiParser extends Parser {
 						break;
 					case 3:
 						{
-						_localctx = new ADDContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new AddContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(249);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
@@ -1658,7 +1658,7 @@ public class CorgiParser extends Parser {
 						break;
 					case 4:
 						{
-						_localctx = new SUBTRACTContext(new ExpressionContext(_parentctx, _parentState));
+						_localctx = new SubtractContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(252);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");

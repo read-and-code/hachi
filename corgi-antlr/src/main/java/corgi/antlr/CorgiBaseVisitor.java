@@ -145,49 +145,49 @@ public class CorgiBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitADD(CorgiParser.ADDContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAdd(CorgiParser.AddContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVARIABLE_REFERENCE(CorgiParser.VARIABLE_REFERENCEContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDivide(CorgiParser.DivideContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFUNCTION_CALL(CorgiParser.FUNCTION_CALLContext ctx) { return visitChildren(ctx); }
+	@Override public T visitValue1(CorgiParser.Value1Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMULTIPLY(CorgiParser.MULTIPLYContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMultiply(CorgiParser.MultiplyContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVALUE(CorgiParser.VALUEContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVariableReference1(CorgiParser.VariableReference1Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSUBTRACT(CorgiParser.SUBTRACTContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSubtract(CorgiParser.SubtractContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDIVIDE(CorgiParser.DIVIDEContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunctionCall1(CorgiParser.FunctionCall1Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -190,89 +190,89 @@ public interface CorgiListener extends ParseTreeListener {
 	 */
 	void exitExpressionList(CorgiParser.ExpressionListContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ADD}
+	 * Enter a parse tree produced by the {@code Add}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterADD(CorgiParser.ADDContext ctx);
+	void enterAdd(CorgiParser.AddContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ADD}
+	 * Exit a parse tree produced by the {@code Add}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitADD(CorgiParser.ADDContext ctx);
+	void exitAdd(CorgiParser.AddContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code VARIABLE_REFERENCE}
+	 * Enter a parse tree produced by the {@code Divide}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterVARIABLE_REFERENCE(CorgiParser.VARIABLE_REFERENCEContext ctx);
+	void enterDivide(CorgiParser.DivideContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code VARIABLE_REFERENCE}
+	 * Exit a parse tree produced by the {@code Divide}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitVARIABLE_REFERENCE(CorgiParser.VARIABLE_REFERENCEContext ctx);
+	void exitDivide(CorgiParser.DivideContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FUNCTION_CALL}
+	 * Enter a parse tree produced by the {@code value1}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterFUNCTION_CALL(CorgiParser.FUNCTION_CALLContext ctx);
+	void enterValue1(CorgiParser.Value1Context ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FUNCTION_CALL}
+	 * Exit a parse tree produced by the {@code value1}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitFUNCTION_CALL(CorgiParser.FUNCTION_CALLContext ctx);
+	void exitValue1(CorgiParser.Value1Context ctx);
 	/**
-	 * Enter a parse tree produced by the {@code MULTIPLY}
+	 * Enter a parse tree produced by the {@code Multiply}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterMULTIPLY(CorgiParser.MULTIPLYContext ctx);
+	void enterMultiply(CorgiParser.MultiplyContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code MULTIPLY}
+	 * Exit a parse tree produced by the {@code Multiply}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitMULTIPLY(CorgiParser.MULTIPLYContext ctx);
+	void exitMultiply(CorgiParser.MultiplyContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code VALUE}
+	 * Enter a parse tree produced by the {@code variableReference1}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterVALUE(CorgiParser.VALUEContext ctx);
+	void enterVariableReference1(CorgiParser.VariableReference1Context ctx);
 	/**
-	 * Exit a parse tree produced by the {@code VALUE}
+	 * Exit a parse tree produced by the {@code variableReference1}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitVALUE(CorgiParser.VALUEContext ctx);
+	void exitVariableReference1(CorgiParser.VariableReference1Context ctx);
 	/**
-	 * Enter a parse tree produced by the {@code SUBTRACT}
+	 * Enter a parse tree produced by the {@code Subtract}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterSUBTRACT(CorgiParser.SUBTRACTContext ctx);
+	void enterSubtract(CorgiParser.SubtractContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code SUBTRACT}
+	 * Exit a parse tree produced by the {@code Subtract}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitSUBTRACT(CorgiParser.SUBTRACTContext ctx);
+	void exitSubtract(CorgiParser.SubtractContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code DIVIDE}
+	 * Enter a parse tree produced by the {@code functionCall1}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterDIVIDE(CorgiParser.DIVIDEContext ctx);
+	void enterFunctionCall1(CorgiParser.FunctionCall1Context ctx);
 	/**
-	 * Exit a parse tree produced by the {@code DIVIDE}
+	 * Exit a parse tree produced by the {@code functionCall1}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitDIVIDE(CorgiParser.DIVIDEContext ctx);
+	void exitFunctionCall1(CorgiParser.FunctionCall1Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link CorgiParser#variableReference}.
 	 * @param ctx the parse tree

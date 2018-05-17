@@ -1,11 +1,7 @@
 app {
     void main(string[] args) {
-        var x = 1
+        var x = 2 + 3 * 4
 
-        metoda(x)
-    }
-
-    void metoda(int param) {
-        print param
+        print x
     }
 }
