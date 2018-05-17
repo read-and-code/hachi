@@ -1,4 +1,4 @@
-package corgi.lang.expression
+package corgi.lang.exception
 
 import corgi.lang.domain.expression.FunctionCall
 

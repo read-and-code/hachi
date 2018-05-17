@@ -1,3 +1,3 @@
-package corgi.lang.expression
+package corgi.lang.exception
 
 open class CompilationException : RuntimeException()

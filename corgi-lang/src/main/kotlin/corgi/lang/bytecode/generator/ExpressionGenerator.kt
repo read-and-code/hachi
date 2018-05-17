@@ -7,7 +7,7 @@ import corgi.lang.domain.expression.VariableReference
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
-import corgi.lang.expression.CalledFunctionDoesNotExistException
+import corgi.lang.exception.CalledFunctionDoesNotExistException
 import corgi.lang.util.DescriptorFactory
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes

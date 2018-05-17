@@ -1,8 +1,8 @@
 package corgi.lang.domain.scope
 
 import corgi.lang.domain.global.MetaData
-import corgi.lang.expression.FunctionSignatureNotFoundException
-import corgi.lang.expression.LocalVariableNotFoundException
+import corgi.lang.exception.FunctionSignatureNotFoundException
+import corgi.lang.exception.LocalVariableNotFoundException
 
 class Scope {
     var localVariables: MutableList<LocalVariable>

@@ -1,7 +1,7 @@
 package corgi.lang.visitor
 
 import corgi.antlr.CorgiBaseVisitor
-import corgi.lang.expression.NoVisitorReturnedValueException
+import corgi.lang.exception.NoVisitorReturnedValueException
 import org.antlr.v4.runtime.ParserRuleContext
 
 class CompositeVisitor<T>(vararg val visitors: CorgiBaseVisitor<T>) {

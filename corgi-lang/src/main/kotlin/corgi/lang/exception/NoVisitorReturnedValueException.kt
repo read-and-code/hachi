@@ -1,3 +1,3 @@
-package corgi.lang.expression
+package corgi.lang.exception
 
 class NoVisitorReturnedValueException : CompilationException()
