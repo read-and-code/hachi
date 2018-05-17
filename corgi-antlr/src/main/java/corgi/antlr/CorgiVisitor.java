@@ -135,12 +135,26 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDivide(CorgiParser.DivideContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code value1}
+	 * Visit a parse tree produced by the {@code variableReferenceLabel}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValue1(CorgiParser.Value1Context ctx);
+	T visitVariableReferenceLabel(CorgiParser.VariableReferenceLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code functionCallLabel}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCallLabel(CorgiParser.FunctionCallLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code valueLabel}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValueLabel(CorgiParser.ValueLabelContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Multiply}
 	 * labeled alternative in {@link CorgiParser#expression}.
@@ -149,26 +163,12 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultiply(CorgiParser.MultiplyContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code variableReference1}
-	 * labeled alternative in {@link CorgiParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableReference1(CorgiParser.VariableReference1Context ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Subtract}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSubtract(CorgiParser.SubtractContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code functionCall1}
-	 * labeled alternative in {@link CorgiParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionCall1(CorgiParser.FunctionCall1Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CorgiParser#variableReference}.
 	 * @param ctx the parse tree

@@ -34,9 +34,9 @@ printStatement : PRINT expression;
 functionCall : functionName '('expressionList ')';
 name : ID;
 expressionList : expression (',' expression)*;
-expression : variableReference #variableReference1
-           | value #value1
-           | functionCall #functionCall1
+expression : variableReference #variableReferenceLabel
+           | value #valueLabel
+           | functionCall #functionCallLabel
            | '('expression '*' expression')' #Multiply
            | expression '*' expression #Multiply
            | '(' expression '/' expression ')' #Divide

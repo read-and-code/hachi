@@ -1391,22 +1391,60 @@ public class CorgiParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class Value1Context extends ExpressionContext {
-		public ValueContext value() {
-			return getRuleContext(ValueContext.class,0);
+	public static class VariableReferenceLabelContext extends ExpressionContext {
+		public VariableReferenceContext variableReference() {
+			return getRuleContext(VariableReferenceContext.class,0);
 		}
-		public Value1Context(ExpressionContext ctx) { copyFrom(ctx); }
+		public VariableReferenceLabelContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterValue1(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterVariableReferenceLabel(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitValue1(this);
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitVariableReferenceLabel(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitValue1(this);
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitVariableReferenceLabel(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FunctionCallLabelContext extends ExpressionContext {
+		public FunctionCallContext functionCall() {
+			return getRuleContext(FunctionCallContext.class,0);
+		}
+		public FunctionCallLabelContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterFunctionCallLabel(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitFunctionCallLabel(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitFunctionCallLabel(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ValueLabelContext extends ExpressionContext {
+		public ValueContext value() {
+			return getRuleContext(ValueContext.class,0);
+		}
+		public ValueLabelContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterValueLabel(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitValueLabel(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitValueLabel(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1432,25 +1470,6 @@ public class CorgiParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class VariableReference1Context extends ExpressionContext {
-		public VariableReferenceContext variableReference() {
-			return getRuleContext(VariableReferenceContext.class,0);
-		}
-		public VariableReference1Context(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterVariableReference1(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitVariableReference1(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitVariableReference1(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class SubtractContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -1470,25 +1489,6 @@ public class CorgiParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitSubtract(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FunctionCall1Context extends ExpressionContext {
-		public FunctionCallContext functionCall() {
-			return getRuleContext(FunctionCallContext.class,0);
-		}
-		public FunctionCall1Context(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).enterFunctionCall1(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CorgiListener ) ((CorgiListener)listener).exitFunctionCall1(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CorgiVisitor ) return ((CorgiVisitor<? extends T>)visitor).visitFunctionCall1(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1513,7 +1513,7 @@ public class CorgiParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
 			case 1:
 				{
-				_localctx = new VariableReference1Context(_localctx);
+				_localctx = new VariableReferenceLabelContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
@@ -1523,7 +1523,7 @@ public class CorgiParser extends Parser {
 				break;
 			case 2:
 				{
-				_localctx = new Value1Context(_localctx);
+				_localctx = new ValueLabelContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(215);
@@ -1532,7 +1532,7 @@ public class CorgiParser extends Parser {
 				break;
 			case 3:
 				{
-				_localctx = new FunctionCall1Context(_localctx);
+				_localctx = new FunctionCallLabelContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(216);

@@ -258,13 +258,37 @@ public class CorgiBaseListener implements CorgiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValue1(CorgiParser.Value1Context ctx) { }
+	@Override public void enterVariableReferenceLabel(CorgiParser.VariableReferenceLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValue1(CorgiParser.Value1Context ctx) { }
+	@Override public void exitVariableReferenceLabel(CorgiParser.VariableReferenceLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionCallLabel(CorgiParser.FunctionCallLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionCallLabel(CorgiParser.FunctionCallLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValueLabel(CorgiParser.ValueLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValueLabel(CorgiParser.ValueLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -282,18 +306,6 @@ public class CorgiBaseListener implements CorgiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariableReference1(CorgiParser.VariableReference1Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariableReference1(CorgiParser.VariableReference1Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSubtract(CorgiParser.SubtractContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -301,18 +313,6 @@ public class CorgiBaseListener implements CorgiListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSubtract(CorgiParser.SubtractContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFunctionCall1(CorgiParser.FunctionCall1Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunctionCall1(CorgiParser.FunctionCall1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
