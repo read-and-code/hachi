@@ -5,7 +5,11 @@ import corgi.antlr.CorgiParser
 import corgi.lang.domain.expression.EmptyExpression
 import corgi.lang.domain.scope.LocalVariable
 import corgi.lang.domain.scope.Scope
-import corgi.lang.domain.statement.*
+import corgi.lang.domain.statement.Block
+import corgi.lang.domain.statement.PrintStatement
+import corgi.lang.domain.statement.ReturnStatement
+import corgi.lang.domain.statement.Statement
+import corgi.lang.domain.statement.VariableDeclarationStatement
 import corgi.lang.domain.type.BuiltInType
 
 class StatementVisitor(val scope: Scope) : CorgiBaseVisitor<Statement>() {

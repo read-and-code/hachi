@@ -1,7 +1,15 @@
 package corgi.lang.bytecode.generator
 
-import corgi.lang.domain.expression.*
-import corgi.lang.domain.math.*
+import corgi.lang.domain.expression.EmptyExpression
+import corgi.lang.domain.expression.FunctionCall
+import corgi.lang.domain.expression.FunctionParameter
+import corgi.lang.domain.expression.Value
+import corgi.lang.domain.expression.VariableReference
+import corgi.lang.domain.math.Addition
+import corgi.lang.domain.math.ArithmeticExpression
+import corgi.lang.domain.math.Division
+import corgi.lang.domain.math.Multiplication
+import corgi.lang.domain.math.Subtraction
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
