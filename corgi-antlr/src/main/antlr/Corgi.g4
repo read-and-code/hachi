@@ -9,8 +9,8 @@ compilationUnit : classDeclaration EOF;
 classDeclaration : className '{' classBody '}';
 className : ID;
 classBody : function*;
-function : functionDeclaration '{' (blockStatement)* '}';
-functionDeclaration : (type)? functionName '('(functionArgument)*')';
+function : functionDeclaration block;
+functionDeclaration : (type)? functionName '(' (functionArgument (',' functionArgument)*)?')';
 functionName : ID;
 functionArgument : type ID functionParameterDefaultValue?;
 functionParameterDefaultValue : '=' expression;
@@ -26,14 +26,19 @@ primitiveType : 'boolean' ('[' ']')*
               | 'double' ('[' ']')*
               | 'void' ('[' ']')*;
 classType : QUALIFIED_NAME ('[' ']')*;
-blockStatement : variableDeclaration
-               | printStatement
-               | functionCall;
+block: '{' statement* '}';
+statement : block
+            | variableDeclaration
+            | printStatement
+            | functionCall
+            | returnStatement;
 variableDeclaration : VARIABLE name EQUALS expression;
 printStatement : PRINT expression;
 functionCall : functionName '('expressionList ')';
+returnStatement: 'return' #returnVoid
+            | ('return')? expression #returnWithValue;
 name : ID;
-expressionList : expression (',' expression)*;
+expressionList : expression? (',' expression)*;
 expression : variableReference #variableReferenceLabel
            | value #valueLabel
            | functionCall #functionCallLabel
@@ -46,15 +51,15 @@ expression : variableReference #variableReferenceLabel
            | '(' expression '-' expression ')' #Subtract
            | expression '-' expression #Subtract;
 variableReference : ID;
-value : op=NUMBER
-      | op=STRING;
+value : NUMBER
+      | STRING;
 
 // TOKENS
 VARIABLE : 'var';
 PRINT : 'print';
 EQUALS : '=';
 NUMBER : [0-9]+;
-STRING : '"'.*?'"';
+STRING : '"'~('\r' | '\n' | '"')*'"';
 ID : [a-zA-Z0-9]+;
 QUALIFIED_NAME : ID ('.' ID)+;
 WHITE_SPACE: [ \t\n\r]+ -> skip;

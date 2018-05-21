@@ -130,15 +130,25 @@ public interface CorgiListener extends ParseTreeListener {
 	 */
 	void exitClassType(CorgiParser.ClassTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CorgiParser#blockStatement}.
+	 * Enter a parse tree produced by {@link CorgiParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void enterBlockStatement(CorgiParser.BlockStatementContext ctx);
+	void enterBlock(CorgiParser.BlockContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CorgiParser#blockStatement}.
+	 * Exit a parse tree produced by {@link CorgiParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void exitBlockStatement(CorgiParser.BlockStatementContext ctx);
+	void exitBlock(CorgiParser.BlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CorgiParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(CorgiParser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CorgiParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(CorgiParser.StatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CorgiParser#variableDeclaration}.
 	 * @param ctx the parse tree
@@ -169,6 +179,30 @@ public interface CorgiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionCall(CorgiParser.FunctionCallContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code returnVoid}
+	 * labeled alternative in {@link CorgiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnVoid(CorgiParser.ReturnVoidContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code returnVoid}
+	 * labeled alternative in {@link CorgiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnVoid(CorgiParser.ReturnVoidContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code returnWithValue}
+	 * labeled alternative in {@link CorgiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnWithValue(CorgiParser.ReturnWithValueContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code returnWithValue}
+	 * labeled alternative in {@link CorgiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnWithValue(CorgiParser.ReturnWithValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CorgiParser#name}.
 	 * @param ctx the parse tree

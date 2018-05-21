@@ -18,7 +18,7 @@ class Scope {
     }
 
     constructor(scope: Scope) {
-        this.localVariables = mutableListOf()
+        this.localVariables = ArrayList(scope.localVariables)
         this.functionSignatures = ArrayList(scope.functionSignatures)
         this.metaData = scope.metaData
     }

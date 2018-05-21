@@ -1,7 +1,13 @@
 app {
     void main(string[] args) {
-        var x = 2 + 3 * 4
+        var x = 1
+        var y = 1
+        var result = sum(x, y)
 
-        print x
+        print result
+    }
+
+    int sum(int x, int y) {
+        x + y
     }
 }

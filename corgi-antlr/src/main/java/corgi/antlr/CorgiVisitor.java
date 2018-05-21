@@ -85,11 +85,17 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassType(CorgiParser.ClassTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CorgiParser#blockStatement}.
+	 * Visit a parse tree produced by {@link CorgiParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBlockStatement(CorgiParser.BlockStatementContext ctx);
+	T visitBlock(CorgiParser.BlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CorgiParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatement(CorgiParser.StatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CorgiParser#variableDeclaration}.
 	 * @param ctx the parse tree
@@ -108,6 +114,20 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunctionCall(CorgiParser.FunctionCallContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code returnVoid}
+	 * labeled alternative in {@link CorgiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnVoid(CorgiParser.ReturnVoidContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code returnWithValue}
+	 * labeled alternative in {@link CorgiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnWithValue(CorgiParser.ReturnWithValueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CorgiParser#name}.
 	 * @param ctx the parse tree

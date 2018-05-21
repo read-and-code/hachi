@@ -21,9 +21,9 @@ class FunctionVisitor : CorgiBaseVisitor<Function> {
         val functionName = this.getName(functionContext)
         val returnType = this.getReturnType(functionContext)
         val arguments = this.getArguments(functionContext)
-        val statements = this.getStatements(functionContext)
+        val block = this.getBlock(functionContext)
 
-        return Function(functionName, arguments, statements, returnType, this.scope)
+        return Function(functionName, arguments, block, returnType)
     }
 
     private fun getName(functionContext: CorgiParser.FunctionContext): String {
@@ -48,9 +48,9 @@ class FunctionVisitor : CorgiBaseVisitor<Function> {
         return functionParameters
     }
 
-    private fun getStatements(functionContext: CorgiParser.FunctionContext): List<Statement> {
+    private fun getBlock(functionContext: CorgiParser.FunctionContext): Statement {
         val statementVisitor = StatementVisitor(this.scope)
 
-        return functionContext.blockStatement().map { it.accept(statementVisitor) }
+        return functionContext.block().accept(statementVisitor)
     }
 }

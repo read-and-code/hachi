@@ -1,9 +1,10 @@
 package corgi.lang.bytecode.generator
 
 import corgi.lang.domain.expression.FunctionCall
-import corgi.lang.domain.scope.LocalVariable
 import corgi.lang.domain.scope.Scope
+import corgi.lang.domain.statement.Block
 import corgi.lang.domain.statement.PrintStatement
+import corgi.lang.domain.statement.ReturnStatement
 import corgi.lang.domain.statement.VariableDeclarationStatement
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
@@ -39,11 +40,28 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
             BuiltInType.INT -> this.methodVisitor.visitVarInsn(Opcodes.ISTORE, index)
             else -> this.methodVisitor.visitVarInsn(Opcodes.ASTORE, index)
         }
-
-        this.scope.addLocalVariable(LocalVariable(name, expression.type))
     }
 
     fun generate(functionCall: FunctionCall) {
         functionCall.accept(this.expressionGenerator)
+    }
+
+    fun generate(returnStatement: ReturnStatement) {
+        val expression = returnStatement.expression
+
+        expression.accept(this.expressionGenerator)
+
+        when (expression.type) {
+            BuiltInType.VOID -> this.methodVisitor.visitInsn(Opcodes.RETURN)
+            BuiltInType.INT -> this.methodVisitor.visitInsn(Opcodes.IRETURN)
+        }
+    }
+
+    fun generate(block: Block) {
+        val scope = block.scope
+        val statements = block.statements
+        val statementGenerator = StatementGenerator(this.methodVisitor, scope)
+
+        statements.forEach { it.accept(statementGenerator) }
     }
 }

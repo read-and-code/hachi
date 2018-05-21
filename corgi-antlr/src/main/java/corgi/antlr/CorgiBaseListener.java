@@ -162,13 +162,25 @@ public class CorgiBaseListener implements CorgiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlockStatement(CorgiParser.BlockStatementContext ctx) { }
+	@Override public void enterBlock(CorgiParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlockStatement(CorgiParser.BlockStatementContext ctx) { }
+	@Override public void exitBlock(CorgiParser.BlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatement(CorgiParser.StatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatement(CorgiParser.StatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -205,6 +217,30 @@ public class CorgiBaseListener implements CorgiListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionCall(CorgiParser.FunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReturnVoid(CorgiParser.ReturnVoidContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturnVoid(CorgiParser.ReturnVoidContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReturnWithValue(CorgiParser.ReturnWithValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturnWithValue(CorgiParser.ReturnWithValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
