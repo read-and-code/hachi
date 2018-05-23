@@ -82,8 +82,8 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
         val leftExpression = leftExpressionContext.accept(expressionVisitor)
         val rightExpression = rightExpressionContext.accept(expressionVisitor)
         val compareSign = when (conditionalExpressionContext.cmp) {
-            null -> CompareSign.fromString(conditionalExpressionContext.cmp.text)
-            else -> CompareSign.NOT_EQUAL
+            null -> CompareSign.NOT_EQUAL
+            else -> CompareSign.fromString(conditionalExpressionContext.cmp.text)
         }
 
         return ConditionalExpression(leftExpression, rightExpression, compareSign)
