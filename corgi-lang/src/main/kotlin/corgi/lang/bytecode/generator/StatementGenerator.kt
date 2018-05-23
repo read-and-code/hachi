@@ -3,11 +3,13 @@ package corgi.lang.bytecode.generator
 import corgi.lang.domain.expression.FunctionCall
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.statement.Block
+import corgi.lang.domain.statement.IfStatement
 import corgi.lang.domain.statement.PrintStatement
 import corgi.lang.domain.statement.ReturnStatement
 import corgi.lang.domain.statement.VariableDeclarationStatement
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
+import jdk.internal.org.objectweb.asm.Label
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
@@ -37,7 +39,7 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         expression.accept(this.expressionGenerator)
 
         when (type) {
-            BuiltInType.INT -> this.methodVisitor.visitVarInsn(Opcodes.ISTORE, index)
+            BuiltInType.INT, BuiltInType.BOOLEAN -> this.methodVisitor.visitVarInsn(Opcodes.ISTORE, index)
             else -> this.methodVisitor.visitVarInsn(Opcodes.ASTORE, index)
         }
     }
@@ -63,5 +65,25 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         val statementGenerator = StatementGenerator(this.methodVisitor, scope)
 
         statements.forEach { it.accept(statementGenerator) }
+    }
+
+    fun generate(ifStatement: IfStatement) {
+        ifStatement.condition.accept(this.expressionGenerator)
+
+        val trueLabel = Label()
+        val falseLabel = Label()
+
+        this.methodVisitor.visitJumpInsn(Opcodes.IFEQ, trueLabel)
+
+        ifStatement.trueStatement.accept(this)
+
+        this.methodVisitor.visitJumpInsn(Opcodes.GOTO, falseLabel)
+        this.methodVisitor.visitLabel(trueLabel)
+        this.methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null)
+
+        ifStatement.falseStatement.accept(this)
+
+        this.methodVisitor.visitLabel(falseLabel)
+        this.methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null)
     }
 }

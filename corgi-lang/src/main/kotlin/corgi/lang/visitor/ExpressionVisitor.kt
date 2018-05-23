@@ -2,6 +2,8 @@ package corgi.lang.visitor
 
 import corgi.antlr.CorgiBaseVisitor
 import corgi.antlr.CorgiParser
+import corgi.lang.CompareSign
+import corgi.lang.domain.expression.ConditionalExpression
 import corgi.lang.domain.expression.Expression
 import corgi.lang.domain.expression.FunctionCall
 import corgi.lang.domain.expression.Value
@@ -71,5 +73,19 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
         val rightExpression = rightExpressionContext.accept(this)
 
         return Division(leftExpression, rightExpression)
+    }
+
+    override fun visitConditionalExpression(conditionalExpressionContext: CorgiParser.ConditionalExpressionContext): Expression {
+        val expressionVisitor = ExpressionVisitor(this.scope)
+        val leftExpressionContext = conditionalExpressionContext.expression(0)
+        val rightExpressionContext = conditionalExpressionContext.expression(1)
+        val leftExpression = leftExpressionContext.accept(expressionVisitor)
+        val rightExpression = rightExpressionContext.accept(expressionVisitor)
+        val compareSign = when (conditionalExpressionContext.cmp) {
+            null -> CompareSign.fromString(conditionalExpressionContext.cmp.text)
+            else -> CompareSign.NOT_EQUAL
+        }
+
+        return ConditionalExpression(leftExpression, rightExpression, compareSign)
     }
 }

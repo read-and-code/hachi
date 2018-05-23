@@ -1,5 +1,6 @@
 package corgi.lang.bytecode.generator
 
+import corgi.lang.domain.expression.ConditionalExpression
 import corgi.lang.domain.expression.EmptyExpression
 import corgi.lang.domain.expression.FunctionCall
 import corgi.lang.domain.expression.FunctionParameter
@@ -14,7 +15,9 @@ import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
 import corgi.lang.exception.CalledFunctionDoesNotExistException
+import corgi.lang.exception.ComparisonBetweenDifferentTypesException
 import corgi.lang.util.DescriptorFactory
+import jdk.internal.org.objectweb.asm.Label
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 import jdk.internal.org.objectweb.asm.Type
@@ -27,7 +30,7 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
         val type = localVariable.type
 
         when (type) {
-            BuiltInType.INT -> this.methodVisitor.visitVarInsn(Opcodes.ILOAD, index)
+            BuiltInType.INT, BuiltInType.BOOLEAN -> this.methodVisitor.visitVarInsn(Opcodes.ILOAD, index)
             else -> this.methodVisitor.visitVarInsn(Opcodes.ALOAD, index)
         }
     }
@@ -47,7 +50,7 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
         val stringValue = value.value
 
         when (type) {
-            BuiltInType.INT -> this.methodVisitor.visitIntInsn(Opcodes.BIPUSH, stringValue.toInt())
+            BuiltInType.INT, BuiltInType.BOOLEAN -> this.methodVisitor.visitIntInsn(Opcodes.BIPUSH, stringValue.toInt())
             BuiltInType.STRING -> this.methodVisitor.visitLdcInsn(stringValue.removePrefix("\"").removeSuffix("\""))
         }
     }
@@ -89,6 +92,29 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
     }
 
     fun generate(emptyExpression: EmptyExpression) {
+    }
+
+    fun generate(conditionalExpression: ConditionalExpression) {
+        val leftExpression = conditionalExpression.leftExpression
+        val rightExpression = conditionalExpression.rightExpression
+
+        if (leftExpression.type != rightExpression.type) {
+            throw ComparisonBetweenDifferentTypesException(leftExpression, rightExpression)
+        }
+
+        leftExpression.accept(this)
+        rightExpression.accept(this)
+
+        val compareSign = conditionalExpression.compareSign
+        val endLabel = Label()
+        val falseLabel = Label()
+
+        this.methodVisitor.visitJumpInsn(compareSign.opcode, falseLabel)
+        this.methodVisitor.visitInsn(Opcodes.ICONST_1)
+        this.methodVisitor.visitJumpInsn(Opcodes.GOTO, endLabel)
+        this.methodVisitor.visitLabel(falseLabel)
+        this.methodVisitor.visitInsn(Opcodes.ICONST_0)
+        this.methodVisitor.visitLabel(endLabel)
     }
 
     private fun evaluateArithmeticComponents(arithmeticExpression: ArithmeticExpression) {

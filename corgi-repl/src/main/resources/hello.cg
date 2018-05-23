@@ -1,10 +1,13 @@
 app {
     void main(string[] args) {
-        var x = 1
-        var y = 1
-        var result = sum(x, y)
+        var expected = 6
+        var actual = sum(5, 1)
 
-        print result
+        if (actual == expected) {
+            print "Equal"
+        } else {
+            print "Not equal"
+        }
     }
 
     int sum(int x, int y) {

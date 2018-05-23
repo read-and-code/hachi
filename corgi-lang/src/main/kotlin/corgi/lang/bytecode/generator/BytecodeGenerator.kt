@@ -2,7 +2,7 @@ package corgi.lang.bytecode.generator
 
 import corgi.lang.domain.global.CompilationUnit
 
-class ByteCodeGenerator {
+class BytecodeGenerator {
     fun generate(compilationUnit: CompilationUnit): ByteArray {
         val classDeclaration = compilationUnit.classDeclaration
         val classGenerator = ClassGenerator()
