@@ -1,6 +1,6 @@
 package corgi.repl
 
-import corgi.lang.Compiler
+import corgi.lang.compiler.Compiler
 import java.nio.file.Paths
 
 class Application

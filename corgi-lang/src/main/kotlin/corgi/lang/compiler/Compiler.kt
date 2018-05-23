@@ -1,7 +1,8 @@
-package corgi.lang
+package corgi.lang.compiler
 
 import corgi.lang.bytecode.generator.BytecodeGenerator
 import corgi.lang.domain.global.CompilationUnit
+import corgi.lang.parsing.Parser
 import java.io.File
 import java.io.FileOutputStream
 

@@ -1,4 +1,4 @@
-package corgi.lang
+package corgi.lang.domain.global
 
 import jdk.internal.org.objectweb.asm.Opcodes
 

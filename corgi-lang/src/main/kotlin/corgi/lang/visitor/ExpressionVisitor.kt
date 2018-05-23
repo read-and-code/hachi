@@ -2,12 +2,12 @@ package corgi.lang.visitor
 
 import corgi.antlr.CorgiBaseVisitor
 import corgi.antlr.CorgiParser
-import corgi.lang.CompareSign
 import corgi.lang.domain.expression.ConditionalExpression
 import corgi.lang.domain.expression.Expression
 import corgi.lang.domain.expression.FunctionCall
 import corgi.lang.domain.expression.Value
 import corgi.lang.domain.expression.VariableReference
+import corgi.lang.domain.global.CompareSign
 import corgi.lang.domain.math.Addition
 import corgi.lang.domain.math.Division
 import corgi.lang.domain.math.Multiplication
