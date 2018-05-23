@@ -106,15 +106,15 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
         rightExpression.accept(this)
 
         val compareSign = conditionalExpression.compareSign
-        val endLabel = Label()
+        val trueLabel = Label()
         val falseLabel = Label()
 
-        this.methodVisitor.visitJumpInsn(compareSign.opcode, falseLabel)
-        this.methodVisitor.visitInsn(Opcodes.ICONST_1)
-        this.methodVisitor.visitJumpInsn(Opcodes.GOTO, endLabel)
-        this.methodVisitor.visitLabel(falseLabel)
+        this.methodVisitor.visitJumpInsn(compareSign.opcode, trueLabel)
         this.methodVisitor.visitInsn(Opcodes.ICONST_0)
-        this.methodVisitor.visitLabel(endLabel)
+        this.methodVisitor.visitJumpInsn(Opcodes.GOTO, falseLabel)
+        this.methodVisitor.visitLabel(trueLabel)
+        this.methodVisitor.visitInsn(Opcodes.ICONST_1)
+        this.methodVisitor.visitLabel(falseLabel)
     }
 
     private fun evaluateArithmeticComponents(arithmeticExpression: ArithmeticExpression) {

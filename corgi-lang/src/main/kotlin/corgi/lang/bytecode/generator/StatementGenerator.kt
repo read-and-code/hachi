@@ -73,17 +73,15 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         val trueLabel = Label()
         val falseLabel = Label()
 
-        this.methodVisitor.visitJumpInsn(Opcodes.IFEQ, trueLabel)
-
-        ifStatement.trueStatement.accept(this)
-
-        this.methodVisitor.visitJumpInsn(Opcodes.GOTO, falseLabel)
-        this.methodVisitor.visitLabel(trueLabel)
-        this.methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null)
+        this.methodVisitor.visitJumpInsn(Opcodes.IFNE, trueLabel)
 
         ifStatement.falseStatement.accept(this)
 
+        this.methodVisitor.visitJumpInsn(Opcodes.GOTO, falseLabel)
+        this.methodVisitor.visitLabel(trueLabel)
+
+        ifStatement.trueStatement.accept(this)
+
         this.methodVisitor.visitLabel(falseLabel)
-        this.methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null)
     }
 }
