@@ -31,25 +31,33 @@ statement : block
             | variableDeclaration
             | printStatement
             | functionCall
-            | returnStatement;
+            | returnStatement
+            | ifStatement;
 variableDeclaration : VARIABLE name EQUALS expression;
 printStatement : PRINT expression;
 functionCall : functionName '('expressionList ')';
 returnStatement: 'return' #returnVoid
             | ('return')? expression #returnWithValue;
+ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
 name : ID;
 expressionList : expression? (',' expression)*;
 expression : variableReference #variableReferenceLabel
            | value #valueLabel
            | functionCall #functionCallLabel
-           | '('expression '*' expression')' #Multiply
-           | expression '*' expression #Multiply
-           | '(' expression '/' expression ')' #Divide
-           | expression '/' expression #Divide
-           | '(' expression '+' expression ')' #Add
-           | expression '+' expression #Add
-           | '(' expression '-' expression ')' #Subtract
-           | expression '-' expression #Subtract;
+           | '('expression '*' expression')' #multiply
+           | expression '*' expression #multiply
+           | '(' expression '/' expression ')' #divide
+           | expression '/' expression #divide
+           | '(' expression '+' expression ')' #add
+           | expression '+' expression #add
+           | '(' expression '-' expression ')' #subtract
+           | expression '-' expression #subtract
+           | expression cmp='>' expression #conditionalExpression
+           | expression cmp='<' expression #conditionalExpression
+           | expression cmp='==' expression #conditionalExpression
+           | expression cmp='!=' expression #conditionalExpression
+           | expression cmp='>=' expression #conditionalExpression
+           | expression cmp='<=' expression #conditionalExpression;
 variableReference : ID;
 value : NUMBER
       | STRING;

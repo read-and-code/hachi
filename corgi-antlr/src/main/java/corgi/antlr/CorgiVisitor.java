@@ -129,6 +129,12 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReturnWithValue(CorgiParser.ReturnWithValueContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CorgiParser#ifStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfStatement(CorgiParser.IfStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CorgiParser#name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -141,19 +147,12 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpressionList(CorgiParser.ExpressionListContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Add}
+	 * Visit a parse tree produced by the {@code add}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAdd(CorgiParser.AddContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Divide}
-	 * labeled alternative in {@link CorgiParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDivide(CorgiParser.DivideContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code variableReferenceLabel}
 	 * labeled alternative in {@link CorgiParser#expression}.
@@ -176,19 +175,33 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitValueLabel(CorgiParser.ValueLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Multiply}
+	 * Visit a parse tree produced by the {@code conditionalExpression}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMultiply(CorgiParser.MultiplyContext ctx);
+	T visitConditionalExpression(CorgiParser.ConditionalExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Subtract}
+	 * Visit a parse tree produced by the {@code subtract}
 	 * labeled alternative in {@link CorgiParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSubtract(CorgiParser.SubtractContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code divide}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDivide(CorgiParser.DivideContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code multiply}
+	 * labeled alternative in {@link CorgiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultiply(CorgiParser.MultiplyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CorgiParser#variableReference}.
 	 * @param ctx the parse tree
