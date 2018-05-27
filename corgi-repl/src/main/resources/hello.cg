@@ -1,16 +1,11 @@
 app {
     void main(string[] args) {
-        var expected = 6
-        var actual = sum(5, 1)
-
-        if (actual == expected) {
-            print("Equal")
-        } else {
-            print("Not equal")
-        }
+        greet("Tom")
+        greet("Tim", "Python")
     }
 
-    int sum(int x, int y) {
-        x + y
+    greet(string name, string language = "java") {
+        print(name)
+        print(language)
     }
 }
