@@ -21,14 +21,14 @@ class FunctionVisitor : CorgiBaseVisitor<Function> {
         functionSignature.parameters
                 .forEach { this.scope.addLocalVariable(LocalVariable(it.name, it.type)) }
 
-        val block = this.getBlock(functionContext)
+        val functionBody = this.getFunctionBody(functionContext)
 
-        return Function(functionSignature, block)
+        return Function(functionSignature, functionBody)
     }
 
-    private fun getBlock(functionContext: CorgiParser.FunctionContext): Statement {
+    private fun getFunctionBody(functionContext: CorgiParser.FunctionContext): Statement {
         val statementVisitor = StatementVisitor(this.scope)
 
-        return functionContext.block().accept(statementVisitor)
+        return functionContext.functionBody().accept(statementVisitor)
     }
 }

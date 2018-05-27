@@ -100,6 +100,16 @@ public interface CorgiListener extends ParseTreeListener {
 	 */
 	void exitFunctionParameterDefaultValue(CorgiParser.FunctionParameterDefaultValueContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CorgiParser#functionBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionBody(CorgiParser.FunctionBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CorgiParser#functionBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionBody(CorgiParser.FunctionBodyContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CorgiParser#type}.
 	 * @param ctx the parse tree
 	 */
@@ -130,16 +140,6 @@ public interface CorgiListener extends ParseTreeListener {
 	 */
 	void exitClassType(CorgiParser.ClassTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CorgiParser#block}.
-	 * @param ctx the parse tree
-	 */
-	void enterBlock(CorgiParser.BlockContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CorgiParser#block}.
-	 * @param ctx the parse tree
-	 */
-	void exitBlock(CorgiParser.BlockContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CorgiParser#statement}.
 	 * @param ctx the parse tree
 	 */
@@ -149,6 +149,16 @@ public interface CorgiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStatement(CorgiParser.StatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CorgiParser#blockStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlockStatement(CorgiParser.BlockStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CorgiParser#blockStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlockStatement(CorgiParser.BlockStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CorgiParser#variableDeclaration}.
 	 * @param ctx the parse tree

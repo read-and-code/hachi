@@ -5,7 +5,7 @@ import corgi.lang.domain.scope.FunctionSignature
 import corgi.lang.domain.statement.Statement
 import corgi.lang.domain.type.Type
 
-class Function(private val functionSignature: FunctionSignature, val block: Statement) {
+class Function(private val functionSignature: FunctionSignature, val functionBody: Statement) {
     fun getName(): String {
         return this.functionSignature.functionName
     }

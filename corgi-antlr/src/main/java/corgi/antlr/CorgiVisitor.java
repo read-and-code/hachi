@@ -67,6 +67,12 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionParameterDefaultValue(CorgiParser.FunctionParameterDefaultValueContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CorgiParser#functionBody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionBody(CorgiParser.FunctionBodyContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CorgiParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -85,17 +91,17 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassType(CorgiParser.ClassTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CorgiParser#block}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBlock(CorgiParser.BlockContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CorgiParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStatement(CorgiParser.StatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CorgiParser#blockStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlockStatement(CorgiParser.BlockStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CorgiParser#variableDeclaration}.
 	 * @param ctx the parse tree

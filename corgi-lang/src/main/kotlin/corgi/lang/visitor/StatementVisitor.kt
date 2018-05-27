@@ -5,7 +5,7 @@ import corgi.antlr.CorgiParser
 import corgi.lang.domain.expression.EmptyExpression
 import corgi.lang.domain.scope.LocalVariable
 import corgi.lang.domain.scope.Scope
-import corgi.lang.domain.statement.Block
+import corgi.lang.domain.statement.BlockStatement
 import corgi.lang.domain.statement.IfStatement
 import corgi.lang.domain.statement.PrintStatement
 import corgi.lang.domain.statement.ReturnStatement
@@ -47,13 +47,13 @@ class StatementVisitor(val scope: Scope) : CorgiBaseVisitor<Statement>() {
         return ReturnStatement(expression)
     }
 
-    override fun visitBlock(blockContext: CorgiParser.BlockContext): Statement {
-        val blockStatementContexts = blockContext.statement()
+    override fun visitBlockStatement(blockStatementContext: CorgiParser.BlockStatementContext): Statement {
+        val blockStatementContexts = blockStatementContext.statement()
         val scope = Scope(this.scope)
         val statementVisitor = StatementVisitor(scope)
         val statements = blockStatementContexts.map { it.accept(statementVisitor) }
 
-        return Block(scope, statements)
+        return BlockStatement(scope, statements)
     }
 
     override fun visitIfStatement(ifStatementContext: CorgiParser.IfStatementContext): Statement {

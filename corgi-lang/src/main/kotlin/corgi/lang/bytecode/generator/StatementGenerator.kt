@@ -2,7 +2,7 @@ package corgi.lang.bytecode.generator
 
 import corgi.lang.domain.expression.FunctionCall
 import corgi.lang.domain.scope.Scope
-import corgi.lang.domain.statement.Block
+import corgi.lang.domain.statement.BlockStatement
 import corgi.lang.domain.statement.IfStatement
 import corgi.lang.domain.statement.PrintStatement
 import corgi.lang.domain.statement.ReturnStatement
@@ -59,9 +59,9 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         }
     }
 
-    fun generate(block: Block) {
-        val scope = block.scope
-        val statements = block.statements
+    fun generate(blockStatement: BlockStatement) {
+        val scope = blockStatement.scope
+        val statements = blockStatement.statements
         val statementGenerator = StatementGenerator(this.methodVisitor, scope)
 
         statements.forEach { it.accept(statementGenerator) }

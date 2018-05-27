@@ -9,11 +9,12 @@ compilationUnit : classDeclaration EOF;
 classDeclaration : className '{' classBody '}';
 className : ID;
 classBody : function*;
-function : functionDeclaration block;
+function : functionDeclaration functionBody;
 functionDeclaration : (type)? functionName '('? (functionParameter (',' functionParameter)*)? ')'?;
 functionName : ID;
 functionParameter : type ID functionParameterDefaultValue?;
 functionParameterDefaultValue : '=' expression;
+functionBody : blockStatement;
 type : primitiveType | classType;
 primitiveType : 'boolean' ('[' ']')*
               | 'string' ('[' ']')*
@@ -26,13 +27,13 @@ primitiveType : 'boolean' ('[' ']')*
               | 'double' ('[' ']')*
               | 'void' ('[' ']')*;
 classType : QUALIFIED_NAME ('[' ']')*;
-block: '{' statement* '}';
-statement : block
+statement : blockStatement
             | variableDeclaration
             | printStatement
             | functionCall
             | returnStatement
             | ifStatement;
+blockStatement : '{' statement* '}';
 variableDeclaration : VARIABLE name EQUALS expression;
 printStatement : PRINT '('expression')';
 functionCall : functionName '('expressionList')';
