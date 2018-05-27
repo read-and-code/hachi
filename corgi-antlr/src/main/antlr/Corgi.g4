@@ -10,9 +10,9 @@ classDeclaration : className '{' classBody '}';
 className : ID;
 classBody : function*;
 function : functionDeclaration block;
-functionDeclaration : (type)? functionName '(' (functionArgument (',' functionArgument)*)?')';
+functionDeclaration : (type)? functionName '('? (functionParameter (',' functionParameter)*)? ')'?;
 functionName : ID;
-functionArgument : type ID functionParameterDefaultValue?;
+functionParameter : type ID functionParameterDefaultValue?;
 functionParameterDefaultValue : '=' expression;
 type : primitiveType | classType;
 primitiveType : 'boolean' ('[' ']')*

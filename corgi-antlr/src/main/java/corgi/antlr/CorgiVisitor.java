@@ -55,11 +55,11 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionName(CorgiParser.FunctionNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CorgiParser#functionArgument}.
+	 * Visit a parse tree produced by {@link CorgiParser#functionParameter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunctionArgument(CorgiParser.FunctionArgumentContext ctx);
+	T visitFunctionParameter(CorgiParser.FunctionParameterContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CorgiParser#functionParameterDefaultValue}.
 	 * @param ctx the parse tree

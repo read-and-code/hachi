@@ -11,11 +11,12 @@ class ClassVisitor : CorgiBaseVisitor<ClassDeclaration>() {
 
     override fun visitClassDeclaration(classDeclarationContext: CorgiParser.ClassDeclarationContext): ClassDeclaration {
         val className = classDeclarationContext.className().text
-        val functionSignatureVisitor = FunctionSignatureVisitor()
         val functionContexts = classDeclarationContext.classBody().function()
         val metaData = MetaData(classDeclarationContext.className().text)
 
         this.scope = Scope(metaData)
+
+        val functionSignatureVisitor = FunctionSignatureVisitor(this.scope)
 
         functionContexts.map { it.functionDeclaration().accept(functionSignatureVisitor) }
                 .forEach { this.scope.addFunctionSignature(it) }

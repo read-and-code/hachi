@@ -14,6 +14,7 @@ import corgi.lang.domain.math.Subtraction
 import corgi.lang.domain.scope.Scope
 import corgi.lang.domain.type.BuiltInType
 import corgi.lang.domain.type.ClassType
+import corgi.lang.exception.BadArgumentsToFunctionCallException
 import corgi.lang.exception.CalledFunctionDoesNotExistException
 import corgi.lang.exception.ComparisonBetweenDifferentTypesException
 import corgi.lang.util.DescriptorFactory
@@ -56,13 +57,29 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
     }
 
     fun generate(functionCall: FunctionCall) {
-        val parameters = functionCall.parameters
-        parameters.forEach { it.accept(this) }
+        val functionName = functionCall.getFunctionName()
+        val functionSignature = this.scope.getFunctionSignature(functionName)
+        val arguments = functionCall.arguments
+        val parameters = functionSignature.parameters
+
+        if (arguments.size > parameters.size) {
+            throw BadArgumentsToFunctionCallException()
+        }
+
+        arguments.forEach { it.accept(this) }
+
+        for (i in arguments.size..(parameters.size - 1)) {
+            val defaultParameter = parameters[i].defaultValue
+
+            when (defaultParameter) {
+                null -> BadArgumentsToFunctionCallException()
+                else -> defaultParameter.accept(this)
+            }
+        }
 
         val owner = functionCall.owner ?: ClassType(this.scope.getClassName())
         val methodDescriptor = this.getFunctionDescriptor(functionCall)
         val ownerDescriptor = owner.getInternalName()
-        val functionName = functionCall.getFunctionName()
 
         this.methodVisitor.visitMethodInsn(Opcodes.INVOKESTATIC, ownerDescriptor, functionName, methodDescriptor, false)
     }

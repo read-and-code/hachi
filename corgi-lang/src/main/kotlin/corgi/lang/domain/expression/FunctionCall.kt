@@ -6,7 +6,7 @@ import corgi.lang.domain.scope.FunctionSignature
 import corgi.lang.domain.statement.Statement
 import corgi.lang.domain.type.Type
 
-class FunctionCall(val owner: Type?, val functionSignature: FunctionSignature, val parameters: Collection<Expression>) : Expression(functionSignature.returnType), Statement {
+class FunctionCall(val owner: Type?, val functionSignature: FunctionSignature, val arguments: Collection<Expression>) : Expression(functionSignature.returnType), Statement {
     fun getFunctionName(): String {
         return this.functionSignature.functionName
     }

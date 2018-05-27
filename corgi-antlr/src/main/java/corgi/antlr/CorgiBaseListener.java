@@ -102,13 +102,13 @@ public class CorgiBaseListener implements CorgiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionArgument(CorgiParser.FunctionArgumentContext ctx) { }
+	@Override public void enterFunctionParameter(CorgiParser.FunctionParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionArgument(CorgiParser.FunctionArgumentContext ctx) { }
+	@Override public void exitFunctionParameter(CorgiParser.FunctionParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -10,7 +10,7 @@ import jdk.internal.org.objectweb.asm.Opcodes
 
 class MethodGenerator(private val classWriter: ClassWriter) {
     fun generate(function: Function) {
-        val functionName = function.name
+        val functionName = function.getName()
         val descriptor = DescriptorFactory.getMethodDescriptor(function)
         val block = function.block as Block
         val access = Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC
@@ -33,7 +33,7 @@ class MethodGenerator(private val classWriter: ClassWriter) {
         val lastStatement = block.statements.last()
 
         if (lastStatement !is ReturnStatement) {
-            val emptyExpression = EmptyExpression(function.returnType)
+            val emptyExpression = EmptyExpression(function.getReturnType())
             val returnStatement = ReturnStatement(emptyExpression)
 
             returnStatement.accept(statementGenerator)

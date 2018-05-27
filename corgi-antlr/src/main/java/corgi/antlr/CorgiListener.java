@@ -80,15 +80,15 @@ public interface CorgiListener extends ParseTreeListener {
 	 */
 	void exitFunctionName(CorgiParser.FunctionNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CorgiParser#functionArgument}.
+	 * Enter a parse tree produced by {@link CorgiParser#functionParameter}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionArgument(CorgiParser.FunctionArgumentContext ctx);
+	void enterFunctionParameter(CorgiParser.FunctionParameterContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CorgiParser#functionArgument}.
+	 * Exit a parse tree produced by {@link CorgiParser#functionParameter}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionArgument(CorgiParser.FunctionArgumentContext ctx);
+	void exitFunctionParameter(CorgiParser.FunctionParameterContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CorgiParser#functionParameterDefaultValue}.
 	 * @param ctx the parse tree
