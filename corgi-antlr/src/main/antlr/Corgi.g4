@@ -34,8 +34,8 @@ statement : block
             | returnStatement
             | ifStatement;
 variableDeclaration : VARIABLE name EQUALS expression;
-printStatement : PRINT expression;
-functionCall : functionName '('expressionList ')';
+printStatement : PRINT '('expression')';
+functionCall : functionName '('expressionList')';
 returnStatement: 'return' #returnVoid
             | ('return')? expression #returnWithValue;
 ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;

@@ -4,9 +4,9 @@ app {
         var actual = sum(5, 1)
 
         if (actual == expected) {
-            print "Equal"
+            print("Equal")
         } else {
-            print "Not equal"
+            print("Not equal")
         }
     }
 
