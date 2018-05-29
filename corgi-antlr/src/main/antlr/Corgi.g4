@@ -41,7 +41,7 @@ returnStatement: 'return' #returnVoid
             | ('return')? expression #returnWithValue;
 ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
 name : ID;
-argument: expression | expression '->' name;
+argument: expression | name '->' expression;
 expression : variableReference #variableReferenceLabel
            | value #valueLabel
            | functionCall #functionCallLabel
@@ -67,7 +67,7 @@ value : NUMBER
 VARIABLE : 'var';
 PRINT : 'print';
 EQUALS : '=';
-NUMBER : [0-9]+;
+NUMBER : '-'?[0-9]+;
 STRING : '"'~('\r' | '\n' | '"')*'"';
 ID : [a-zA-Z0-9]+;
 QUALIFIED_NAME : ID ('.' ID)+;
