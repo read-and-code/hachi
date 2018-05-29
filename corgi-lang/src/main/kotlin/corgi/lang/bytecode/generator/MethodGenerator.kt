@@ -30,6 +30,10 @@ class MethodGenerator(private val classWriter: ClassWriter) {
     }
 
     private fun appendReturnIfNotExists(function: Function, functionBody: BlockStatement, statementGenerator: StatementGenerator) {
+        if (functionBody.statements.isEmpty()) {
+            return
+        }
+
         val lastStatement = functionBody.statements.last()
 
         if (lastStatement !is ReturnStatement) {

@@ -7,7 +7,7 @@ import corgi.lang.exception.UnsupportedArithmeticOperationException
 
 abstract class ArithmeticExpression(val leftExpression: Expression, val rightExpression: Expression, type: Type) : Expression(type) {
     init {
-        if (this.type != BuiltInType.INT) {
+        if (this.type != BuiltInType.INT && type != BuiltInType.STRING) {
             throw UnsupportedArithmeticOperationException(this)
         }
     }

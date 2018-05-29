@@ -1,6 +1,8 @@
 app {
     void main(string[] args) {
-        greet("Tom")
+        var name = "Tom" + "Cat"
+
+        greet(name)
         greet(language -> "Python", name -> "Tom")
     }
 

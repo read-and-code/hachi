@@ -85,6 +85,12 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
     }
 
     fun generate(addition: Addition) {
+        if (addition.type.equals(BuiltInType.STRING)) {
+            this.generateStringAppend(addition)
+
+            return
+        }
+
         this.evaluateArithmeticComponents(addition)
 
         this.methodVisitor.visitInsn(Opcodes.IADD)
@@ -163,5 +169,30 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
 
             ""
         }
+    }
+
+    private fun generateStringAppend(addition: Addition) {
+        this.methodVisitor.visitTypeInsn(Opcodes.NEW, "java/lang/StringBuilder")
+        this.methodVisitor.visitInsn(Opcodes.DUP)
+        this.methodVisitor.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false)
+
+        val leftExpression = addition.leftExpression
+
+        leftExpression.accept(this)
+
+        val leftExpressionDescriptor = leftExpression.type.getDescriptor()
+        var descriptor = "($leftExpressionDescriptor)Ljava/lang/StringBuilder;"
+
+        this.methodVisitor.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/StringBuilder", "append", descriptor, false)
+
+        val rightExpression = addition.rightExpression
+
+        rightExpression.accept(this)
+
+        val rightExpressionDescriptor = rightExpression.type.getDescriptor()
+        descriptor = "($rightExpressionDescriptor)Ljava/lang/StringBuilder;"
+
+        this.methodVisitor.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/StringBuilder", "append", descriptor, false)
+        this.methodVisitor.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;", false)
     }
 }
