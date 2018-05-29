@@ -282,13 +282,13 @@ public class CorgiBaseListener implements CorgiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpressionList(CorgiParser.ExpressionListContext ctx) { }
+	@Override public void enterArgument(CorgiParser.ArgumentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpressionList(CorgiParser.ExpressionListContext ctx) { }
+	@Override public void exitArgument(CorgiParser.ArgumentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

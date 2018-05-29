@@ -36,12 +36,12 @@ statement : blockStatement
 blockStatement : '{' statement* '}';
 variableDeclaration : VARIABLE name EQUALS expression;
 printStatement : PRINT '('expression')';
-functionCall : functionName '('expressionList')';
+functionCall : functionName '('argument? (',' argument)* ')';
 returnStatement: 'return' #returnVoid
             | ('return')? expression #returnWithValue;
 ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
 name : ID;
-expressionList : expression? (',' expression)*;
+argument: expression | expression '->' name;
 expression : variableReference #variableReferenceLabel
            | value #valueLabel
            | functionCall #functionCallLabel

@@ -33,8 +33,14 @@ class ExpressionVisitor(val scope: Scope) : CorgiBaseVisitor<Expression>() {
     override fun visitFunctionCall(functionCallContext: CorgiParser.FunctionCallContext): Expression {
         val functionName = functionCallContext.functionName().text
         val functionSignature = this.scope.getFunctionSignature(functionName)
-        val calledParameters = functionCallContext.expressionList().expression()
-        val arguments = calledParameters.map { it.accept(this) }
+        val argumentContexts = functionCallContext.argument()
+        val arguments = argumentContexts.sortedWith(Comparator<CorgiParser.ArgumentContext> { a, b ->
+            when (a.name()) {
+                null -> 0
+                else -> functionSignature.getIndexOfParameter(a.name().text) -
+                        functionSignature.getIndexOfParameter(b.name().text)
+            }
+        }).map { it.expression().accept(this) }
 
         return FunctionCall(null, functionSignature, arguments)
     }

@@ -1,7 +1,7 @@
 app {
     void main(string[] args) {
         greet("Tom")
-        greet("Tim", "Python")
+        greet("Python" -> language, "Tom" -> name)
     }
 
     greet(string name, string language = "java") {

@@ -234,15 +234,15 @@ public interface CorgiListener extends ParseTreeListener {
 	 */
 	void exitName(CorgiParser.NameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CorgiParser#expressionList}.
+	 * Enter a parse tree produced by {@link CorgiParser#argument}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpressionList(CorgiParser.ExpressionListContext ctx);
+	void enterArgument(CorgiParser.ArgumentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CorgiParser#expressionList}.
+	 * Exit a parse tree produced by {@link CorgiParser#argument}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpressionList(CorgiParser.ExpressionListContext ctx);
+	void exitArgument(CorgiParser.ArgumentContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code add}
 	 * labeled alternative in {@link CorgiParser#expression}.

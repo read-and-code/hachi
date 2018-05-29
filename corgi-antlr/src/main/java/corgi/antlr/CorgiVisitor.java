@@ -147,11 +147,11 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitName(CorgiParser.NameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CorgiParser#expressionList}.
+	 * Visit a parse tree produced by {@link CorgiParser#argument}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpressionList(CorgiParser.ExpressionListContext ctx);
+	T visitArgument(CorgiParser.ArgumentContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code add}
 	 * labeled alternative in {@link CorgiParser#expression}.
