@@ -1,4 +1,4 @@
-class app {
+class sum {
     int sum(int x, int y) {
         return x + y
     }
