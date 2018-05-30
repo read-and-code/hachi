@@ -1,4 +1,4 @@
-rootProject.name = 'corgi'
-include 'corgi-antlr'
-include 'corgi-lang'
-include 'corgi-repl'
+rootProject.name = 'hachi'
+include 'hachi-antlr'
+include 'hachi-lang'
+include 'hachi-repl'

@@ -14,7 +14,7 @@ buildscript {
 }
 
 allprojects {
-    group 'corgi'
+    group 'hachi'
     version '1.0-SNAPSHOT'
 
     repositories {
@@ -23,7 +23,7 @@ allprojects {
 }
 
 subprojects {
-    if (it.name != 'corgi-antlr') {
+    if (it.name != 'hachi-antlr') {
         apply plugin: 'kotlin'
 
         configurations {
