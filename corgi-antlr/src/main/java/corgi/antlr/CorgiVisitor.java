@@ -141,6 +141,18 @@ public interface CorgiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfStatement(CorgiParser.IfStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CorgiParser#forStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForStatement(CorgiParser.ForStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CorgiParser#forCondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForCondition(CorgiParser.ForConditionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CorgiParser#name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

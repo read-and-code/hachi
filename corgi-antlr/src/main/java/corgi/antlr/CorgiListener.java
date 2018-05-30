@@ -224,6 +224,26 @@ public interface CorgiListener extends ParseTreeListener {
 	 */
 	void exitIfStatement(CorgiParser.IfStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CorgiParser#forStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterForStatement(CorgiParser.ForStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CorgiParser#forStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitForStatement(CorgiParser.ForStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CorgiParser#forCondition}.
+	 * @param ctx the parse tree
+	 */
+	void enterForCondition(CorgiParser.ForConditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CorgiParser#forCondition}.
+	 * @param ctx the parse tree
+	 */
+	void exitForCondition(CorgiParser.ForConditionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CorgiParser#name}.
 	 * @param ctx the parse tree
 	 */

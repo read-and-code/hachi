@@ -32,7 +32,8 @@ statement : blockStatement
             | printStatement
             | functionCall
             | returnStatement
-            | ifStatement;
+            | ifStatement
+            | forStatement;
 blockStatement : '{' statement* '}';
 variableDeclaration : VARIABLE name EQUALS expression;
 printStatement : PRINT '('expression')';
@@ -40,6 +41,8 @@ functionCall : functionName '('argument? (',' argument)* ')';
 returnStatement: 'return' #returnVoid
             | ('return')? expression #returnWithValue;
 ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
+forStatement : 'for' ('(')? forCondition (')')? statement;
+forCondition : iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;
 name : ID;
 argument: expression | name '->' expression;
 expression : variableReference #variableReferenceLabel
