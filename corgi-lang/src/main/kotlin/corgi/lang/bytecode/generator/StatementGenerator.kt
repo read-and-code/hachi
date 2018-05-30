@@ -1,10 +1,15 @@
 package corgi.lang.bytecode.generator
 
+import corgi.lang.domain.expression.ConditionalExpression
 import corgi.lang.domain.expression.FunctionCall
+import corgi.lang.domain.expression.VariableReference
+import corgi.lang.domain.global.CompareSign
 import corgi.lang.domain.scope.Scope
+import corgi.lang.domain.statement.AssignmentStatement
 import corgi.lang.domain.statement.BlockStatement
 import corgi.lang.domain.statement.IfStatement
 import corgi.lang.domain.statement.PrintStatement
+import corgi.lang.domain.statement.RangedForStatement
 import corgi.lang.domain.statement.ReturnStatement
 import corgi.lang.domain.statement.VariableDeclarationStatement
 import corgi.lang.domain.type.BuiltInType
@@ -32,11 +37,18 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
 
     fun generate(variableDeclarationStatement: VariableDeclarationStatement) {
         val expression = variableDeclarationStatement.expression
-        val name = variableDeclarationStatement.name
-        val index = this.scope.getLocalVariableIndex(name)
-        val type = expression.type
 
         expression.accept(this.expressionGenerator)
+
+        val assignmentStatement = AssignmentStatement(variableDeclarationStatement)
+
+        this.generate(assignmentStatement)
+    }
+
+    fun generate(assignmentStatement: AssignmentStatement) {
+        val variableName = assignmentStatement.variableName
+        val type = assignmentStatement.expression.type
+        val index = this.scope.getLocalVariableIndex(variableName)
 
         when (type) {
             BuiltInType.INT, BuiltInType.BOOLEAN -> this.methodVisitor.visitVarInsn(Opcodes.ISTORE, index)
@@ -83,5 +95,43 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         ifStatement.trueStatement.accept(this)
 
         this.methodVisitor.visitLabel(falseLabel)
+    }
+
+    fun generate(rangedForStatement: RangedForStatement) {
+        val newScope = rangedForStatement.scope
+        val statementGenerator = StatementGenerator(this.methodVisitor, newScope)
+        val expressionGenerator = ExpressionGenerator(this.methodVisitor, newScope)
+        val iterator = rangedForStatement.iteratorVariable
+        val incrementSection = Label()
+        val decrementSection = Label()
+        val endLoopSection = Label()
+        val iteratorVariableName = rangedForStatement.iteratorVariableName
+        val endExpression = rangedForStatement.endExpression
+        val iteratorVariable = VariableReference(iteratorVariableName, rangedForStatement.getType())
+        val iteratorGreaterThanEndCondition = ConditionalExpression(iteratorVariable, endExpression, CompareSign.GREATER_THAN)
+        val iteratorLessThanEndCondition = ConditionalExpression(iteratorVariable, endExpression, CompareSign.LESS_THAN)
+
+        iterator.accept(statementGenerator)
+
+        iteratorLessThanEndCondition.accept(expressionGenerator)
+        this.methodVisitor.visitJumpInsn(Opcodes.IFNE, incrementSection)
+
+        iteratorGreaterThanEndCondition.accept(expressionGenerator)
+        this.methodVisitor.visitJumpInsn(Opcodes.IFNE, decrementSection)
+
+        this.methodVisitor.visitLabel(incrementSection)
+        rangedForStatement.statement.accept(statementGenerator)
+        this.methodVisitor.visitIincInsn(newScope.getLocalVariableIndex(iteratorVariableName), 1)
+        iteratorGreaterThanEndCondition.accept(expressionGenerator)
+        this.methodVisitor.visitJumpInsn(Opcodes.IFEQ, incrementSection)
+        this.methodVisitor.visitJumpInsn(Opcodes.GOTO, endLoopSection)
+
+        this.methodVisitor.visitLabel(decrementSection)
+        rangedForStatement.statement.accept(statementGenerator)
+        this.methodVisitor.visitIincInsn(newScope.getLocalVariableIndex(iteratorVariableName), -1)
+        iteratorLessThanEndCondition.accept(expressionGenerator)
+        this.methodVisitor.visitJumpInsn(Opcodes.IFEQ, decrementSection)
+
+        this.methodVisitor.visitLabel(endLoopSection)
     }
 }

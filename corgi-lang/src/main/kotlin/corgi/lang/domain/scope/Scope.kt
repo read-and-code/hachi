@@ -51,6 +51,10 @@ class Scope {
         return this.metaData.className
     }
 
+    fun localVariableExists(variableName: String): Boolean {
+        return this.localVariables.any { it.name == variableName }
+    }
+
     override fun toString(): String {
         return this.metaData.className
     }

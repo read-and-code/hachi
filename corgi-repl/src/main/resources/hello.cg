@@ -1,13 +1,7 @@
 class app {
     void main(string[] args) {
-        var name = "Tom" + "Cat"
-
-        greet(name)
-        greet(language -> "Python", name -> "Tom")
-    }
-
-    greet(string name, string language = "java") {
-        print(name)
-        print(language)
+        for x from 1 to 10 {
+            print(x)
+        }
     }
 }

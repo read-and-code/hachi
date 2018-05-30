@@ -64,4 +64,10 @@ class StatementVisitor(val scope: Scope) : CorgiBaseVisitor<Statement>() {
 
         return IfStatement(condition, trueStatement, falseStatement)
     }
+
+    override fun visitForStatement(forStatementContext: CorgiParser.ForStatementContext): Statement {
+        val forStatementVisitor = ForStatementVisitor(this.scope)
+
+        return forStatementContext.accept(forStatementVisitor)
+    }
 }
