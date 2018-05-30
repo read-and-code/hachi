@@ -12,12 +12,12 @@ import hachi.lang.domain.math.Division
 import hachi.lang.domain.math.Multiplication
 import hachi.lang.domain.math.Subtraction
 import hachi.lang.domain.scope.Scope
-import hachi.lang.domain.type.BuiltInType
 import hachi.lang.domain.type.ClassType
 import hachi.lang.exception.BadArgumentsToFunctionCallException
 import hachi.lang.exception.CalledFunctionDoesNotExistException
-import hachi.lang.exception.ComparisonBetweenDifferentTypesException
 import hachi.lang.util.DescriptorFactory
+import hachi.lang.util.TypeChecker
+import hachi.lang.util.TypeResolver
 import jdk.internal.org.objectweb.asm.Label
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
@@ -30,30 +30,22 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
         val localVariable = this.scope.getLocalVariable(variableName)
         val type = localVariable.type
 
-        when (type) {
-            BuiltInType.INT, BuiltInType.BOOLEAN -> this.methodVisitor.visitVarInsn(Opcodes.ILOAD, index)
-            else -> this.methodVisitor.visitVarInsn(Opcodes.ALOAD, index)
-        }
+        this.methodVisitor.visitVarInsn(type.getLoadOpcode(), index)
     }
 
     fun generate(functionParameter: FunctionParameter) {
         val type = functionParameter.type
         val index = this.scope.getLocalVariableIndex(functionParameter.name)
 
-        when (type) {
-            BuiltInType.INT -> this.methodVisitor.visitVarInsn(Opcodes.ILOAD, index)
-            else -> this.methodVisitor.visitVarInsn(Opcodes.ALOAD, index)
-        }
+        this.methodVisitor.visitVarInsn(type.getLoadOpcode(), index)
     }
 
     fun generate(value: Value) {
         val type = value.type
         val stringValue = value.value
+        val transformedValue = TypeResolver.getValueFromString(stringValue, type)
 
-        when (type) {
-            BuiltInType.INT, BuiltInType.BOOLEAN -> this.methodVisitor.visitIntInsn(Opcodes.BIPUSH, stringValue.toInt())
-            BuiltInType.STRING -> this.methodVisitor.visitLdcInsn(stringValue.removePrefix("\"").removeSuffix("\""))
-        }
+        this.methodVisitor.visitLdcInsn(transformedValue)
     }
 
     fun generate(functionCall: FunctionCall) {
@@ -85,33 +77,34 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
     }
 
     fun generate(addition: Addition) {
-        if (addition.type.equals(BuiltInType.STRING)) {
+        val type = addition.type
+
+        if (TypeChecker.isString(type)) {
             this.generateStringAppend(addition)
 
             return
         }
 
         this.evaluateArithmeticComponents(addition)
-
-        this.methodVisitor.visitInsn(Opcodes.IADD)
+        this.methodVisitor.visitInsn(type.getAddOpcode())
     }
 
     fun generate(subtraction: Subtraction) {
         this.evaluateArithmeticComponents(subtraction)
 
-        this.methodVisitor.visitInsn(Opcodes.ISUB)
+        this.methodVisitor.visitInsn(subtraction.type.getSubtractOpcode())
     }
 
     fun generate(multiplication: Multiplication) {
         this.evaluateArithmeticComponents(multiplication)
 
-        this.methodVisitor.visitInsn(Opcodes.IMUL)
+        this.methodVisitor.visitInsn(multiplication.type.getMultiplyOpcode())
     }
 
     fun generate(division: Division) {
         this.evaluateArithmeticComponents(division)
 
-        this.methodVisitor.visitInsn(Opcodes.IDIV)
+        this.methodVisitor.visitInsn(division.type.getDivideOpcode())
     }
 
     fun generate(emptyExpression: EmptyExpression) {
@@ -120,10 +113,6 @@ class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: S
     fun generate(conditionalExpression: ConditionalExpression) {
         val leftExpression = conditionalExpression.leftExpression
         val rightExpression = conditionalExpression.rightExpression
-
-        if (leftExpression.type != rightExpression.type) {
-            throw ComparisonBetweenDifferentTypesException(leftExpression, rightExpression)
-        }
 
         leftExpression.accept(this)
         rightExpression.accept(this)

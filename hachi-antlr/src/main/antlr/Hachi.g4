@@ -65,15 +65,15 @@ expression : variableReference #variableReferenceLabel
 variableReference : ID;
 value : NUMBER
       | STRING
-      | BOOL;
+      | BOOLEAN;
 
 // TOKENS
 VARIABLE : 'var';
 PRINT : 'print';
 EQUALS : '=';
-NUMBER : '-'?[0-9]+;
+NUMBER : '-'?[0-9.]+;
 STRING : '"'~('\r' | '\n' | '"')*'"';
-BOOL : 'true' | 'false';
+BOOLEAN : 'true' | 'false';
 ID : [a-zA-Z0-9]+;
 QUALIFIED_NAME : ID ('.' ID)+;
 WHITE_SPACE: [ \t\n\r]+ -> skip;

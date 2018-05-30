@@ -24,7 +24,7 @@ public class HachiParser extends Parser {
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, VARIABLE=36, PRINT=37, EQUALS=38, 
-		NUMBER=39, STRING=40, BOOL=41, ID=42, QUALIFIED_NAME=43, WHITE_SPACE=44;
+		NUMBER=39, STRING=40, BOOLEAN=41, ID=42, QUALIFIED_NAME=43, WHITE_SPACE=44;
 	public static final int
 		RULE_compilationUnit = 0, RULE_classDeclaration = 1, RULE_className = 2, 
 		RULE_classBody = 3, RULE_function = 4, RULE_functionDeclaration = 5, RULE_functionName = 6, 
@@ -54,7 +54,7 @@ public class HachiParser extends Parser {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		"VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "BOOL", "ID", "QUALIFIED_NAME", 
+		"VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "BOOLEAN", "ID", "QUALIFIED_NAME", 
 		"WHITE_SPACE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -1213,7 +1213,7 @@ public class HachiParser extends Parser {
 			setState(213);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__3) | (1L << T__18) | (1L << T__19) | (1L << T__21) | (1L << VARIABLE) | (1L << PRINT) | (1L << NUMBER) | (1L << STRING) | (1L << BOOL) | (1L << ID))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__3) | (1L << T__18) | (1L << T__19) | (1L << T__21) | (1L << VARIABLE) | (1L << PRINT) | (1L << NUMBER) | (1L << STRING) | (1L << BOOLEAN) | (1L << ID))) != 0)) {
 				{
 				{
 				setState(210);
@@ -1388,7 +1388,7 @@ public class HachiParser extends Parser {
 			setState(231);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << NUMBER) | (1L << STRING) | (1L << BOOL) | (1L << ID))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << NUMBER) | (1L << STRING) | (1L << BOOLEAN) | (1L << ID))) != 0)) {
 				{
 				setState(230);
 				argument();
@@ -2341,7 +2341,7 @@ public class HachiParser extends Parser {
 	public static class ValueContext extends ParserRuleContext {
 		public TerminalNode NUMBER() { return getToken(HachiParser.NUMBER, 0); }
 		public TerminalNode STRING() { return getToken(HachiParser.STRING, 0); }
-		public TerminalNode BOOL() { return getToken(HachiParser.BOOL, 0); }
+		public TerminalNode BOOLEAN() { return getToken(HachiParser.BOOLEAN, 0); }
 		public ValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2370,7 +2370,7 @@ public class HachiParser extends Parser {
 			{
 			setState(354);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NUMBER) | (1L << STRING) | (1L << BOOL))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NUMBER) | (1L << STRING) | (1L << BOOLEAN))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {

@@ -22,15 +22,33 @@ object TypeResolver {
     fun getFromValue(value: String): Type {
         if (value.isEmpty()) {
             return BuiltInType.VOID
-        }
-
-        val intValue = value.toIntOrNull()
-
-        if (intValue != null) {
+        } else if (value.toIntOrNull() != null) {
             return BuiltInType.INT
+        } else if (value.toFloatOrNull() != null) {
+            return BuiltInType.FLOAT
+        } else if (value.toDoubleOrNull() != null) {
+            return BuiltInType.DOUBLE
+        } else if (value.toBoolean()) {
+            return BuiltInType.BOOLEAN
+        } else {
+            return BuiltInType.STRING
         }
+    }
 
-        return BuiltInType.STRING
+    fun getValueFromString(value: String, type: Type): Any {
+        if (TypeChecker.isInt(type)) {
+            return value.toInt()
+        } else if (TypeChecker.isBoolean(type)) {
+            return value.toBoolean()
+        } else if (TypeChecker.isFloat(type)) {
+            return value.toFloat()
+        } else if (TypeChecker.isDouble(type)) {
+            return value.toDouble()
+        } else if (TypeChecker.isString(type)) {
+            return value.removePrefix("\"").removeSuffix("\"")
+        } else {
+            throw UnsupportedOperationException()
+        }
     }
 
     private fun getBuiltInType(typeName: String): BuiltInType? {

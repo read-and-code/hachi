@@ -50,10 +50,7 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         val type = assignmentStatement.expression.type
         val index = this.scope.getLocalVariableIndex(variableName)
 
-        when (type) {
-            BuiltInType.INT, BuiltInType.BOOLEAN -> this.methodVisitor.visitVarInsn(Opcodes.ISTORE, index)
-            else -> this.methodVisitor.visitVarInsn(Opcodes.ASTORE, index)
-        }
+        this.methodVisitor.visitVarInsn(type.getStoreOpcode(), index)
     }
 
     fun generate(functionCall: FunctionCall) {
@@ -65,10 +62,7 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
 
         expression.accept(this.expressionGenerator)
 
-        when (expression.type) {
-            BuiltInType.VOID -> this.methodVisitor.visitInsn(Opcodes.RETURN)
-            BuiltInType.INT -> this.methodVisitor.visitInsn(Opcodes.IRETURN)
-        }
+        this.methodVisitor.visitInsn(expression.type.getReturnOpcode())
     }
 
     fun generate(blockStatement: BlockStatement) {
