@@ -12,7 +12,6 @@ import hachi.lang.domain.statement.PrintStatement
 import hachi.lang.domain.statement.RangedForStatement
 import hachi.lang.domain.statement.ReturnStatement
 import hachi.lang.domain.statement.VariableDeclarationStatement
-import hachi.lang.domain.type.BuiltInType
 import hachi.lang.domain.type.ClassType
 import jdk.internal.org.objectweb.asm.Label
 import jdk.internal.org.objectweb.asm.MethodVisitor
