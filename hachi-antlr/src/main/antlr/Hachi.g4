@@ -64,7 +64,8 @@ expression : variableReference #variableReferenceLabel
            | expression cmp='<=' expression #conditionalExpression;
 variableReference : ID;
 value : NUMBER
-      | STRING;
+      | STRING
+      | BOOL;
 
 // TOKENS
 VARIABLE : 'var';
@@ -72,6 +73,7 @@ PRINT : 'print';
 EQUALS : '=';
 NUMBER : '-'?[0-9]+;
 STRING : '"'~('\r' | '\n' | '"')*'"';
+BOOL : 'true' | 'false';
 ID : [a-zA-Z0-9]+;
 QUALIFIED_NAME : ID ('.' ID)+;
 WHITE_SPACE: [ \t\n\r]+ -> skip;

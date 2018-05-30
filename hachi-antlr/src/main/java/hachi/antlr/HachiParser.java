@@ -24,7 +24,7 @@ public class HachiParser extends Parser {
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, VARIABLE=36, PRINT=37, EQUALS=38, 
-		NUMBER=39, STRING=40, ID=41, QUALIFIED_NAME=42, WHITE_SPACE=43;
+		NUMBER=39, STRING=40, BOOL=41, ID=42, QUALIFIED_NAME=43, WHITE_SPACE=44;
 	public static final int
 		RULE_compilationUnit = 0, RULE_classDeclaration = 1, RULE_className = 2, 
 		RULE_classBody = 3, RULE_function = 4, RULE_functionDeclaration = 5, RULE_functionName = 6, 
@@ -54,7 +54,7 @@ public class HachiParser extends Parser {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		"VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "ID", "QUALIFIED_NAME", 
+		"VARIABLE", "PRINT", "EQUALS", "NUMBER", "STRING", "BOOL", "ID", "QUALIFIED_NAME", 
 		"WHITE_SPACE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -1213,7 +1213,7 @@ public class HachiParser extends Parser {
 			setState(213);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__3) | (1L << T__18) | (1L << T__19) | (1L << T__21) | (1L << VARIABLE) | (1L << PRINT) | (1L << NUMBER) | (1L << STRING) | (1L << ID))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__3) | (1L << T__18) | (1L << T__19) | (1L << T__21) | (1L << VARIABLE) | (1L << PRINT) | (1L << NUMBER) | (1L << STRING) | (1L << BOOL) | (1L << ID))) != 0)) {
 				{
 				{
 				setState(210);
@@ -1388,7 +1388,7 @@ public class HachiParser extends Parser {
 			setState(231);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << NUMBER) | (1L << STRING) | (1L << ID))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << NUMBER) | (1L << STRING) | (1L << BOOL) | (1L << ID))) != 0)) {
 				{
 				setState(230);
 				argument();
@@ -2341,6 +2341,7 @@ public class HachiParser extends Parser {
 	public static class ValueContext extends ParserRuleContext {
 		public TerminalNode NUMBER() { return getToken(HachiParser.NUMBER, 0); }
 		public TerminalNode STRING() { return getToken(HachiParser.STRING, 0); }
+		public TerminalNode BOOL() { return getToken(HachiParser.BOOL, 0); }
 		public ValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2369,7 +2370,7 @@ public class HachiParser extends Parser {
 			{
 			setState(354);
 			_la = _input.LA(1);
-			if ( !(_la==NUMBER || _la==STRING) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NUMBER) | (1L << STRING) | (1L << BOOL))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2424,7 +2425,7 @@ public class HachiParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3-\u0167\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3.\u0167\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2453,20 +2454,20 @@ public class HachiParser extends Parser {
 		"\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32"+
 		"\7\32\u015e\n\32\f\32\16\32\u0161\13\32\3\33\3\33\3\34\3\34\3\34\2\3\62"+
 		"\35\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\66\2\3\3"+
-		"\2)*\2\u0188\28\3\2\2\2\4;\3\2\2\2\6A\3\2\2\2\bF\3\2\2\2\nI\3\2\2\2\f"+
+		"\2)+\2\u0188\28\3\2\2\2\4;\3\2\2\2\6A\3\2\2\2\bF\3\2\2\2\nI\3\2\2\2\f"+
 		"M\3\2\2\2\16`\3\2\2\2\20b\3\2\2\2\22g\3\2\2\2\24j\3\2\2\2\26n\3\2\2\2"+
 		"\30\u00c0\3\2\2\2\32\u00c2\3\2\2\2\34\u00d1\3\2\2\2\36\u00d3\3\2\2\2 "+
 		"\u00dc\3\2\2\2\"\u00e1\3\2\2\2$\u00e6\3\2\2\2&\u00f9\3\2\2\2(\u00fb\3"+
 		"\2\2\2*\u0108\3\2\2\2,\u0112\3\2\2\2.\u0118\3\2\2\2\60\u011f\3\2\2\2\62"+
 		"\u013d\3\2\2\2\64\u0162\3\2\2\2\66\u0164\3\2\2\289\5\4\3\29:\7\2\2\3:"+
 		"\3\3\2\2\2;<\7\3\2\2<=\5\6\4\2=>\7\4\2\2>?\5\b\5\2?@\7\5\2\2@\5\3\2\2"+
-		"\2AB\7+\2\2B\7\3\2\2\2CE\5\n\6\2DC\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2"+
+		"\2AB\7,\2\2B\7\3\2\2\2CE\5\n\6\2DC\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2"+
 		"\2G\t\3\2\2\2HF\3\2\2\2IJ\5\f\7\2JK\5\24\13\2K\13\3\2\2\2LN\5\26\f\2M"+
 		"L\3\2\2\2MN\3\2\2\2NO\3\2\2\2OQ\5\16\b\2PR\7\6\2\2QP\3\2\2\2QR\3\2\2\2"+
 		"R[\3\2\2\2SX\5\20\t\2TU\7\7\2\2UW\5\20\t\2VT\3\2\2\2WZ\3\2\2\2XV\3\2\2"+
 		"\2XY\3\2\2\2Y\\\3\2\2\2ZX\3\2\2\2[S\3\2\2\2[\\\3\2\2\2\\^\3\2\2\2]_\7"+
-		"\b\2\2^]\3\2\2\2^_\3\2\2\2_\r\3\2\2\2`a\7+\2\2a\17\3\2\2\2bc\5\26\f\2"+
-		"ce\7+\2\2df\5\22\n\2ed\3\2\2\2ef\3\2\2\2f\21\3\2\2\2gh\7(\2\2hi\5\62\32"+
+		"\b\2\2^]\3\2\2\2^_\3\2\2\2_\r\3\2\2\2`a\7,\2\2a\17\3\2\2\2bc\5\26\f\2"+
+		"ce\7,\2\2df\5\22\n\2ed\3\2\2\2ef\3\2\2\2f\21\3\2\2\2gh\7(\2\2hi\5\62\32"+
 		"\2i\23\3\2\2\2jk\5\36\20\2k\25\3\2\2\2lo\5\30\r\2mo\5\32\16\2nl\3\2\2"+
 		"\2nm\3\2\2\2o\27\3\2\2\2pu\7\t\2\2qr\7\n\2\2rt\7\13\2\2sq\3\2\2\2tw\3"+
 		"\2\2\2us\3\2\2\2uv\3\2\2\2v\u00c1\3\2\2\2wu\3\2\2\2x}\7\f\2\2yz\7\n\2"+
@@ -2494,7 +2495,7 @@ public class HachiParser extends Parser {
 		"\u00be\3\2\2\2\u00be\u00c1\3\2\2\2\u00bf\u00bd\3\2\2\2\u00c0p\3\2\2\2"+
 		"\u00c0x\3\2\2\2\u00c0\u0080\3\2\2\2\u00c0\u0088\3\2\2\2\u00c0\u0090\3"+
 		"\2\2\2\u00c0\u0098\3\2\2\2\u00c0\u00a0\3\2\2\2\u00c0\u00a8\3\2\2\2\u00c0"+
-		"\u00b0\3\2\2\2\u00c0\u00b8\3\2\2\2\u00c1\31\3\2\2\2\u00c2\u00c7\7,\2\2"+
+		"\u00b0\3\2\2\2\u00c0\u00b8\3\2\2\2\u00c1\31\3\2\2\2\u00c2\u00c7\7-\2\2"+
 		"\u00c3\u00c4\7\n\2\2\u00c4\u00c6\7\13\2\2\u00c5\u00c3\3\2\2\2\u00c6\u00c9"+
 		"\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c7\u00c8\3\2\2\2\u00c8\33\3\2\2\2\u00c9"+
 		"\u00c7\3\2\2\2\u00ca\u00d2\5\36\20\2\u00cb\u00d2\5 \21\2\u00cc\u00d2\5"+
@@ -2523,7 +2524,7 @@ public class HachiParser extends Parser {
 		"\5,\27\2\u010d\u010f\7\b\2\2\u010e\u010d\3\2\2\2\u010e\u010f\3\2\2\2\u010f"+
 		"\u0110\3\2\2\2\u0110\u0111\5\34\17\2\u0111+\3\2\2\2\u0112\u0113\5\64\33"+
 		"\2\u0113\u0114\7\31\2\2\u0114\u0115\5\62\32\2\u0115\u0116\7\32\2\2\u0116"+
-		"\u0117\5\62\32\2\u0117-\3\2\2\2\u0118\u0119\7+\2\2\u0119/\3\2\2\2\u011a"+
+		"\u0117\5\62\32\2\u0117-\3\2\2\2\u0118\u0119\7,\2\2\u0119/\3\2\2\2\u011a"+
 		"\u0120\5\62\32\2\u011b\u011c\5.\30\2\u011c\u011d\7\33\2\2\u011d\u011e"+
 		"\5\62\32\2\u011e\u0120\3\2\2\2\u011f\u011a\3\2\2\2\u011f\u011b\3\2\2\2"+
 		"\u0120\61\3\2\2\2\u0121\u0122\b\32\1\2\u0122\u013e\5\64\33\2\u0123\u013e"+
@@ -2549,7 +2550,7 @@ public class HachiParser extends Parser {
 		"\3\2\2\2\u015d\u0145\3\2\2\2\u015d\u0148\3\2\2\2\u015d\u014b\3\2\2\2\u015d"+
 		"\u014e\3\2\2\2\u015d\u0151\3\2\2\2\u015d\u0154\3\2\2\2\u015d\u0157\3\2"+
 		"\2\2\u015d\u015a\3\2\2\2\u015e\u0161\3\2\2\2\u015f\u015d\3\2\2\2\u015f"+
-		"\u0160\3\2\2\2\u0160\63\3\2\2\2\u0161\u015f\3\2\2\2\u0162\u0163\7+\2\2"+
+		"\u0160\3\2\2\2\u0160\63\3\2\2\2\u0161\u015f\3\2\2\2\u0162\u0163\7,\2\2"+
 		"\u0163\65\3\2\2\2\u0164\u0165\t\2\2\2\u0165\67\3\2\2\2%FMQX[^enu}\u0085"+
 		"\u008d\u0095\u009d\u00a5\u00ad\u00b5\u00bd\u00c0\u00c7\u00d1\u00d7\u00e9"+
 		"\u00ef\u00f6\u00f9\u00fd\u0101\u0106\u010a\u010e\u011f\u013d\u015d\u015f";
