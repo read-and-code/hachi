@@ -6,7 +6,7 @@ grammar Corgi;
 
 // RULES
 compilationUnit : classDeclaration EOF;
-classDeclaration : className '{' classBody '}';
+classDeclaration : 'class' className '{' classBody '}';
 className : ID;
 classBody : function*;
 function : functionDeclaration functionBody;

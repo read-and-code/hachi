@@ -1,4 +1,4 @@
-app {
+class app {
     void main(string[] args) {
         var name = "Tom" + "Cat"
 
