@@ -9,11 +9,11 @@ import hachi.lang.domain.expression.FunctionCall
 import hachi.lang.domain.expression.SuperCall
 import hachi.lang.domain.expression.Value
 import hachi.lang.domain.expression.VariableReference
+import hachi.lang.domain.expression.math.Addition
+import hachi.lang.domain.expression.math.Division
+import hachi.lang.domain.expression.math.Multiplication
+import hachi.lang.domain.expression.math.Subtraction
 import hachi.lang.domain.global.CompareSign
-import hachi.lang.domain.math.Addition
-import hachi.lang.domain.math.Division
-import hachi.lang.domain.math.Multiplication
-import hachi.lang.domain.math.Subtraction
 import hachi.lang.domain.scope.Scope
 import hachi.lang.domain.type.ClassType
 import hachi.lang.exception.FunctionNameEqualClassException

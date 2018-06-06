@@ -1,4 +1,4 @@
-package hachi.lang.domain.math
+package hachi.lang.domain.expression.math
 
 import hachi.lang.domain.expression.Expression
 import hachi.lang.domain.type.BuiltInType
