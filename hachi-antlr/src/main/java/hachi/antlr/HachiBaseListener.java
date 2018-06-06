@@ -222,18 +222,6 @@ public class HachiBaseListener implements HachiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionCall(HachiParser.FunctionCallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunctionCall(HachiParser.FunctionCallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterReturnVoid(HachiParser.ReturnVoidContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -342,18 +330,6 @@ public class HachiBaseListener implements HachiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionCallLabel(HachiParser.FunctionCallLabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunctionCallLabel(HachiParser.FunctionCallLabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterValueLabel(HachiParser.ValueLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -361,6 +337,18 @@ public class HachiBaseListener implements HachiListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitValueLabel(HachiParser.ValueLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSupercall(HachiParser.SupercallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSupercall(HachiParser.SupercallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -378,6 +366,18 @@ public class HachiBaseListener implements HachiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionCall(HachiParser.FunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionCall(HachiParser.FunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSubtract(HachiParser.SubtractContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -385,6 +385,18 @@ public class HachiBaseListener implements HachiListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSubtract(HachiParser.SubtractContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstructorCall(HachiParser.ConstructorCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstructorCall(HachiParser.ConstructorCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

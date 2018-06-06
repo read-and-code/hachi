@@ -115,12 +115,6 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrintStatement(HachiParser.PrintStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HachiParser#functionCall}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionCall(HachiParser.FunctionCallContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code returnVoid}
 	 * labeled alternative in {@link HachiParser#returnStatement}.
 	 * @param ctx the parse tree
@@ -179,19 +173,19 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableReferenceLabel(HachiParser.VariableReferenceLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code functionCallLabel}
-	 * labeled alternative in {@link HachiParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctionCallLabel(HachiParser.FunctionCallLabelContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code valueLabel}
 	 * labeled alternative in {@link HachiParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitValueLabel(HachiParser.ValueLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code supercall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSupercall(HachiParser.SupercallContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code conditionalExpression}
 	 * labeled alternative in {@link HachiParser#expression}.
@@ -200,12 +194,26 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConditionalExpression(HachiParser.ConditionalExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code functionCall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCall(HachiParser.FunctionCallContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code subtract}
 	 * labeled alternative in {@link HachiParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSubtract(HachiParser.SubtractContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code constructorCall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstructorCall(HachiParser.ConstructorCallContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code divide}
 	 * labeled alternative in {@link HachiParser#expression}.

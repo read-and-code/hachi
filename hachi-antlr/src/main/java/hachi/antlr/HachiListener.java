@@ -180,16 +180,6 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitPrintStatement(HachiParser.PrintStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HachiParser#functionCall}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctionCall(HachiParser.FunctionCallContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HachiParser#functionCall}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctionCall(HachiParser.FunctionCallContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code returnVoid}
 	 * labeled alternative in {@link HachiParser#returnStatement}.
 	 * @param ctx the parse tree
@@ -288,18 +278,6 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitVariableReferenceLabel(HachiParser.VariableReferenceLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code functionCallLabel}
-	 * labeled alternative in {@link HachiParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctionCallLabel(HachiParser.FunctionCallLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code functionCallLabel}
-	 * labeled alternative in {@link HachiParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctionCallLabel(HachiParser.FunctionCallLabelContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code valueLabel}
 	 * labeled alternative in {@link HachiParser#expression}.
 	 * @param ctx the parse tree
@@ -311,6 +289,18 @@ public interface HachiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValueLabel(HachiParser.ValueLabelContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code supercall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterSupercall(HachiParser.SupercallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code supercall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitSupercall(HachiParser.SupercallContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code conditionalExpression}
 	 * labeled alternative in {@link HachiParser#expression}.
@@ -324,6 +314,18 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitConditionalExpression(HachiParser.ConditionalExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code functionCall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionCall(HachiParser.FunctionCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code functionCall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionCall(HachiParser.FunctionCallContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code subtract}
 	 * labeled alternative in {@link HachiParser#expression}.
 	 * @param ctx the parse tree
@@ -335,6 +337,18 @@ public interface HachiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSubtract(HachiParser.SubtractContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code constructorCall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstructorCall(HachiParser.ConstructorCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code constructorCall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstructorCall(HachiParser.ConstructorCallContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code divide}
 	 * labeled alternative in {@link HachiParser#expression}.

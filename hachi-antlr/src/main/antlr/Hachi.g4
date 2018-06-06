@@ -30,24 +30,26 @@ classType : QUALIFIED_NAME ('[' ']')*;
 statement : blockStatement
             | variableDeclaration
             | printStatement
-            | functionCall
+            | forStatement
             | returnStatement
             | ifStatement
-            | forStatement;
+            | expression;
 blockStatement : '{' statement* '}';
 variableDeclaration : VARIABLE name EQUALS expression;
 printStatement : PRINT '('expression')';
-functionCall : functionName '('argument? (',' argument)* ')';
 returnStatement: 'return' #returnVoid
-            | ('return')? expression #returnWithValue;
+            | 'return' expression #returnWithValue;
 ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
 forStatement : 'for' ('(')? forCondition (')')? statement;
 forCondition : iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;
 name : ID;
 argument: expression | name '->' expression;
 expression : variableReference #variableReferenceLabel
+           | owner=expression '.' functionName '('argument? (',' argument)* ')' #functionCall
+           | functionName '('argument? (',' argument)* ')' #functionCall
+           | superCall='super' '('argument? (',' argument)* ')' #supercall
+           | newCall='new' className '('argument? (',' argument)* ')' #constructorCall
            | value #valueLabel
-           | functionCall #functionCallLabel
            | '('expression '*' expression')' #multiply
            | expression '*' expression #multiply
            | '(' expression '/' expression ')' #divide
