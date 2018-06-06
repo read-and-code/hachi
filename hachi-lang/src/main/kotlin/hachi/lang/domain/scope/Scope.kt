@@ -1,6 +1,10 @@
 package hachi.lang.domain.scope
 
+import hachi.lang.domain.expression.Expression
 import hachi.lang.domain.global.MetaData
+import hachi.lang.domain.type.BuiltInType
+import hachi.lang.domain.type.ClassType
+import hachi.lang.domain.type.Type
 import hachi.lang.exception.FunctionSignatureNotFoundException
 import hachi.lang.exception.LocalVariableNotFoundException
 
@@ -27,9 +31,34 @@ class Scope {
         this.functionSignatures.add(functionSignature)
     }
 
-    fun getFunctionSignature(methodName: String): FunctionSignature {
-        return this.functionSignatures.firstOrNull { it.functionName == methodName }
-                ?: throw FunctionSignatureNotFoundException(this, methodName)
+    fun parameterLessSignatureExists(identifier: String): Boolean {
+        return this.signatureExists(identifier, emptyList())
+    }
+
+    fun signatureExists(identifier: String, parameterTypes: List<Type>): Boolean {
+        if (identifier == "super") {
+            return true
+        }
+
+        return this.functionSignatures.any { it.matches(identifier, parameterTypes) }
+    }
+
+    fun getMethodCallSignatureWithoutParameters(identifier: String): FunctionSignature {
+        return this.getMethodCallSignature(identifier, emptyList<Type>())
+    }
+
+    fun getMethodCallSignature(identifier: String, arguments: Collection<Expression>): FunctionSignature {
+        val argumentTypes = arguments.map { it.getType() }
+
+        return this.getMethodCallSignature(identifier, argumentTypes)
+    }
+
+    fun getMethodCallSignature(identifier: String, parameterTypes: List<Type>): FunctionSignature {
+        return when (identifier) {
+            "super" -> FunctionSignature("super", emptyList(), BuiltInType.VOID)
+            else -> this.functionSignatures.firstOrNull { it.matches(identifier, parameterTypes) }
+                    ?: throw FunctionSignatureNotFoundException(this, identifier, parameterTypes)
+        }
     }
 
     fun addLocalVariable(localVariable: LocalVariable) {
@@ -49,6 +78,22 @@ class Scope {
 
     fun getClassName(): String {
         return this.metaData.className
+    }
+
+    fun getSuperClassName(): String {
+        return this.metaData.superClassName
+    }
+
+    fun getClassType(): Type {
+        return ClassType(this.getClassName())
+    }
+
+    fun getClassInternalName(): String {
+        return this.getClassType().getInternalName()
+    }
+
+    fun getSuperClassInternalName(): String {
+        return ClassType(this.getSuperClassName()).getInternalName()
     }
 
     fun localVariableExists(variableName: String): Boolean {

@@ -2,6 +2,7 @@ apply plugin: "jacoco"
 
 dependencies {
     compile project(':hachi-antlr')
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     testCompile 'junit:junit:4.11'
 }
 

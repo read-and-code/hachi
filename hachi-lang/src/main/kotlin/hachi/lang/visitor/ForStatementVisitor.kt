@@ -22,18 +22,18 @@ class ForStatementVisitor(scope: Scope) : HachiBaseVisitor<RangedForStatement>()
         val iterator = forConditionContext.iterator
         val variableName = iterator.text
 
-        if (this.scope.localVariableExists(variableName)) {
+        return if (this.scope.localVariableExists(variableName)) {
             val iteratorVariable = AssignmentStatement(variableName, startExpression)
             val statement = forStatementContext.statement().accept(this.statementVisitor)
 
-            return RangedForStatement(iteratorVariable, startExpression, endExpression, statement, variableName, this.scope)
+            RangedForStatement(iteratorVariable, startExpression, endExpression, statement, variableName, this.scope)
         } else {
-            this.scope.addLocalVariable(LocalVariable(variableName, startExpression.type))
+            this.scope.addLocalVariable(LocalVariable(variableName, startExpression.getType()))
 
             val iteratorVariable = VariableDeclarationStatement(variableName, startExpression)
             val statement = forStatementContext.statement().accept(this.statementVisitor)
 
-            return RangedForStatement(iteratorVariable, startExpression, endExpression, statement, variableName, this.scope)
+            RangedForStatement(iteratorVariable, startExpression, endExpression, statement, variableName, this.scope)
         }
     }
 }

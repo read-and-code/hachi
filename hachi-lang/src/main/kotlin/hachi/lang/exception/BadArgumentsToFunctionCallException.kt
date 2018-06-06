@@ -1,3 +1,8 @@
 package hachi.lang.exception
 
-class BadArgumentsToFunctionCallException : CompilationException()
+import hachi.lang.domain.expression.Call
+
+class BadArgumentsToFunctionCallException(private val call: Call) : CompilationException() {
+    override val message: String?
+        get() = "You called function with bad arguments %s".format(this.call)
+}

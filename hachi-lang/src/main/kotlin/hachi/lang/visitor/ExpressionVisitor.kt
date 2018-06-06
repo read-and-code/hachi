@@ -3,8 +3,10 @@ package hachi.lang.visitor
 import hachi.antlr.HachiBaseVisitor
 import hachi.antlr.HachiParser
 import hachi.lang.domain.expression.ConditionalExpression
+import hachi.lang.domain.expression.ConstructorCall
 import hachi.lang.domain.expression.Expression
 import hachi.lang.domain.expression.FunctionCall
+import hachi.lang.domain.expression.SuperCall
 import hachi.lang.domain.expression.Value
 import hachi.lang.domain.expression.VariableReference
 import hachi.lang.domain.global.CompareSign
@@ -13,6 +15,8 @@ import hachi.lang.domain.math.Division
 import hachi.lang.domain.math.Multiplication
 import hachi.lang.domain.math.Subtraction
 import hachi.lang.domain.scope.Scope
+import hachi.lang.domain.type.ClassType
+import hachi.lang.exception.FunctionNameEqualClassException
 import hachi.lang.util.TypeResolver
 
 class ExpressionVisitor(val scope: Scope) : HachiBaseVisitor<Expression>() {
@@ -32,17 +36,39 @@ class ExpressionVisitor(val scope: Scope) : HachiBaseVisitor<Expression>() {
 
     override fun visitFunctionCall(functionCallContext: HachiParser.FunctionCallContext): Expression {
         val functionName = functionCallContext.functionName().text
-        val functionSignature = this.scope.getFunctionSignature(functionName)
-        val argumentContexts = functionCallContext.argument()
-        val arguments = argumentContexts.sortedWith(Comparator<HachiParser.ArgumentContext> { a, b ->
-            when (a.name()) {
-                null -> 0
-                else -> functionSignature.getIndexOfParameter(a.name().text) -
-                        functionSignature.getIndexOfParameter(b.name().text)
-            }
-        }).map { it.expression().accept(this) }
 
-        return FunctionCall(null, functionSignature, arguments)
+        if (functionName == this.scope.getClassName()) {
+            throw FunctionNameEqualClassException(functionName)
+        }
+
+        val argumentContexts = functionCallContext.argument()
+        val arguments = this.getArgumentsForCall(argumentContexts, functionName)
+        val functionSignature = this.scope.getMethodCallSignature(functionName, arguments)
+
+        functionCallContext.owner?.let {
+            val owner = functionCallContext.owner.accept(this)
+
+            return FunctionCall(owner, functionSignature, arguments)
+        }
+
+        val thisType = ClassType(this.scope.getClassName())
+
+        return FunctionCall(VariableReference("this", thisType), functionSignature, arguments)
+    }
+
+    override fun visitConstructorCall(constructorCallContext: HachiParser.ConstructorCallContext): Expression {
+        val className = constructorCallContext.className().text
+        val argumentContexts = constructorCallContext.argument()
+        val arguments = this.getArgumentsForCall(argumentContexts, className)
+
+        return ConstructorCall(className, arguments)
+    }
+
+    override fun visitSupercall(supercallContext: HachiParser.SupercallContext): Expression {
+        val argumentContexts = supercallContext.argument()
+        val arguments = this.getArgumentsForCall(argumentContexts, "super")
+
+        return SuperCall(arguments)
     }
 
     override fun visitAdd(addContext: HachiParser.AddContext): Expression {
@@ -93,5 +119,18 @@ class ExpressionVisitor(val scope: Scope) : HachiBaseVisitor<Expression>() {
         }
 
         return ConditionalExpression(leftExpression, rightExpression, compareSign)
+    }
+
+    private fun getArgumentsForCall(argumentContexts: List<HachiParser.ArgumentContext>, identifier: String): List<Expression> {
+        val arguments = argumentContexts.map { it.accept(this) }
+        val functionSignature = this.scope.getMethodCallSignature(identifier, arguments)
+
+        return argumentContexts.sortedWith(Comparator { a, b ->
+            when (a.name()) {
+                null -> 0
+                else -> functionSignature.getIndexOfParameter(a.name().text) -
+                        functionSignature.getIndexOfParameter(b.name().text)
+            }
+        }).map { it.expression().accept(this) }
     }
 }

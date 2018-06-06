@@ -14,4 +14,16 @@ class FunctionSignature(val functionName: String, val parameters: List<FunctionP
 
         return this.parameters.indexOf(functionParameter)
     }
+
+    fun matches(otherSignatureName: String, otherSignatureParameterTypes: List<Type>): Boolean {
+        val areNamesEqual = this.functionName == otherSignatureName
+
+        if (!areNamesEqual) {
+            return false
+        }
+
+        val parameterTypes = this.parameters.map { it.getType() }
+
+        return parameterTypes.containsAll(otherSignatureParameterTypes) && otherSignatureParameterTypes.containsAll(parameterTypes)
+    }
 }

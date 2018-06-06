@@ -11,10 +11,11 @@ class ClassGenerator {
 
     fun generate(classDeclaration: ClassDeclaration): ClassWriter {
         val name = classDeclaration.name
+        val methodGenerator = MethodGenerator(this.classWriter)
 
         this.classWriter.visit(this.classVersion, Opcodes.ACC_PUBLIC + Opcodes.ACC_SUPER, name, null, "java/lang/Object", null)
 
-        classDeclaration.methods.forEach { MethodGenerator(this.classWriter).generate(it) }
+        classDeclaration.methods.forEach { it.accept(methodGenerator) }
 
         this.classWriter.visitEnd()
 

@@ -1,9 +1,18 @@
 package hachi.lang.bytecode.generator
 
 import hachi.lang.domain.expression.ConditionalExpression
+import hachi.lang.domain.expression.ConstructorCall
+import hachi.lang.domain.expression.EmptyExpression
 import hachi.lang.domain.expression.FunctionCall
+import hachi.lang.domain.expression.FunctionParameter
+import hachi.lang.domain.expression.SuperCall
+import hachi.lang.domain.expression.Value
 import hachi.lang.domain.expression.VariableReference
 import hachi.lang.domain.global.CompareSign
+import hachi.lang.domain.math.Addition
+import hachi.lang.domain.math.Division
+import hachi.lang.domain.math.Multiplication
+import hachi.lang.domain.math.Subtraction
 import hachi.lang.domain.scope.Scope
 import hachi.lang.domain.statement.AssignmentStatement
 import hachi.lang.domain.statement.BlockStatement
@@ -26,7 +35,7 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         val expression = printStatement.expression
         expression.accept(expressionGenerator)
 
-        val type = expression.type
+        val type = expression.getType()
         val descriptor = "(" + type.getDescriptor() + ")V"
         val owner = ClassType("java.io.PrintStream")
         val fieldDescriptor = owner.getDescriptor()
@@ -46,7 +55,7 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
 
     fun generate(assignmentStatement: AssignmentStatement) {
         val variableName = assignmentStatement.variableName
-        val type = assignmentStatement.expression.type
+        val type = assignmentStatement.expression.getType()
         val index = this.scope.getLocalVariableIndex(variableName)
 
         this.methodVisitor.visitVarInsn(type.getStoreOpcode(), index)
@@ -61,7 +70,7 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
 
         expression.accept(this.expressionGenerator)
 
-        this.methodVisitor.visitInsn(expression.type.getReturnOpcode())
+        this.methodVisitor.visitInsn(expression.getType().getReturnOpcode())
     }
 
     fun generate(blockStatement: BlockStatement) {
@@ -80,7 +89,9 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
 
         this.methodVisitor.visitJumpInsn(Opcodes.IFNE, trueLabel)
 
-        ifStatement.falseStatement.accept(this)
+        ifStatement.falseStatement.let {
+            it?.accept(this)
+        }
 
         this.methodVisitor.visitJumpInsn(Opcodes.GOTO, falseLabel)
         this.methodVisitor.visitLabel(trueLabel)
@@ -126,5 +137,49 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         this.methodVisitor.visitJumpInsn(Opcodes.IFEQ, decrementSection)
 
         this.methodVisitor.visitLabel(endLoopSection)
+    }
+
+    fun generate(superCall: SuperCall) {
+        this.expressionGenerator.generate(superCall)
+    }
+
+    fun generate(constructorCall: ConstructorCall) {
+        this.expressionGenerator.generate(constructorCall)
+    }
+
+    fun generate(addition: Addition) {
+        this.expressionGenerator.generate(addition)
+    }
+
+    fun generate(subtraction: Subtraction) {
+        this.expressionGenerator.generate(subtraction)
+    }
+
+    fun generate(multiplication: Multiplication) {
+        this.expressionGenerator.generate(multiplication)
+    }
+
+    fun generate(division: Division) {
+        this.expressionGenerator.generate(division)
+    }
+
+    fun generate(functionParameter: FunctionParameter) {
+        this.expressionGenerator.generate(functionParameter)
+    }
+
+    fun generate(conditionalExpression: ConditionalExpression) {
+        this.expressionGenerator.generate(conditionalExpression)
+    }
+
+    fun generate(value: Value) {
+        this.expressionGenerator.generate(value)
+    }
+
+    fun generate(variableReference: VariableReference) {
+        this.expressionGenerator.generate(variableReference)
+    }
+
+    fun generate(emptyExpression: EmptyExpression) {
+        this.expressionGenerator.generate(emptyExpression)
     }
 }

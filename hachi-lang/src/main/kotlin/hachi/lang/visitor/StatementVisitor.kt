@@ -28,13 +28,9 @@ class StatementVisitor(val scope: Scope) : HachiBaseVisitor<Statement>() {
         val expressionContext = variableDeclarationContext.expression()
         val expression = expressionContext.accept(this.expressionVisitor)
 
-        this.scope.addLocalVariable(LocalVariable(variableName, expression.type))
+        this.scope.addLocalVariable(LocalVariable(variableName, expression.getType()))
 
         return VariableDeclarationStatement(variableName, expression)
-    }
-
-    override fun visitFunctionCall(functionCallContext: HachiParser.FunctionCallContext): Statement {
-        return functionCallContext.accept(ExpressionVisitor(this.scope)) as Statement
     }
 
     override fun visitReturnVoid(returnVoidContext: HachiParser.ReturnVoidContext): Statement {
@@ -60,14 +56,49 @@ class StatementVisitor(val scope: Scope) : HachiBaseVisitor<Statement>() {
         val conditionalExpressionContext = ifStatementContext.expression()
         val condition = conditionalExpressionContext.accept(this.expressionVisitor)
         val trueStatement = ifStatementContext.trueStatement.accept(this)
-        val falseStatement = ifStatementContext.falseStatement.accept(this)
 
-        return IfStatement(condition, trueStatement, falseStatement)
+        ifStatementContext.falseStatement?.let {
+            val falseStatement = ifStatementContext.falseStatement.accept(this)
+
+            return IfStatement(condition, trueStatement, falseStatement)
+        }
+
+        return IfStatement(condition, trueStatement)
     }
 
-    override fun visitForStatement(forStatementContext: HachiParser.ForStatementContext): Statement {
-        val forStatementVisitor = ForStatementVisitor(this.scope)
+    override fun visitVariableReference(variableReferenceContext: HachiParser.VariableReferenceContext): Statement {
+        return this.expressionVisitor.visitVariableReference(variableReferenceContext)
+    }
 
-        return forStatementContext.accept(forStatementVisitor)
+    override fun visitValue(valueContext: HachiParser.ValueContext): Statement {
+        return this.expressionVisitor.visitValue(valueContext)
+    }
+
+    override fun visitFunctionCall(functionCallContext: HachiParser.FunctionCallContext): Statement {
+        return this.expressionVisitor.visitFunctionCall(functionCallContext)
+    }
+
+    override fun visitConstructorCall(constructorCallContext: HachiParser.ConstructorCallContext): Statement {
+        return this.expressionVisitor.visitConstructorCall(constructorCallContext)
+    }
+
+    override fun visitAdd(addContext: HachiParser.AddContext): Statement {
+        return this.expressionVisitor.visitAdd(addContext)
+    }
+
+    override fun visitSubtract(subtractContext: HachiParser.SubtractContext): Statement {
+        return this.expressionVisitor.visitSubtract(subtractContext)
+    }
+
+    override fun visitMultiply(multiplyContext: HachiParser.MultiplyContext): Statement {
+        return this.expressionVisitor.visitMultiply(multiplyContext)
+    }
+
+    override fun visitDivide(divideContext: HachiParser.DivideContext): Statement {
+        return this.expressionVisitor.visitDivide(divideContext)
+    }
+
+    override fun visitConditionalExpression(conditionalExpressionContext: HachiParser.ConditionalExpressionContext): Statement {
+        return this.expressionVisitor.visitConditionalExpression(conditionalExpressionContext)
     }
 }
