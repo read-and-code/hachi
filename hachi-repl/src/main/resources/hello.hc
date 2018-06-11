@@ -1,11 +1,13 @@
 class app {
     app() {
-        for i from 1 to 5 {
-            print(i)
-        }
+        print("A new instance is created")
     }
 
     start() {
-        new app()
+        for i from 1 to 5 {
+            if (i > 3) {
+                print(i)
+            }
+        }
     }
 }
