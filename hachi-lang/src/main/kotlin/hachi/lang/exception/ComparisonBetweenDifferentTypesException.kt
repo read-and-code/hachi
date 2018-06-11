@@ -1,6 +1,6 @@
 package hachi.lang.exception
 
-import hachi.lang.domain.expression.Expression
+import hachi.lang.domain.node.expression.Expression
 
 class ComparisonBetweenDifferentTypesException(private val leftExpression: Expression, private val rightExpression: Expression) : CompilationException() {
     override val message: String?

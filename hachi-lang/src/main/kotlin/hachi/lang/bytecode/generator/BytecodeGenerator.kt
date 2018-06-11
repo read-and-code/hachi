@@ -1,6 +1,6 @@
 package hachi.lang.bytecode.generator
 
-import hachi.lang.domain.global.CompilationUnit
+import hachi.lang.domain.CompilationUnit
 
 class BytecodeGenerator {
     fun generate(compilationUnit: CompilationUnit): ByteArray {

@@ -55,17 +55,23 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionName(HachiParser.FunctionNameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link HachiParser#functionParameterList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionParameterList(HachiParser.FunctionParameterListContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link HachiParser#functionParameter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunctionParameter(HachiParser.FunctionParameterContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HachiParser#functionParameterDefaultValue}.
+	 * Visit a parse tree produced by {@link HachiParser#functionParameterWithDefaultValue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunctionParameterDefaultValue(HachiParser.FunctionParameterDefaultValueContext ctx);
+	T visitFunctionParameterWithDefaultValue(HachiParser.FunctionParameterWithDefaultValueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HachiParser#functionBody}.
 	 * @param ctx the parse tree
@@ -158,6 +164,26 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArgument(HachiParser.ArgumentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code unnamedArgumentList}
+	 * labeled alternative in {@link HachiParser#argumentList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnnamedArgumentList(HachiParser.UnnamedArgumentListContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code namedArgumentList}
+	 * labeled alternative in {@link HachiParser#argumentList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNamedArgumentList(HachiParser.NamedArgumentListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HachiParser#namedArgument}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNamedArgument(HachiParser.NamedArgumentContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code add}
 	 * labeled alternative in {@link HachiParser#expression}.

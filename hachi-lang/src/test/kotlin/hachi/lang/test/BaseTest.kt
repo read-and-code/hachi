@@ -1,6 +1,6 @@
 package hachi.lang.test
 
-import hachi.lang.domain.global.CompilationUnit
+import hachi.lang.domain.CompilationUnit
 import hachi.lang.parsing.Parser
 import java.nio.file.Paths
 

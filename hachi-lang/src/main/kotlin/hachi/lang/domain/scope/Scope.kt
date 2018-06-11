@@ -1,12 +1,13 @@
 package hachi.lang.domain.scope
 
-import hachi.lang.domain.expression.Expression
-import hachi.lang.domain.global.MetaData
+import hachi.lang.domain.MetaData
+import hachi.lang.domain.node.expression.Argument
 import hachi.lang.domain.type.BuiltInType
 import hachi.lang.domain.type.ClassType
 import hachi.lang.domain.type.Type
-import hachi.lang.exception.FunctionSignatureNotFoundException
 import hachi.lang.exception.LocalVariableNotFoundException
+import hachi.lang.exception.MethodSignatureNotFoundException
+import hachi.lang.exception.MethodWithNameAlreadyDefinedException
 
 class Scope {
     var localVariables: MutableList<LocalVariable>
@@ -28,6 +29,10 @@ class Scope {
     }
 
     fun addFunctionSignature(functionSignature: FunctionSignature) {
+        if (this.parameterLessSignatureExists(functionSignature.functionName)) {
+            throw MethodWithNameAlreadyDefinedException(functionSignature)
+        }
+
         this.functionSignatures.add(functionSignature)
     }
 
@@ -35,30 +40,25 @@ class Scope {
         return this.signatureExists(identifier, emptyList())
     }
 
-    fun signatureExists(identifier: String, parameterTypes: List<Type>): Boolean {
+    private fun signatureExists(identifier: String, arguments: List<Argument>): Boolean {
         if (identifier == "super") {
             return true
         }
 
-        return this.functionSignatures.any { it.matches(identifier, parameterTypes) }
+        return this.functionSignatures.any { it.matches(identifier, arguments) }
     }
 
     fun getMethodCallSignatureWithoutParameters(identifier: String): FunctionSignature {
-        return this.getMethodCallSignature(identifier, emptyList<Type>())
+        return this.getMethodCallSignature(identifier, emptyList<Argument>())
     }
 
-    fun getMethodCallSignature(identifier: String, arguments: Collection<Expression>): FunctionSignature {
-        val argumentTypes = arguments.map { it.getType() }
-
-        return this.getMethodCallSignature(identifier, argumentTypes)
-    }
-
-    fun getMethodCallSignature(identifier: String, parameterTypes: List<Type>): FunctionSignature {
-        return when (identifier) {
-            "super" -> FunctionSignature("super", emptyList(), BuiltInType.VOID)
-            else -> this.functionSignatures.firstOrNull { it.matches(identifier, parameterTypes) }
-                    ?: throw FunctionSignatureNotFoundException(this, identifier, parameterTypes)
+    fun getMethodCallSignature(identifier: String, arguments: List<Argument>): FunctionSignature {
+        if (identifier == "super") {
+            return FunctionSignature("super", emptyList(), BuiltInType.VOID)
         }
+
+        return this.functionSignatures.firstOrNull { it.matches(identifier, arguments) }
+                ?: throw MethodSignatureNotFoundException(identifier, arguments)
     }
 
     fun addLocalVariable(localVariable: LocalVariable) {

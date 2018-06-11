@@ -2,8 +2,8 @@ package hachi.lang.parsing
 
 import hachi.antlr.HachiLexer
 import hachi.antlr.HachiParser
-import hachi.lang.domain.global.CompilationUnit
-import hachi.lang.visitor.CompilationUnitVisitor
+import hachi.lang.domain.CompilationUnit
+import hachi.lang.parsing.visitor.CompilationUnitVisitor
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 

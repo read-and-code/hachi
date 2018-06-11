@@ -1,7 +1,7 @@
 package hachi.lang.compiler
 
 import hachi.lang.bytecode.generator.BytecodeGenerator
-import hachi.lang.domain.global.CompilationUnit
+import hachi.lang.domain.CompilationUnit
 import hachi.lang.parsing.Parser
 import java.io.File
 import java.io.FileOutputStream

@@ -1,11 +1,12 @@
 package hachi.lang.bytecode.generator
 
-import hachi.lang.domain.`class`.Constructor
-import hachi.lang.domain.`class`.Function
-import hachi.lang.domain.expression.EmptyExpression
-import hachi.lang.domain.expression.SuperCall
-import hachi.lang.domain.statement.BlockStatement
-import hachi.lang.domain.statement.ReturnStatement
+import hachi.lang.bytecode.generator.statement.StatementGenerator
+import hachi.lang.domain.Constructor
+import hachi.lang.domain.Function
+import hachi.lang.domain.node.expression.EmptyExpression
+import hachi.lang.domain.node.expression.SuperCall
+import hachi.lang.domain.node.statement.BlockStatement
+import hachi.lang.domain.node.statement.ReturnStatement
 import hachi.lang.util.DescriptorFactory
 import jdk.internal.org.objectweb.asm.ClassWriter
 import jdk.internal.org.objectweb.asm.Opcodes

@@ -1,6 +1,6 @@
 package hachi.lang.exception
 
-import hachi.lang.domain.expression.Call
+import hachi.lang.domain.node.expression.Call
 
 class BadArgumentsToFunctionCallException(private val call: Call) : CompilationException() {
     override val message: String?

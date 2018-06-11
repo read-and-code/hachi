@@ -1,7 +1,7 @@
 package hachi.lang.util
 
-import hachi.lang.domain.`class`.Function
-import hachi.lang.domain.expression.FunctionParameter
+import hachi.lang.domain.Function
+import hachi.lang.domain.node.expression.FunctionParameter
 import hachi.lang.domain.scope.FunctionSignature
 import hachi.lang.domain.type.Type
 

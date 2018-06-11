@@ -10,10 +10,13 @@ classDeclaration : 'class' className '{' classBody '}';
 className : ID;
 classBody : function*;
 function : functionDeclaration functionBody;
-functionDeclaration : (type)? functionName '('? (functionParameter (',' functionParameter)*)? ')'?;
+functionDeclaration : (type)? functionName '('? functionParameterList? ')'?;
 functionName : ID;
-functionParameter : type ID functionParameterDefaultValue?;
-functionParameterDefaultValue : '=' expression;
+functionParameterList: functionParameter (',' functionParameter)*
+          |  functionParameter (',' functionParameterWithDefaultValue)*
+          |  functionParameterWithDefaultValue (',' functionParameterWithDefaultValue)*;
+functionParameter : type ID;
+functionParameterWithDefaultValue : type ID '=' defaultValue=expression;
 functionBody : blockStatement;
 type : primitiveType | classType;
 primitiveType : 'boolean' ('[' ']')*
@@ -43,12 +46,15 @@ ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' false
 forStatement : 'for' ('(')? forCondition (')')? statement;
 forCondition : iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;
 name : ID;
-argument: expression | name '->' expression;
+argument: expression;
+argumentList: argument? (',' a=argument)* #unnamedArgumentList
+            | namedArgument? (',' namedArgument)* #namedArgumentList;
+namedArgument: name '->' expression;
 expression : variableReference #variableReferenceLabel
-           | owner=expression '.' functionName '('argument? (',' argument)* ')' #functionCall
-           | functionName '('argument? (',' argument)* ')' #functionCall
-           | superCall='super' '('argument? (',' argument)* ')' #supercall
-           | newCall='new' className '('argument? (',' argument)* ')' #constructorCall
+           | owner=expression '.' functionName '(' argumentList ')' #functionCall
+           | functionName '(' argumentList ')' #functionCall
+           | superCall='super' '('argumentList ')' #supercall
+           | newCall='new' className '('argumentList ')' #constructorCall
            | value #valueLabel
            | '('expression '*' expression')' #multiply
            | expression '*' expression #multiply

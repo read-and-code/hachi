@@ -1,6 +1,6 @@
 package hachi.lang.bytecode.generator
 
-import hachi.lang.domain.global.ClassDeclaration
+import hachi.lang.domain.ClassDeclaration
 import jdk.internal.org.objectweb.asm.ClassWriter
 import jdk.internal.org.objectweb.asm.Opcodes
 

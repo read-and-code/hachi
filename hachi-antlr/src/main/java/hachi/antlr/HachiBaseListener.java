@@ -102,6 +102,18 @@ public class HachiBaseListener implements HachiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionParameterList(HachiParser.FunctionParameterListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionParameterList(HachiParser.FunctionParameterListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionParameter(HachiParser.FunctionParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -114,13 +126,13 @@ public class HachiBaseListener implements HachiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionParameterDefaultValue(HachiParser.FunctionParameterDefaultValueContext ctx) { }
+	@Override public void enterFunctionParameterWithDefaultValue(HachiParser.FunctionParameterWithDefaultValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionParameterDefaultValue(HachiParser.FunctionParameterDefaultValueContext ctx) { }
+	@Override public void exitFunctionParameterWithDefaultValue(HachiParser.FunctionParameterWithDefaultValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -301,6 +313,42 @@ public class HachiBaseListener implements HachiListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArgument(HachiParser.ArgumentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnnamedArgumentList(HachiParser.UnnamedArgumentListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnnamedArgumentList(HachiParser.UnnamedArgumentListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNamedArgumentList(HachiParser.NamedArgumentListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNamedArgumentList(HachiParser.NamedArgumentListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNamedArgument(HachiParser.NamedArgumentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNamedArgument(HachiParser.NamedArgumentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
