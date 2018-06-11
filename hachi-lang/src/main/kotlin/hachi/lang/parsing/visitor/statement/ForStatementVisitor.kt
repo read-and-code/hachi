@@ -9,32 +9,30 @@ import hachi.lang.domain.scope.LocalVariable
 import hachi.lang.domain.scope.Scope
 import hachi.lang.parsing.visitor.expression.ExpressionVisitor
 
-class ForStatementVisitor(scope: Scope) : HachiBaseVisitor<RangedForStatement>() {
-    val scope = Scope(scope)
-
+class ForStatementVisitor(val scope: Scope) : HachiBaseVisitor<RangedForStatement>() {
     private val expressionVisitor = ExpressionVisitor(this.scope)
 
-    private val statementVisitor = StatementVisitor(this.scope)
-
     override fun visitForStatement(forStatementContext: HachiParser.ForStatementContext): RangedForStatement {
+        val newScope = Scope(this.scope)
         val forConditionContext = forStatementContext.forCondition()
         val startExpression = forConditionContext.startExpression.accept(this.expressionVisitor)
         val endExpression = forConditionContext.endExpression.accept(this.expressionVisitor)
+        val statementVisitor = StatementVisitor(newScope)
         val iterator = forConditionContext.iterator
         val variableName = iterator.text
 
-        return if (this.scope.localVariableExists(variableName)) {
+        return if (newScope.localVariableExists(variableName)) {
             val iteratorVariable = AssignmentStatement(variableName, startExpression)
-            val statement = forStatementContext.statement().accept(this.statementVisitor)
+            val statement = forStatementContext.statement().accept(statementVisitor)
 
-            RangedForStatement(iteratorVariable, startExpression, endExpression, statement, variableName, this.scope)
+            RangedForStatement(iteratorVariable, startExpression, endExpression, statement, variableName, newScope)
         } else {
-            this.scope.addLocalVariable(LocalVariable(variableName, startExpression.getType()))
+            newScope.addLocalVariable(LocalVariable(variableName, startExpression.getType()))
 
             val iteratorVariable = VariableDeclarationStatement(variableName, startExpression)
-            val statement = forStatementContext.statement().accept(this.statementVisitor)
+            val statement = forStatementContext.statement().accept(statementVisitor)
 
-            RangedForStatement(iteratorVariable, startExpression, endExpression, statement, variableName, this.scope)
+            RangedForStatement(iteratorVariable, startExpression, endExpression, statement, variableName, newScope)
         }
     }
 }

@@ -19,6 +19,8 @@ class StatementVisitor(val scope: Scope) : HachiBaseVisitor<Statement>() {
 
     private val ifStatementVisitor = IfStatementVisitor(this, this.expressionVisitor)
 
+    private val forStatementVisitor = ForStatementVisitor(this.scope)
+
     override fun visitPrintStatement(printStatementContext: HachiParser.PrintStatementContext): Statement {
         return this.printStatementVisitor.visitPrintStatement(printStatementContext)
     }
@@ -81,5 +83,9 @@ class StatementVisitor(val scope: Scope) : HachiBaseVisitor<Statement>() {
 
     override fun visitConditionalExpression(conditionalExpressionContext: HachiParser.ConditionalExpressionContext): Statement {
         return this.expressionVisitor.visitConditionalExpression(conditionalExpressionContext)
+    }
+
+    override fun visitForStatement(forStatementContext: HachiParser.ForStatementContext): Statement {
+        return this.forStatementVisitor.visitForStatement(forStatementContext)
     }
 }

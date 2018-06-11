@@ -1,6 +1,8 @@
 class app {
     app() {
-        print("constructor")
+        for i from 1 to 5 {
+            print(i)
+        }
     }
 
     start() {
