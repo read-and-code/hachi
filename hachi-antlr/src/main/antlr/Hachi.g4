@@ -46,15 +46,15 @@ ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' false
 forStatement : 'for' ('(')? forCondition (')')? statement;
 forCondition : iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;
 name : ID;
-argument: expression;
-argumentList: argument? (',' a=argument)* #unnamedArgumentList
-            | namedArgument? (',' namedArgument)* #namedArgumentList;
-namedArgument: name '->' expression;
+functionArgument: expression;
+functionArgumentList: functionArgument? (',' functionArgument)* #unnamedFunctionArgumentList
+            | namedFunctionArgument? (',' namedFunctionArgument)* #namedFunctionArgumentList;
+namedFunctionArgument: name '->' expression;
 expression : variableReference #variableReferenceLabel
-           | owner=expression '.' functionName '(' argumentList ')' #functionCall
-           | functionName '(' argumentList ')' #functionCall
-           | superCall='super' '('argumentList ')' #supercall
-           | newCall='new' className '('argumentList ')' #constructorCall
+           | owner=expression '.' functionName '(' functionArgumentList ')' #functionCall
+           | functionName '(' functionArgumentList ')' #functionCall
+           | superCall='super' '('functionArgumentList ')' #supercall
+           | newCall='new' className '('functionArgumentList ')' #constructorCall
            | value #valueLabel
            | '('expression '*' expression')' #multiply
            | expression '*' expression #multiply

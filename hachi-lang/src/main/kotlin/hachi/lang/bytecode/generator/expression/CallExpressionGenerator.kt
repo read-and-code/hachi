@@ -1,9 +1,9 @@
 package hachi.lang.bytecode.generator.expression
 
-import hachi.lang.domain.node.expression.Argument
 import hachi.lang.domain.node.expression.Call
 import hachi.lang.domain.node.expression.ConstructorCall
 import hachi.lang.domain.node.expression.Expression
+import hachi.lang.domain.node.expression.FunctionArgument
 import hachi.lang.domain.node.expression.FunctionCall
 import hachi.lang.domain.node.expression.FunctionParameter
 import hachi.lang.domain.node.expression.SuperCall
@@ -66,8 +66,8 @@ class CallExpressionGenerator(val expressionGenerator: ExpressionGenerator, priv
         this.generateDefaultParameters(arguments, parameters, call)
     }
 
-    private fun getSortedArguments(arguments: List<Argument>, functionParameters: List<FunctionParameter>): List<Argument> {
-        return arguments.sortedWith(Comparator { a, b ->
+    private fun getSortedArguments(functionArguments: List<FunctionArgument>, functionParameters: List<FunctionParameter>): List<FunctionArgument> {
+        return functionArguments.sortedWith(Comparator { a, b ->
             when (a.parameterName) {
                 null -> 0
                 else -> this.getIndexOfArgument(a, functionParameters) - this.getIndexOfArgument(b, functionParameters)
@@ -75,10 +75,10 @@ class CallExpressionGenerator(val expressionGenerator: ExpressionGenerator, priv
         })
     }
 
-    private fun getIndexOfArgument(argument: Argument, functionParameters: List<FunctionParameter>): Int {
-        return functionParameters.filter { it.name == argument.parameterName }
+    private fun getIndexOfArgument(functionArgument: FunctionArgument, functionParameters: List<FunctionParameter>): Int {
+        return functionParameters.filter { it.name == functionArgument.parameterName }
                 .map { functionParameters.indexOf(it) }
-                .firstOrNull() ?: throw WrongArgumentNameException(argument, functionParameters)
+                .firstOrNull() ?: throw WrongArgumentNameException(functionArgument, functionParameters)
     }
 
     private fun generateDefaultParameters(arguments: List<Expression>, parameters: List<FunctionParameter>, call: Call) {

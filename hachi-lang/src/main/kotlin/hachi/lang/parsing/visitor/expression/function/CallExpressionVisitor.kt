@@ -2,9 +2,9 @@ package hachi.lang.parsing.visitor.expression.function
 
 import hachi.antlr.HachiBaseVisitor
 import hachi.antlr.HachiParser
-import hachi.lang.domain.node.expression.Argument
 import hachi.lang.domain.node.expression.Call
 import hachi.lang.domain.node.expression.ConstructorCall
+import hachi.lang.domain.node.expression.FunctionArgument
 import hachi.lang.domain.node.expression.FunctionCall
 import hachi.lang.domain.node.expression.SuperCall
 import hachi.lang.domain.node.expression.VariableReference
@@ -21,7 +21,7 @@ class CallExpressionVisitor(private val expressionVisitor: ExpressionVisitor, pr
             throw FunctionNameEqualClassException(functionName)
         }
 
-        val arguments = this.getArgumentsForCall(functionCallContext.argumentList())
+        val arguments = this.getArgumentsForCall(functionCallContext.functionArgumentList())
         val functionSignature = this.scope.getMethodCallSignature(functionName, arguments)
 
         functionCallContext.owner?.let {
@@ -37,22 +37,22 @@ class CallExpressionVisitor(private val expressionVisitor: ExpressionVisitor, pr
 
     override fun visitConstructorCall(constructorCallContext: HachiParser.ConstructorCallContext): Call {
         val className = constructorCallContext.className().text
-        val arguments = this.getArgumentsForCall(constructorCallContext.argumentList())
+        val arguments = this.getArgumentsForCall(constructorCallContext.functionArgumentList())
 
         return ConstructorCall(className, arguments)
     }
 
     override fun visitSupercall(supercallContext: HachiParser.SupercallContext): Call {
-        val arguments = this.getArgumentsForCall(supercallContext.argumentList())
+        val arguments = this.getArgumentsForCall(supercallContext.functionArgumentList())
 
         return SuperCall(arguments)
     }
 
-    private fun getArgumentsForCall(argumentListContext: HachiParser.ArgumentListContext?): List<Argument> {
-        if (argumentListContext != null) {
-            val argumentExpressionsListVisitor = ArgumentExpressionsListVisitor(this.expressionVisitor)
+    private fun getArgumentsForCall(functionArgumentListContext: HachiParser.FunctionArgumentListContext?): List<FunctionArgument> {
+        if (functionArgumentListContext != null) {
+            val argumentExpressionsListVisitor = FunctionArgumentListExpressionVisitor(this.expressionVisitor)
 
-            return argumentListContext.accept(argumentExpressionsListVisitor)
+            return functionArgumentListContext.accept(argumentExpressionsListVisitor)
         } else {
             return emptyList()
         }

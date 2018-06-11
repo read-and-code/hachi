@@ -5,7 +5,7 @@ import hachi.antlr.HachiParser
 import hachi.lang.domain.node.expression.FunctionParameter
 import hachi.lang.parsing.visitor.expression.ExpressionVisitor
 
-class FunctionParameterExpressionListVisitor(private val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<List<FunctionParameter>>() {
+class FunctionParameterListExpressionVisitor(private val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<List<FunctionParameter>>() {
     override fun visitFunctionParameterList(functionParameterListContext: HachiParser.FunctionParameterListContext?): List<FunctionParameter> {
         val functionParameterContexts = functionParameterListContext?.functionParameter()
         val functionParameterExpressionVisitor = FunctionParameterExpressionVisitor(this.expressionVisitor)

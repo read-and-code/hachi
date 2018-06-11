@@ -159,31 +159,31 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitName(HachiParser.NameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HachiParser#argument}.
+	 * Visit a parse tree produced by {@link HachiParser#functionArgument}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArgument(HachiParser.ArgumentContext ctx);
+	T visitFunctionArgument(HachiParser.FunctionArgumentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code unnamedArgumentList}
-	 * labeled alternative in {@link HachiParser#argumentList}.
+	 * Visit a parse tree produced by the {@code unnamedFunctionArgumentList}
+	 * labeled alternative in {@link HachiParser#functionArgumentList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnnamedArgumentList(HachiParser.UnnamedArgumentListContext ctx);
+	T visitUnnamedFunctionArgumentList(HachiParser.UnnamedFunctionArgumentListContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code namedArgumentList}
-	 * labeled alternative in {@link HachiParser#argumentList}.
+	 * Visit a parse tree produced by the {@code namedFunctionArgumentList}
+	 * labeled alternative in {@link HachiParser#functionArgumentList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNamedArgumentList(HachiParser.NamedArgumentListContext ctx);
+	T visitNamedFunctionArgumentList(HachiParser.NamedFunctionArgumentListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HachiParser#namedArgument}.
+	 * Visit a parse tree produced by {@link HachiParser#namedFunctionArgument}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNamedArgument(HachiParser.NamedArgumentContext ctx);
+	T visitNamedFunctionArgument(HachiParser.NamedFunctionArgumentContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code add}
 	 * labeled alternative in {@link HachiParser#expression}.

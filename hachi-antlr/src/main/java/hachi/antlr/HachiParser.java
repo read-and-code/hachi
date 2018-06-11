@@ -33,8 +33,8 @@ public class HachiParser extends Parser {
 		RULE_functionBody = 10, RULE_type = 11, RULE_primitiveType = 12, RULE_classType = 13, 
 		RULE_statement = 14, RULE_blockStatement = 15, RULE_variableDeclaration = 16, 
 		RULE_printStatement = 17, RULE_returnStatement = 18, RULE_ifStatement = 19, 
-		RULE_forStatement = 20, RULE_forCondition = 21, RULE_name = 22, RULE_argument = 23, 
-		RULE_argumentList = 24, RULE_namedArgument = 25, RULE_expression = 26, 
+		RULE_forStatement = 20, RULE_forCondition = 21, RULE_name = 22, RULE_functionArgument = 23, 
+		RULE_functionArgumentList = 24, RULE_namedFunctionArgument = 25, RULE_expression = 26, 
 		RULE_variableReference = 27, RULE_value = 28;
 	public static final String[] ruleNames = {
 		"compilationUnit", "classDeclaration", "className", "classBody", "function", 
@@ -42,8 +42,8 @@ public class HachiParser extends Parser {
 		"functionParameterWithDefaultValue", "functionBody", "type", "primitiveType", 
 		"classType", "statement", "blockStatement", "variableDeclaration", "printStatement", 
 		"returnStatement", "ifStatement", "forStatement", "forCondition", "name", 
-		"argument", "argumentList", "namedArgument", "expression", "variableReference", 
-		"value"
+		"functionArgument", "functionArgumentList", "namedFunctionArgument", "expression", 
+		"variableReference", "value"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -1804,32 +1804,32 @@ public class HachiParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ArgumentContext extends ParserRuleContext {
+	public static class FunctionArgumentContext extends ParserRuleContext {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public ArgumentContext(ParserRuleContext parent, int invokingState) {
+		public FunctionArgumentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_argument; }
+		@Override public int getRuleIndex() { return RULE_functionArgument; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterArgument(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterFunctionArgument(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitArgument(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitFunctionArgument(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitArgument(this);
+			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitFunctionArgument(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ArgumentContext argument() throws RecognitionException {
-		ArgumentContext _localctx = new ArgumentContext(_ctx, getState());
-		enterRule(_localctx, 46, RULE_argument);
+	public final FunctionArgumentContext functionArgument() throws RecognitionException {
+		FunctionArgumentContext _localctx = new FunctionArgumentContext(_ctx, getState());
+		enterRule(_localctx, 46, RULE_functionArgument);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -1848,73 +1848,72 @@ public class HachiParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ArgumentListContext extends ParserRuleContext {
-		public ArgumentListContext(ParserRuleContext parent, int invokingState) {
+	public static class FunctionArgumentListContext extends ParserRuleContext {
+		public FunctionArgumentListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_argumentList; }
+		@Override public int getRuleIndex() { return RULE_functionArgumentList; }
 	 
-		public ArgumentListContext() { }
-		public void copyFrom(ArgumentListContext ctx) {
+		public FunctionArgumentListContext() { }
+		public void copyFrom(FunctionArgumentListContext ctx) {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class NamedArgumentListContext extends ArgumentListContext {
-		public List<NamedArgumentContext> namedArgument() {
-			return getRuleContexts(NamedArgumentContext.class);
+	public static class NamedFunctionArgumentListContext extends FunctionArgumentListContext {
+		public List<NamedFunctionArgumentContext> namedFunctionArgument() {
+			return getRuleContexts(NamedFunctionArgumentContext.class);
 		}
-		public NamedArgumentContext namedArgument(int i) {
-			return getRuleContext(NamedArgumentContext.class,i);
+		public NamedFunctionArgumentContext namedFunctionArgument(int i) {
+			return getRuleContext(NamedFunctionArgumentContext.class,i);
 		}
-		public NamedArgumentListContext(ArgumentListContext ctx) { copyFrom(ctx); }
+		public NamedFunctionArgumentListContext(FunctionArgumentListContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterNamedArgumentList(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterNamedFunctionArgumentList(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitNamedArgumentList(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitNamedFunctionArgumentList(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitNamedArgumentList(this);
+			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitNamedFunctionArgumentList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class UnnamedArgumentListContext extends ArgumentListContext {
-		public ArgumentContext a;
-		public List<ArgumentContext> argument() {
-			return getRuleContexts(ArgumentContext.class);
+	public static class UnnamedFunctionArgumentListContext extends FunctionArgumentListContext {
+		public List<FunctionArgumentContext> functionArgument() {
+			return getRuleContexts(FunctionArgumentContext.class);
 		}
-		public ArgumentContext argument(int i) {
-			return getRuleContext(ArgumentContext.class,i);
+		public FunctionArgumentContext functionArgument(int i) {
+			return getRuleContext(FunctionArgumentContext.class,i);
 		}
-		public UnnamedArgumentListContext(ArgumentListContext ctx) { copyFrom(ctx); }
+		public UnnamedFunctionArgumentListContext(FunctionArgumentListContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterUnnamedArgumentList(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterUnnamedFunctionArgumentList(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitUnnamedArgumentList(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitUnnamedFunctionArgumentList(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitUnnamedArgumentList(this);
+			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitUnnamedFunctionArgumentList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ArgumentListContext argumentList() throws RecognitionException {
-		ArgumentListContext _localctx = new ArgumentListContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_argumentList);
+	public final FunctionArgumentListContext functionArgumentList() throws RecognitionException {
+		FunctionArgumentListContext _localctx = new FunctionArgumentListContext(_ctx, getState());
+		enterRule(_localctx, 48, RULE_functionArgumentList);
 		int _la;
 		try {
 			setState(309);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
 			case 1:
-				_localctx = new UnnamedArgumentListContext(_localctx);
+				_localctx = new UnnamedFunctionArgumentListContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(290);
@@ -1923,7 +1922,7 @@ public class HachiParser extends Parser {
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << T__26) | (1L << T__27) | (1L << NUMBER) | (1L << STRING) | (1L << BOOLEAN) | (1L << ID))) != 0)) {
 					{
 					setState(289);
-					argument();
+					functionArgument();
 					}
 				}
 
@@ -1936,7 +1935,7 @@ public class HachiParser extends Parser {
 					setState(292);
 					match(T__5);
 					setState(293);
-					((UnnamedArgumentListContext)_localctx).a = argument();
+					functionArgument();
 					}
 					}
 					setState(298);
@@ -1946,7 +1945,7 @@ public class HachiParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new NamedArgumentListContext(_localctx);
+				_localctx = new NamedFunctionArgumentListContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(300);
@@ -1955,7 +1954,7 @@ public class HachiParser extends Parser {
 				if (_la==ID) {
 					{
 					setState(299);
-					namedArgument();
+					namedFunctionArgument();
 					}
 				}
 
@@ -1968,7 +1967,7 @@ public class HachiParser extends Parser {
 					setState(302);
 					match(T__5);
 					setState(303);
-					namedArgument();
+					namedFunctionArgument();
 					}
 					}
 					setState(308);
@@ -1990,35 +1989,35 @@ public class HachiParser extends Parser {
 		return _localctx;
 	}
 
-	public static class NamedArgumentContext extends ParserRuleContext {
+	public static class NamedFunctionArgumentContext extends ParserRuleContext {
 		public NameContext name() {
 			return getRuleContext(NameContext.class,0);
 		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public NamedArgumentContext(ParserRuleContext parent, int invokingState) {
+		public NamedFunctionArgumentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_namedArgument; }
+		@Override public int getRuleIndex() { return RULE_namedFunctionArgument; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterNamedArgument(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterNamedFunctionArgument(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitNamedArgument(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitNamedFunctionArgument(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitNamedArgument(this);
+			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitNamedFunctionArgument(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final NamedArgumentContext namedArgument() throws RecognitionException {
-		NamedArgumentContext _localctx = new NamedArgumentContext(_ctx, getState());
-		enterRule(_localctx, 50, RULE_namedArgument);
+	public final NamedFunctionArgumentContext namedFunctionArgument() throws RecognitionException {
+		NamedFunctionArgumentContext _localctx = new NamedFunctionArgumentContext(_ctx, getState());
+		enterRule(_localctx, 50, RULE_namedFunctionArgument);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -2114,8 +2113,8 @@ public class HachiParser extends Parser {
 	}
 	public static class SupercallContext extends ExpressionContext {
 		public Token superCall;
-		public ArgumentListContext argumentList() {
-			return getRuleContext(ArgumentListContext.class,0);
+		public FunctionArgumentListContext functionArgumentList() {
+			return getRuleContext(FunctionArgumentListContext.class,0);
 		}
 		public SupercallContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
@@ -2160,8 +2159,8 @@ public class HachiParser extends Parser {
 		public FunctionNameContext functionName() {
 			return getRuleContext(FunctionNameContext.class,0);
 		}
-		public ArgumentListContext argumentList() {
-			return getRuleContext(ArgumentListContext.class,0);
+		public FunctionArgumentListContext functionArgumentList() {
+			return getRuleContext(FunctionArgumentListContext.class,0);
 		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
@@ -2208,8 +2207,8 @@ public class HachiParser extends Parser {
 		public ClassNameContext className() {
 			return getRuleContext(ClassNameContext.class,0);
 		}
-		public ArgumentListContext argumentList() {
-			return getRuleContext(ArgumentListContext.class,0);
+		public FunctionArgumentListContext functionArgumentList() {
+			return getRuleContext(FunctionArgumentListContext.class,0);
 		}
 		public ConstructorCallContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
@@ -2309,7 +2308,7 @@ public class HachiParser extends Parser {
 				setState(318);
 				match(T__3);
 				setState(319);
-				argumentList();
+				functionArgumentList();
 				setState(320);
 				match(T__4);
 				}
@@ -2324,7 +2323,7 @@ public class HachiParser extends Parser {
 				setState(323);
 				match(T__3);
 				setState(324);
-				argumentList();
+				functionArgumentList();
 				setState(325);
 				match(T__4);
 				}
@@ -2341,7 +2340,7 @@ public class HachiParser extends Parser {
 				setState(329);
 				match(T__3);
 				setState(330);
-				argumentList();
+				functionArgumentList();
 				setState(331);
 				match(T__4);
 				}
@@ -2570,7 +2569,7 @@ public class HachiParser extends Parser {
 						setState(393);
 						match(T__3);
 						setState(394);
-						argumentList();
+						functionArgumentList();
 						setState(395);
 						match(T__4);
 						}

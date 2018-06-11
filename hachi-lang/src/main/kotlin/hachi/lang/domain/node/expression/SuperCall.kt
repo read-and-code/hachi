@@ -5,11 +5,11 @@ import hachi.lang.bytecode.generator.statement.StatementGenerator
 import hachi.lang.domain.type.BuiltInType
 import hachi.lang.domain.type.Type
 
-class SuperCall(private val superCallArguments: List<Argument>) : Call {
+class SuperCall(private val superCallFunctionArguments: List<FunctionArgument>) : Call {
     constructor() : this(emptyList())
 
-    override fun getArguments(): List<Argument> {
-        return this.superCallArguments
+    override fun getArguments(): List<FunctionArgument> {
+        return this.superCallFunctionArguments
     }
 
     override fun getIdentifier(): String {

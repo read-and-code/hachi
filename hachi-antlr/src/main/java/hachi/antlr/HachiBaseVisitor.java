@@ -187,28 +187,28 @@ public class HachiBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArgument(HachiParser.ArgumentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunctionArgument(HachiParser.FunctionArgumentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUnnamedArgumentList(HachiParser.UnnamedArgumentListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUnnamedFunctionArgumentList(HachiParser.UnnamedFunctionArgumentListContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNamedArgumentList(HachiParser.NamedArgumentListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNamedFunctionArgumentList(HachiParser.NamedFunctionArgumentListContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNamedArgument(HachiParser.NamedArgumentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNamedFunctionArgument(HachiParser.NamedFunctionArgumentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

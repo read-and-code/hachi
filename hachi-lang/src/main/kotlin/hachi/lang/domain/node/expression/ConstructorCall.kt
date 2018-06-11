@@ -5,13 +5,13 @@ import hachi.lang.bytecode.generator.statement.StatementGenerator
 import hachi.lang.domain.type.ClassType
 import hachi.lang.domain.type.Type
 
-class ConstructorCall(private val constructorIdentifier: String, private val constructorArguments: List<Argument>) : Call {
+class ConstructorCall(private val constructorIdentifier: String, private val constructorFunctionArguments: List<FunctionArgument>) : Call {
     val type = ClassType(this.constructorIdentifier)
 
     constructor(identifier: String) : this(identifier, emptyList())
 
-    override fun getArguments(): List<Argument> {
-        return this.constructorArguments
+    override fun getArguments(): List<FunctionArgument> {
+        return this.constructorFunctionArguments
     }
 
     override fun getIdentifier(): String {

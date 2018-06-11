@@ -1,6 +1,6 @@
 package hachi.lang.domain.scope
 
-import hachi.lang.domain.node.expression.Argument
+import hachi.lang.domain.node.expression.FunctionArgument
 import hachi.lang.domain.node.expression.FunctionParameter
 import hachi.lang.domain.type.Type
 import hachi.lang.exception.ParameterForNameNotFoundException
@@ -16,7 +16,7 @@ class FunctionSignature(val functionName: String, val parameters: List<FunctionP
         return this.parameters.indexOf(functionParameter)
     }
 
-    fun matches(otherSignatureName: String, arguments: List<Argument>): Boolean {
+    fun matches(otherSignatureName: String, functionArguments: List<FunctionArgument>): Boolean {
         val areNamesEqual = this.functionName == otherSignatureName
 
         if (!areNamesEqual) {
@@ -25,20 +25,20 @@ class FunctionSignature(val functionName: String, val parameters: List<FunctionP
 
         val nonDefaultParametersCount = this.parameters.count { it.defaultValue != null }
 
-        if (nonDefaultParametersCount > arguments.size) {
+        if (nonDefaultParametersCount > functionArguments.size) {
             return false
         }
 
-        val isNamedArgumentList = arguments.any { it.parameterName != null }
+        val isNamedArgumentList = functionArguments.any { it.parameterName != null }
 
         if (isNamedArgumentList) {
-            return arguments.all {
+            return functionArguments.all {
                 val parameterName = it.parameterName
 
                 this.parameters.map { it.name }.any { it == parameterName }
             }
         } else {
-            return (0..(arguments.size - 1)).all { arguments[it].getType() == this.parameters[it].getType() }
+            return (0..(functionArguments.size - 1)).all { functionArguments[it].getType() == this.parameters[it].getType() }
         }
     }
 }

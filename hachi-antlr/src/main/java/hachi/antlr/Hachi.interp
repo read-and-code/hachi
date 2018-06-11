@@ -122,9 +122,9 @@ ifStatement
 forStatement
 forCondition
 name
-argument
-argumentList
-namedArgument
+functionArgument
+functionArgumentList
+namedFunctionArgument
 expression
 variableReference
 value

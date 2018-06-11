@@ -254,49 +254,49 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitName(HachiParser.NameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HachiParser#argument}.
+	 * Enter a parse tree produced by {@link HachiParser#functionArgument}.
 	 * @param ctx the parse tree
 	 */
-	void enterArgument(HachiParser.ArgumentContext ctx);
+	void enterFunctionArgument(HachiParser.FunctionArgumentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HachiParser#argument}.
+	 * Exit a parse tree produced by {@link HachiParser#functionArgument}.
 	 * @param ctx the parse tree
 	 */
-	void exitArgument(HachiParser.ArgumentContext ctx);
+	void exitFunctionArgument(HachiParser.FunctionArgumentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code unnamedArgumentList}
-	 * labeled alternative in {@link HachiParser#argumentList}.
+	 * Enter a parse tree produced by the {@code unnamedFunctionArgumentList}
+	 * labeled alternative in {@link HachiParser#functionArgumentList}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnnamedArgumentList(HachiParser.UnnamedArgumentListContext ctx);
+	void enterUnnamedFunctionArgumentList(HachiParser.UnnamedFunctionArgumentListContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code unnamedArgumentList}
-	 * labeled alternative in {@link HachiParser#argumentList}.
+	 * Exit a parse tree produced by the {@code unnamedFunctionArgumentList}
+	 * labeled alternative in {@link HachiParser#functionArgumentList}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnnamedArgumentList(HachiParser.UnnamedArgumentListContext ctx);
+	void exitUnnamedFunctionArgumentList(HachiParser.UnnamedFunctionArgumentListContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code namedArgumentList}
-	 * labeled alternative in {@link HachiParser#argumentList}.
+	 * Enter a parse tree produced by the {@code namedFunctionArgumentList}
+	 * labeled alternative in {@link HachiParser#functionArgumentList}.
 	 * @param ctx the parse tree
 	 */
-	void enterNamedArgumentList(HachiParser.NamedArgumentListContext ctx);
+	void enterNamedFunctionArgumentList(HachiParser.NamedFunctionArgumentListContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code namedArgumentList}
-	 * labeled alternative in {@link HachiParser#argumentList}.
+	 * Exit a parse tree produced by the {@code namedFunctionArgumentList}
+	 * labeled alternative in {@link HachiParser#functionArgumentList}.
 	 * @param ctx the parse tree
 	 */
-	void exitNamedArgumentList(HachiParser.NamedArgumentListContext ctx);
+	void exitNamedFunctionArgumentList(HachiParser.NamedFunctionArgumentListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HachiParser#namedArgument}.
+	 * Enter a parse tree produced by {@link HachiParser#namedFunctionArgument}.
 	 * @param ctx the parse tree
 	 */
-	void enterNamedArgument(HachiParser.NamedArgumentContext ctx);
+	void enterNamedFunctionArgument(HachiParser.NamedFunctionArgumentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HachiParser#namedArgument}.
+	 * Exit a parse tree produced by {@link HachiParser#namedFunctionArgument}.
 	 * @param ctx the parse tree
 	 */
-	void exitNamedArgument(HachiParser.NamedArgumentContext ctx);
+	void exitNamedFunctionArgument(HachiParser.NamedFunctionArgumentContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code add}
 	 * labeled alternative in {@link HachiParser#expression}.

@@ -1,12 +1,12 @@
 package hachi.lang.domain.scope
 
 import hachi.lang.domain.MetaData
-import hachi.lang.domain.node.expression.Argument
+import hachi.lang.domain.node.expression.FunctionArgument
 import hachi.lang.domain.type.BuiltInType
 import hachi.lang.domain.type.ClassType
 import hachi.lang.domain.type.Type
+import hachi.lang.exception.FunctionSignatureNotFoundException
 import hachi.lang.exception.LocalVariableNotFoundException
-import hachi.lang.exception.MethodSignatureNotFoundException
 import hachi.lang.exception.MethodWithNameAlreadyDefinedException
 
 class Scope {
@@ -40,25 +40,25 @@ class Scope {
         return this.signatureExists(identifier, emptyList())
     }
 
-    private fun signatureExists(identifier: String, arguments: List<Argument>): Boolean {
+    private fun signatureExists(identifier: String, functionArguments: List<FunctionArgument>): Boolean {
         if (identifier == "super") {
             return true
         }
 
-        return this.functionSignatures.any { it.matches(identifier, arguments) }
+        return this.functionSignatures.any { it.matches(identifier, functionArguments) }
     }
 
     fun getMethodCallSignatureWithoutParameters(identifier: String): FunctionSignature {
-        return this.getMethodCallSignature(identifier, emptyList<Argument>())
+        return this.getMethodCallSignature(identifier, emptyList<FunctionArgument>())
     }
 
-    fun getMethodCallSignature(identifier: String, arguments: List<Argument>): FunctionSignature {
+    fun getMethodCallSignature(identifier: String, functionArguments: List<FunctionArgument>): FunctionSignature {
         if (identifier == "super") {
             return FunctionSignature("super", emptyList(), BuiltInType.VOID)
         }
 
-        return this.functionSignatures.firstOrNull { it.matches(identifier, arguments) }
-                ?: throw MethodSignatureNotFoundException(identifier, arguments)
+        return this.functionSignatures.firstOrNull { it.matches(identifier, functionArguments) }
+                ?: throw FunctionSignatureNotFoundException(identifier, functionArguments)
     }
 
     fun addLocalVariable(localVariable: LocalVariable) {
