@@ -9,14 +9,14 @@ import hachi.lang.util.TypeResolver
 class FunctionParameterExpressionVisitor(private val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<FunctionParameter>() {
     override fun visitFunctionParameter(functionParameterContext: HachiParser.FunctionParameterContext): FunctionParameter {
         val name = functionParameterContext.ID().text
-        val type = TypeResolver.getFromTypeName(functionParameterContext.type())
+        val type = TypeResolver.getFromTypeContext(functionParameterContext.type())
 
         return FunctionParameter(name, type, null)
     }
 
     override fun visitFunctionParameterWithDefaultValue(functionParameterWithDefaultValueContext: HachiParser.FunctionParameterWithDefaultValueContext): FunctionParameter {
         val name = functionParameterWithDefaultValueContext.ID().text
-        val type = TypeResolver.getFromTypeName(functionParameterWithDefaultValueContext.type())
+        val type = TypeResolver.getFromTypeContext(functionParameterWithDefaultValueContext.type())
         val defaultValue = functionParameterWithDefaultValueContext.defaultValue?.accept(this.expressionVisitor)
 
         return FunctionParameter(name, type, defaultValue)

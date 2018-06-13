@@ -29,7 +29,7 @@ class ClassVisitor : HachiBaseVisitor<ClassDeclaration>() {
         functionContexts.map { it.functionDeclaration().accept(functionSignatureVisitor) }
                 .forEach { this.scope.addFunctionSignature(it) }
 
-        val defaultConstructorExists = this.scope.parameterLessSignatureExists(className)
+        val defaultConstructorExists = this.scope.zeroParameterFunctionSignatureExists(className)
 
         this.addDefaultConstructorSignatureToScope(className, defaultConstructorExists)
 
@@ -40,18 +40,22 @@ class ClassVisitor : HachiBaseVisitor<ClassDeclaration>() {
             methods.add(this.getDefaultConstructor())
         }
 
-        methods.add(this.getMainMethod())
+        val isStartMethodDefined = this.scope.zeroParameterFunctionSignatureExists("start")
+
+        if (isStartMethodDefined) {
+            methods.add(this.getGeneratedMainMethod())
+        }
 
         return ClassDeclaration(className, methods)
     }
 
     private fun getDefaultConstructor(): Constructor {
-        val functionSignature = this.scope.getMethodCallSignatureWithoutParameters(this.scope.getClassName())
+        val functionSignature = this.scope.getFunctionSignatureWithoutParameters(this.scope.getClassName())
 
         return Constructor(functionSignature, BlockStatement(scope))
     }
 
-    private fun getMainMethod(): Function {
+    private fun getGeneratedMainMethod(): Function {
         val functionParameter = FunctionParameter("args", BuiltInType.STRING_ARRAY, null)
         val functionSignature = FunctionSignature("main", listOf(functionParameter), BuiltInType.VOID)
         val constructorCall = ConstructorCall(this.scope.getClassName())

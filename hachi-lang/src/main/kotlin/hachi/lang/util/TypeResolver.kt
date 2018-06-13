@@ -6,13 +6,15 @@ import hachi.lang.domain.type.ClassType
 import hachi.lang.domain.type.Type
 
 object TypeResolver {
-    fun getFromTypeName(typeContext: HachiParser.TypeContext?): Type {
+    fun getFromTypeContext(typeContext: HachiParser.TypeContext?): Type {
         if (typeContext == null) {
             return BuiltInType.VOID
         }
 
-        val typeName = typeContext.text
+        return this.getFromTypeName(typeContext.text)
+    }
 
+    fun getFromTypeName(typeName: String): Type {
         return when (typeName) {
             "java.lang.String" -> BuiltInType.STRING
             else -> this.getBuiltInType(typeName) ?: ClassType(typeName)
@@ -20,32 +22,32 @@ object TypeResolver {
     }
 
     fun getFromValue(value: String): Type {
-        if (value.isEmpty()) {
-            return BuiltInType.VOID
+        return if (value.isEmpty()) {
+            BuiltInType.VOID
         } else if (value.toIntOrNull() != null) {
-            return BuiltInType.INT
+            BuiltInType.INT
         } else if (value.toFloatOrNull() != null) {
-            return BuiltInType.FLOAT
+            BuiltInType.FLOAT
         } else if (value.toDoubleOrNull() != null) {
-            return BuiltInType.DOUBLE
+            BuiltInType.DOUBLE
         } else if (value.toBoolean()) {
-            return BuiltInType.BOOLEAN
+            BuiltInType.BOOLEAN
         } else {
-            return BuiltInType.STRING
+            BuiltInType.STRING
         }
     }
 
     fun getValueFromString(value: String, type: Type): Any {
-        if (TypeChecker.isInt(type)) {
-            return value.toInt()
+        return if (TypeChecker.isInt(type)) {
+            value.toInt()
         } else if (TypeChecker.isBoolean(type)) {
-            return value.toBoolean()
+            value.toBoolean()
         } else if (TypeChecker.isFloat(type)) {
-            return value.toFloat()
+            value.toFloat()
         } else if (TypeChecker.isDouble(type)) {
-            return value.toDouble()
+            value.toDouble()
         } else if (TypeChecker.isString(type)) {
-            return value.removePrefix("\"").removeSuffix("\"")
+            value.removePrefix("\"").removeSuffix("\"")
         } else {
             throw UnsupportedOperationException()
         }

@@ -13,15 +13,15 @@ class FunctionSignatureVisitor(val scope: Scope) : HachiBaseVisitor<FunctionSign
 
     override fun visitFunctionDeclaration(functionDeclarationContext: HachiParser.FunctionDeclarationContext): FunctionSignature {
         val functionName = functionDeclarationContext.functionName().text
-        val returnType = TypeResolver.getFromTypeName(functionDeclarationContext.type())
+        val returnType = TypeResolver.getFromTypeContext(functionDeclarationContext.type())
         val functionParameterListContext = functionDeclarationContext.functionParameterList()
 
-        if (functionParameterListContext != null) {
+        return if (functionParameterListContext != null) {
             val parameters = functionParameterListContext.accept(FunctionParameterListExpressionVisitor(this.expressionVisitor))
 
-            return FunctionSignature(functionName, parameters, returnType)
+            FunctionSignature(functionName, parameters, returnType)
         } else {
-            return FunctionSignature(functionName, emptyList(), returnType)
+            FunctionSignature(functionName, emptyList(), returnType)
         }
     }
 }

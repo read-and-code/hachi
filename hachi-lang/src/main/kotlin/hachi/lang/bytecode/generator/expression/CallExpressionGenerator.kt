@@ -7,7 +7,9 @@ import hachi.lang.domain.node.expression.FunctionArgument
 import hachi.lang.domain.node.expression.FunctionCall
 import hachi.lang.domain.node.expression.FunctionParameter
 import hachi.lang.domain.node.expression.SuperCall
+import hachi.lang.domain.scope.FunctionSignature
 import hachi.lang.domain.scope.Scope
+import hachi.lang.domain.type.ClassType
 import hachi.lang.exception.BadArgumentsToFunctionCallException
 import hachi.lang.exception.WrongArgumentNameException
 import hachi.lang.util.DescriptorFactory
@@ -16,15 +18,15 @@ import jdk.internal.org.objectweb.asm.Opcodes
 
 class CallExpressionGenerator(val expressionGenerator: ExpressionGenerator, private val methodVisitor: MethodVisitor, val scope: Scope) {
     fun generate(constructorCall: ConstructorCall) {
-        val ownerDescriptor = this.scope.getClassInternalName()
+        val functionSignature = this.scope.getConstructorCallSignature(constructorCall.getIdentifier(), constructorCall.getArguments())
+        val ownerDescriptor = ClassType(functionSignature.functionName).getDescriptor()
 
         this.methodVisitor.visitTypeInsn(Opcodes.NEW, ownerDescriptor)
         this.methodVisitor.visitInsn(Opcodes.DUP)
 
-        val methodCallSignature = this.scope.getMethodCallSignature(constructorCall.getIdentifier(), constructorCall.getArguments())
-        val methodDescriptor = DescriptorFactory.getMethodDescriptor(methodCallSignature)
+        val methodDescriptor = DescriptorFactory.getMethodDescriptor(functionSignature)
 
-        this.generateArguments(constructorCall)
+        this.generateArguments(constructorCall, functionSignature)
 
         this.methodVisitor.visitMethodInsn(Opcodes.INVOKESPECIAL, ownerDescriptor, "<init>", methodDescriptor, false)
     }
@@ -51,8 +53,25 @@ class CallExpressionGenerator(val expressionGenerator: ExpressionGenerator, priv
         this.methodVisitor.visitMethodInsn(Opcodes.INVOKEVIRTUAL, ownerDescriptor, functionName, methodDescriptor, false)
     }
 
-    private fun generateArguments(call: Call) {
-        val functionSignature = this.scope.getMethodCallSignature(call.getIdentifier(), call.getArguments())
+    private fun generateArguments(functionCall: FunctionCall) {
+        val functionSignature = this.scope.getFunctionCallSignature(functionCall.getOwnerType(), functionCall.getIdentifier(), functionCall.getArguments())
+
+        this.generateArguments(functionCall, functionSignature)
+    }
+
+    private fun generateArguments(superCall: SuperCall) {
+        val functionSignature = this.scope.getFunctionCallSignature(superCall.getIdentifier(), superCall.getArguments())
+
+        this.generateArguments(superCall, functionSignature)
+    }
+
+    private fun generateArguments(constructorCall: ConstructorCall) {
+        val functionSignature = this.scope.getConstructorCallSignature(constructorCall.getIdentifier(), constructorCall.getArguments())
+
+        this.generateArguments(constructorCall, functionSignature)
+    }
+
+    private fun generateArguments(call: Call, functionSignature: FunctionSignature) {
         var arguments = call.getArguments()
         val parameters = functionSignature.parameters
 

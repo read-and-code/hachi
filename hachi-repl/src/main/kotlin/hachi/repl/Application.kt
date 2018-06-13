@@ -6,7 +6,7 @@ import java.nio.file.Paths
 class Application
 
 fun main(args: Array<String>) {
-    val resource = Application::class.java.classLoader.getResource("hello.hc")
+    val resource = Application::class.java.classLoader.getResource("app.hc")
     val file = Paths.get(resource.toURI()).toFile()
 
     Compiler().compile(file)

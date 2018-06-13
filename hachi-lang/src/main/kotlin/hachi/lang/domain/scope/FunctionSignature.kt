@@ -31,14 +31,22 @@ class FunctionSignature(val functionName: String, val parameters: List<FunctionP
 
         val isNamedArgumentList = functionArguments.any { it.parameterName != null }
 
-        if (isNamedArgumentList) {
-            return functionArguments.all {
-                val parameterName = it.parameterName
-
-                this.parameters.map { it.name }.any { it == parameterName }
-            }
+        return if (isNamedArgumentList) {
+            this.areArgumentsAndParamsMatchedByName(functionArguments)
         } else {
-            return (0..(functionArguments.size - 1)).all { functionArguments[it].getType() == this.parameters[it].getType() }
+            this.areArgumentsAndParametersMatchedByIndex(functionArguments)
         }
+    }
+
+    private fun areArgumentsAndParamsMatchedByName(functionArguments: List<FunctionArgument>): Boolean {
+        return functionArguments.all {
+            val parameterName = it.parameterName
+
+            this.parameters.map { it.name }.any { it == parameterName }
+        }
+    }
+
+    private fun areArgumentsAndParametersMatchedByIndex(functionArguments: List<FunctionArgument>): Boolean {
+        return (0..(functionArguments.size - 1)).all { functionArguments[it].getType() == this.parameters[it].getType() }
     }
 }

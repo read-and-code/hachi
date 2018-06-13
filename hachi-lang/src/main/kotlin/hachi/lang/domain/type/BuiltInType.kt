@@ -1,7 +1,7 @@
 package hachi.lang.domain.type
 
 enum class BuiltInType(private var typeName: String, private var typeClass: Class<*>?, private var descriptor: String, val opcodes: TypeSpecificOpcodes) : Type {
-    BOOLEAN("bool", Boolean::class.java, "Z", TypeSpecificOpcodes.INT),
+    BOOLEAN("boolean", Boolean::class.java, "Z", TypeSpecificOpcodes.INT),
     INT("int", Int::class.java, "I", TypeSpecificOpcodes.INT),
     CHAR("char", Char::class.java, "C", TypeSpecificOpcodes.INT),
     BYTE("byte", Byte::class.java, "B", TypeSpecificOpcodes.INT),

@@ -22,15 +22,16 @@ class CallExpressionVisitor(private val expressionVisitor: ExpressionVisitor, pr
         }
 
         val arguments = this.getArgumentsForCall(functionCallContext.functionArgumentList())
-        val functionSignature = this.scope.getMethodCallSignature(functionName, arguments)
 
         functionCallContext.owner?.let {
             val owner = functionCallContext.owner.accept(this.expressionVisitor)
+            val functionSignature = this.scope.getFunctionCallSignature(owner.getType(), functionName, arguments)
 
             return FunctionCall(functionSignature, arguments, owner)
         }
 
         val thisType = ClassType(this.scope.getClassName())
+        val functionSignature = this.scope.getFunctionCallSignature(functionName, arguments)
 
         return FunctionCall(functionSignature, arguments, VariableReference("this", thisType))
     }

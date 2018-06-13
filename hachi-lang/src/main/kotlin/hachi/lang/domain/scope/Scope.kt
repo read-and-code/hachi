@@ -29,18 +29,18 @@ class Scope {
     }
 
     fun addFunctionSignature(functionSignature: FunctionSignature) {
-        if (this.parameterLessSignatureExists(functionSignature.functionName)) {
+        if (this.zeroParameterFunctionSignatureExists(functionSignature.functionName)) {
             throw MethodWithNameAlreadyDefinedException(functionSignature)
         }
 
         this.functionSignatures.add(functionSignature)
     }
 
-    fun parameterLessSignatureExists(identifier: String): Boolean {
-        return this.signatureExists(identifier, emptyList())
+    fun zeroParameterFunctionSignatureExists(identifier: String): Boolean {
+        return this.functionSignatureExists(identifier, emptyList())
     }
 
-    private fun signatureExists(identifier: String, functionArguments: List<FunctionArgument>): Boolean {
+    private fun functionSignatureExists(identifier: String, functionArguments: List<FunctionArgument>): Boolean {
         if (identifier == "super") {
             return true
         }
@@ -48,11 +48,41 @@ class Scope {
         return this.functionSignatures.any { it.matches(identifier, functionArguments) }
     }
 
-    fun getMethodCallSignatureWithoutParameters(identifier: String): FunctionSignature {
-        return this.getMethodCallSignature(identifier, emptyList<FunctionArgument>())
+    fun getConstructorCallSignature(className: String, functionArguments: List<FunctionArgument>): FunctionSignature {
+        val isDifferentThanCurrentClass = className != this.getClassName()
+
+        if (isDifferentThanCurrentClass) {
+            val argumentTypes = functionArguments.map { it.getType() }
+
+            return ClassPathScope().getConstructorSignature(className, argumentTypes)
+                    ?: throw FunctionSignatureNotFoundException(className, functionArguments)
+        }
+
+        return this.getConstructorCallSignatureForCurrentClass(functionArguments)
     }
 
-    fun getMethodCallSignature(identifier: String, functionArguments: List<FunctionArgument>): FunctionSignature {
+    fun getConstructorCallSignatureForCurrentClass(functionArguments: List<FunctionArgument>): FunctionSignature {
+        return this.getFunctionCallSignature(null, this.getClassName(), functionArguments)
+    }
+
+    fun getFunctionSignatureWithoutParameters(identifier: String): FunctionSignature {
+        return this.getFunctionCallSignature(identifier, emptyList())
+    }
+
+    fun getFunctionCallSignature(owner: Type?, functionName: String, functionArguments: List<FunctionArgument>): FunctionSignature {
+        val isDifferentThanCurrentClass = owner != null && owner != this.getClassType()
+
+        if (isDifferentThanCurrentClass) {
+            val argumentTypes = functionArguments.map { it.getType() }
+
+            return ClassPathScope().getFunctionSignature(owner, functionName, argumentTypes)
+                    ?: throw FunctionSignatureNotFoundException(functionName, functionArguments)
+        }
+
+        return this.getFunctionCallSignature(functionName, functionArguments)
+    }
+
+    fun getFunctionCallSignature(identifier: String, functionArguments: List<FunctionArgument>): FunctionSignature {
         if (identifier == "super") {
             return FunctionSignature("super", emptyList(), BuiltInType.VOID)
         }
