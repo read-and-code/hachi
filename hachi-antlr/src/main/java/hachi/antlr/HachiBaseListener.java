@@ -234,18 +234,6 @@ public class HachiBaseListener implements HachiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReturnVoid(HachiParser.ReturnVoidContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitReturnVoid(HachiParser.ReturnVoidContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterReturnWithValue(HachiParser.ReturnWithValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -253,6 +241,18 @@ public class HachiBaseListener implements HachiListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturnWithValue(HachiParser.ReturnWithValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReturnVoid(HachiParser.ReturnVoidContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReturnVoid(HachiParser.ReturnVoidContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

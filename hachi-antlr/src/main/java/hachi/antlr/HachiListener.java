@@ -190,18 +190,6 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitPrintStatement(HachiParser.PrintStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code returnVoid}
-	 * labeled alternative in {@link HachiParser#returnStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterReturnVoid(HachiParser.ReturnVoidContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code returnVoid}
-	 * labeled alternative in {@link HachiParser#returnStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitReturnVoid(HachiParser.ReturnVoidContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code returnWithValue}
 	 * labeled alternative in {@link HachiParser#returnStatement}.
 	 * @param ctx the parse tree
@@ -213,6 +201,18 @@ public interface HachiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturnWithValue(HachiParser.ReturnWithValueContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code returnVoid}
+	 * labeled alternative in {@link HachiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnVoid(HachiParser.ReturnVoidContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code returnVoid}
+	 * labeled alternative in {@link HachiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnVoid(HachiParser.ReturnVoidContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HachiParser#ifStatement}.
 	 * @param ctx the parse tree

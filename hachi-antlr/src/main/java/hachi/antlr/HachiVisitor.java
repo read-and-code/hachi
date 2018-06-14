@@ -121,19 +121,19 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrintStatement(HachiParser.PrintStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code returnVoid}
-	 * labeled alternative in {@link HachiParser#returnStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitReturnVoid(HachiParser.ReturnVoidContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code returnWithValue}
 	 * labeled alternative in {@link HachiParser#returnStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitReturnWithValue(HachiParser.ReturnWithValueContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code returnVoid}
+	 * labeled alternative in {@link HachiParser#returnStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnVoid(HachiParser.ReturnVoidContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HachiParser#ifStatement}.
 	 * @param ctx the parse tree

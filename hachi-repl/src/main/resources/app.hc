@@ -1,5 +1,9 @@
 class app {
     start() {
-        print(1)
+        print(sum(1, 1))
+    }
+
+    int sum(int x, int y) {
+        return x + y
     }
 }

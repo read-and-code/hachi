@@ -1509,21 +1509,21 @@ public class HachiParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
 			case 1:
-				_localctx = new ReturnVoidContext(_localctx);
+				_localctx = new ReturnWithValueContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(251);
 				match(T__18);
+				setState(252);
+				expression(0);
 				}
 				break;
 			case 2:
-				_localctx = new ReturnWithValueContext(_localctx);
+				_localctx = new ReturnVoidContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(252);
-				match(T__18);
 				setState(253);
-				expression(0);
+				match(T__18);
 				}
 				break;
 			}
@@ -2820,8 +2820,8 @@ public class HachiParser extends Parser {
 		"\2\2\u00f1\u00f2\7\5\2\2\u00f2!\3\2\2\2\u00f3\u00f4\7)\2\2\u00f4\u00f5"+
 		"\5.\30\2\u00f5\u00f6\7+\2\2\u00f6\u00f7\5\66\34\2\u00f7#\3\2\2\2\u00f8"+
 		"\u00f9\7*\2\2\u00f9\u00fa\7\6\2\2\u00fa\u00fb\5\66\34\2\u00fb\u00fc\7"+
-		"\7\2\2\u00fc%\3\2\2\2\u00fd\u0101\7\25\2\2\u00fe\u00ff\7\25\2\2\u00ff"+
-		"\u0101\5\66\34\2\u0100\u00fd\3\2\2\2\u0100\u00fe\3\2\2\2\u0101\'\3\2\2"+
+		"\7\2\2\u00fc%\3\2\2\2\u00fd\u00fe\7\25\2\2\u00fe\u0101\5\66\34\2\u00ff"+
+		"\u0101\7\25\2\2\u0100\u00fd\3\2\2\2\u0100\u00ff\3\2\2\2\u0101\'\3\2\2"+
 		"\2\u0102\u0104\7\26\2\2\u0103\u0105\7\6\2\2\u0104\u0103\3\2\2\2\u0104"+
 		"\u0105\3\2\2\2\u0105\u0106\3\2\2\2\u0106\u0108\5\66\34\2\u0107\u0109\7"+
 		"\7\2\2\u0108\u0107\3\2\2\2\u0108\u0109\3\2\2\2\u0109\u010a\3\2\2\2\u010a"+

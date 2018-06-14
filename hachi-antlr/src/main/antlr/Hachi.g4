@@ -40,8 +40,8 @@ statement : blockStatement
 blockStatement : '{' statement* '}';
 variableDeclaration : VARIABLE name EQUALS expression;
 printStatement : PRINT '('expression')';
-returnStatement: 'return' #returnVoid
-            | 'return' expression #returnWithValue;
+returnStatement : 'return' expression #returnWithValue
+            | 'return' #returnVoid;
 ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
 forStatement : 'for' ('(')? forCondition (')')? statement;
 forCondition : iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;
