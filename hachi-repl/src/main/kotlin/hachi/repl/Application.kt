@@ -1,13 +1,16 @@
 package hachi.repl
 
 import hachi.lang.compiler.Compiler
-import java.nio.file.Paths
+import java.io.File
 
 class Application
 
 fun main(args: Array<String>) {
-    val resource = Application::class.java.classLoader.getResource("app.hc")
-    val file = Paths.get(resource.toURI()).toFile()
+    if (args.isEmpty()) {
+        println("Missing hachi file")
+    } else {
+        val file = File(args[0])
 
-    Compiler().compile(file)
+        Compiler().compile(file)
+    }
 }
