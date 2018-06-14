@@ -55,13 +55,15 @@ class MethodGenerator(private val classWriter: ClassWriter) {
     }
 
     private fun appendReturnIfNotExists(function: Function, functionBody: BlockStatement, statementGenerator: StatementGenerator) {
-        if (functionBody.statements.isEmpty()) {
-            return
+        var hasReturnStatement = false
+
+        if (!functionBody.statements.isEmpty()) {
+            val lastStatement = functionBody.statements.last()
+
+            hasReturnStatement = lastStatement is ReturnStatement
         }
 
-        val lastStatement = functionBody.statements.last()
-
-        if (lastStatement !is ReturnStatement) {
+        if (!hasReturnStatement) {
             val emptyExpression = EmptyExpression(function.getReturnType())
             val returnStatement = ReturnStatement(emptyExpression)
 
