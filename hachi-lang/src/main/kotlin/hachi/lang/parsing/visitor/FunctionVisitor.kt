@@ -21,10 +21,10 @@ class FunctionVisitor(scope: Scope) : HachiBaseVisitor<Function>() {
 
         val functionBody = this.getFunctionBody(functionContext)
 
-        if (functionSignature.functionName == this.scope.getClassName()) {
-            return Constructor(functionSignature, functionBody)
+        return if (functionSignature.functionName == this.scope.getClassName()) {
+            Constructor(functionSignature, functionBody)
         } else {
-            return Function(functionSignature, functionBody)
+            Function(functionSignature, functionBody)
         }
     }
 

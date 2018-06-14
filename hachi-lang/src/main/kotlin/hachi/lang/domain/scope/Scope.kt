@@ -70,7 +70,7 @@ class Scope {
     }
 
     fun getFunctionCallSignature(owner: Type?, functionName: String, functionArguments: List<FunctionArgument>): FunctionSignature {
-        val isDifferentThanCurrentClass = owner != null && owner != this.getClassType()
+        val isDifferentThanCurrentClass = owner != null && owner.getName() != this.getClassName()
 
         if (isDifferentThanCurrentClass) {
             val argumentTypes = functionArguments.map { it.getType() }

@@ -31,7 +31,9 @@ class ClassVisitor : HachiBaseVisitor<ClassDeclaration>() {
 
         val defaultConstructorExists = this.scope.zeroParameterFunctionSignatureExists(className)
 
-        this.addDefaultConstructorSignatureToScope(className, defaultConstructorExists)
+        if (!defaultConstructorExists) {
+            this.addDefaultConstructorSignatureToScope(className)
+        }
 
         val methods = functionContexts.map { it.accept(FunctionVisitor(this.scope)) }
                 .toMutableList()
@@ -66,11 +68,9 @@ class ClassVisitor : HachiBaseVisitor<ClassDeclaration>() {
         return Function(functionSignature, blockStatement)
     }
 
-    private fun addDefaultConstructorSignatureToScope(name: String, defaultConstructorExists: Boolean) {
-        if (!defaultConstructorExists) {
-            val constructorSignature = FunctionSignature(name, emptyList(), BuiltInType.VOID)
+    private fun addDefaultConstructorSignatureToScope(name: String) {
+        val constructorSignature = FunctionSignature(name, emptyList(), BuiltInType.VOID)
 
-            this.scope.addFunctionSignature(constructorSignature)
-        }
+        this.scope.addFunctionSignature(constructorSignature)
     }
 }
