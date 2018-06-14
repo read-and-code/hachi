@@ -7,7 +7,7 @@ grammar Hachi;
 // RULES
 compilationUnit : classDeclaration EOF;
 classDeclaration : 'class' className '{' classBody '}';
-className : ID;
+className : qualifiedName;
 classBody : function*;
 function : functionDeclaration functionBody;
 functionDeclaration : (type)? functionName '('? functionParameterList? ')'?;
@@ -29,7 +29,7 @@ primitiveType : 'boolean' ('[' ']')*
               | 'float' ('[' ']')*
               | 'double' ('[' ']')*
               | 'void' ('[' ']')*;
-classType : QUALIFIED_NAME ('[' ']')*;
+classType : qualifiedName ('[' ']')*;
 statement : blockStatement
             | variableDeclaration
             | printStatement
@@ -74,6 +74,7 @@ variableReference : ID;
 value : NUMBER
       | STRING
       | BOOLEAN;
+qualifiedName : ID ('.' ID)*;
 
 // TOKENS
 VARIABLE : 'var';
@@ -83,5 +84,4 @@ NUMBER : '-'?[0-9.]+;
 STRING : '"'~('\r' | '\n' | '"')*'"';
 BOOLEAN : 'true' | 'false';
 ID : [a-zA-Z0-9]+;
-QUALIFIED_NAME : ID ('.' ID)+;
 WHITE_SPACE: [ \t\n\r]+ -> skip;

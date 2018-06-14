@@ -437,4 +437,14 @@ public interface HachiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValue(HachiParser.ValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HachiParser#qualifiedName}.
+	 * @param ctx the parse tree
+	 */
+	void enterQualifiedName(HachiParser.QualifiedNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HachiParser#qualifiedName}.
+	 * @param ctx the parse tree
+	 */
+	void exitQualifiedName(HachiParser.QualifiedNameContext ctx);
 }

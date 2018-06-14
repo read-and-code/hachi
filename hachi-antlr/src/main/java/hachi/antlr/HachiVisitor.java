@@ -266,4 +266,10 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValue(HachiParser.ValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HachiParser#qualifiedName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQualifiedName(HachiParser.QualifiedNameContext ctx);
 }
