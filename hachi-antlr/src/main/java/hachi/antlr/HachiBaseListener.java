@@ -234,13 +234,13 @@ public class HachiBaseListener implements HachiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment(HachiParser.AssignmentContext ctx) { }
+	@Override public void enterAssignmentStatement(HachiParser.AssignmentStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignment(HachiParser.AssignmentContext ctx) { }
+	@Override public void exitAssignmentStatement(HachiParser.AssignmentStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

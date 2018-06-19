@@ -121,11 +121,11 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableDeclaration(HachiParser.VariableDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HachiParser#assignment}.
+	 * Visit a parse tree produced by {@link HachiParser#assignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignment(HachiParser.AssignmentContext ctx);
+	T visitAssignmentStatement(HachiParser.AssignmentStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HachiParser#printStatement}.
 	 * @param ctx the parse tree

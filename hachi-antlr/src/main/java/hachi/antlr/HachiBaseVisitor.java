@@ -145,7 +145,7 @@ public class HachiBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAssignment(HachiParser.AssignmentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssignmentStatement(HachiParser.AssignmentStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

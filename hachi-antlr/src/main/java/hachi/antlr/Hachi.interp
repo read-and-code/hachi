@@ -115,7 +115,7 @@ classType
 statement
 blockStatement
 variableDeclaration
-assignment
+assignmentStatement
 printStatement
 forStatement
 forCondition

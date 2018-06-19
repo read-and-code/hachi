@@ -190,15 +190,15 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitVariableDeclaration(HachiParser.VariableDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HachiParser#assignment}.
+	 * Enter a parse tree produced by {@link HachiParser#assignmentStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignment(HachiParser.AssignmentContext ctx);
+	void enterAssignmentStatement(HachiParser.AssignmentStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HachiParser#assignment}.
+	 * Exit a parse tree produced by {@link HachiParser#assignmentStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignment(HachiParser.AssignmentContext ctx);
+	void exitAssignmentStatement(HachiParser.AssignmentStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HachiParser#printStatement}.
 	 * @param ctx the parse tree

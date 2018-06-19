@@ -33,7 +33,7 @@ primitiveType : 'boolean' ('[' ']')*
 classType : qualifiedName ('[' ']')*;
 statement : blockStatement
             | variableDeclaration
-            | assignment
+            | assignmentStatement
             | printStatement
             | forStatement
             | returnStatement
@@ -41,7 +41,7 @@ statement : blockStatement
             | expression;
 blockStatement : '{' statement* '}';
 variableDeclaration : VARIABLE name EQUALS expression;
-assignment: name EQUALS expression;
+assignmentStatement: name EQUALS expression;
 printStatement : PRINT '('expression')';
 forStatement : 'for' ('(')? forCondition (')')? statement;
 forCondition : iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;

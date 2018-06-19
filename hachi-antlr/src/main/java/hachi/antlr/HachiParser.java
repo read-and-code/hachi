@@ -32,7 +32,7 @@ public class HachiParser extends Parser {
 		RULE_functionName = 7, RULE_functionParameterList = 8, RULE_functionParameter = 9, 
 		RULE_functionParameterWithDefaultValue = 10, RULE_functionBody = 11, RULE_type = 12, 
 		RULE_primitiveType = 13, RULE_classType = 14, RULE_statement = 15, RULE_blockStatement = 16, 
-		RULE_variableDeclaration = 17, RULE_assignment = 18, RULE_printStatement = 19, 
+		RULE_variableDeclaration = 17, RULE_assignmentStatement = 18, RULE_printStatement = 19, 
 		RULE_forStatement = 20, RULE_forCondition = 21, RULE_returnStatement = 22, 
 		RULE_ifStatement = 23, RULE_name = 24, RULE_functionArgument = 25, RULE_functionArgumentList = 26, 
 		RULE_namedFunctionArgument = 27, RULE_expression = 28, RULE_variableReference = 29, 
@@ -42,9 +42,9 @@ public class HachiParser extends Parser {
 		"function", "functionDeclaration", "functionName", "functionParameterList", 
 		"functionParameter", "functionParameterWithDefaultValue", "functionBody", 
 		"type", "primitiveType", "classType", "statement", "blockStatement", "variableDeclaration", 
-		"assignment", "printStatement", "forStatement", "forCondition", "returnStatement", 
-		"ifStatement", "name", "functionArgument", "functionArgumentList", "namedFunctionArgument", 
-		"expression", "variableReference", "value", "qualifiedName"
+		"assignmentStatement", "printStatement", "forStatement", "forCondition", 
+		"returnStatement", "ifStatement", "name", "functionArgument", "functionArgumentList", 
+		"namedFunctionArgument", "expression", "variableReference", "value", "qualifiedName"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -1250,8 +1250,8 @@ public class HachiParser extends Parser {
 		public VariableDeclarationContext variableDeclaration() {
 			return getRuleContext(VariableDeclarationContext.class,0);
 		}
-		public AssignmentContext assignment() {
-			return getRuleContext(AssignmentContext.class,0);
+		public AssignmentStatementContext assignmentStatement() {
+			return getRuleContext(AssignmentStatementContext.class,0);
 		}
 		public PrintStatementContext printStatement() {
 			return getRuleContext(PrintStatementContext.class,0);
@@ -1312,7 +1312,7 @@ public class HachiParser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(240);
-				assignment();
+				assignmentStatement();
 				}
 				break;
 			case 4:
@@ -1482,7 +1482,7 @@ public class HachiParser extends Parser {
 		return _localctx;
 	}
 
-	public static class AssignmentContext extends ParserRuleContext {
+	public static class AssignmentStatementContext extends ParserRuleContext {
 		public NameContext name() {
 			return getRuleContext(NameContext.class,0);
 		}
@@ -1490,28 +1490,28 @@ public class HachiParser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public AssignmentContext(ParserRuleContext parent, int invokingState) {
+		public AssignmentStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_assignment; }
+		@Override public int getRuleIndex() { return RULE_assignmentStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterAssignment(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).enterAssignmentStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitAssignment(this);
+			if ( listener instanceof HachiListener ) ((HachiListener)listener).exitAssignmentStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitAssignment(this);
+			if ( visitor instanceof HachiVisitor ) return ((HachiVisitor<? extends T>)visitor).visitAssignmentStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final AssignmentContext assignment() throws RecognitionException {
-		AssignmentContext _localctx = new AssignmentContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_assignment);
+	public final AssignmentStatementContext assignmentStatement() throws RecognitionException {
+		AssignmentStatementContext _localctx = new AssignmentStatementContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_assignmentStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
