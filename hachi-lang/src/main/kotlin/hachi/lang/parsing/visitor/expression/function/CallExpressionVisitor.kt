@@ -6,8 +6,9 @@ import hachi.lang.domain.node.expression.Call
 import hachi.lang.domain.node.expression.ConstructorCall
 import hachi.lang.domain.node.expression.FunctionArgument
 import hachi.lang.domain.node.expression.FunctionCall
+import hachi.lang.domain.node.expression.LocalVariableReference
 import hachi.lang.domain.node.expression.SuperCall
-import hachi.lang.domain.node.expression.VariableReference
+import hachi.lang.domain.scope.LocalVariable
 import hachi.lang.domain.scope.Scope
 import hachi.lang.domain.type.ClassType
 import hachi.lang.exception.FunctionNameEqualClassException
@@ -32,8 +33,9 @@ class CallExpressionVisitor(private val expressionVisitor: ExpressionVisitor, pr
 
         val thisType = ClassType(this.scope.getClassName())
         val functionSignature = this.scope.getFunctionCallSignature(functionName, arguments)
+        val thisVariable = LocalVariable("this", thisType)
 
-        return FunctionCall(functionSignature, arguments, VariableReference("this", thisType))
+        return FunctionCall(functionSignature, arguments, LocalVariableReference(thisVariable))
     }
 
     override fun visitConstructorCall(constructorCallContext: HachiParser.ConstructorCallContext): Call {
@@ -50,12 +52,12 @@ class CallExpressionVisitor(private val expressionVisitor: ExpressionVisitor, pr
     }
 
     private fun getArgumentsForCall(functionArgumentListContext: HachiParser.FunctionArgumentListContext?): List<FunctionArgument> {
-        if (functionArgumentListContext != null) {
+        return if (functionArgumentListContext != null) {
             val argumentExpressionsListVisitor = FunctionArgumentListExpressionVisitor(this.expressionVisitor)
 
-            return functionArgumentListContext.accept(argumentExpressionsListVisitor)
+            functionArgumentListContext.accept(argumentExpressionsListVisitor)
         } else {
-            return emptyList()
+            emptyList()
         }
     }
 }

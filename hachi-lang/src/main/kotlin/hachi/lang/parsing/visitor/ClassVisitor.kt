@@ -18,13 +18,24 @@ class ClassVisitor : HachiBaseVisitor<ClassDeclaration>() {
     lateinit var scope: Scope
 
     override fun visitClassDeclaration(classDeclarationContext: HachiParser.ClassDeclarationContext): ClassDeclaration {
-        val className = classDeclarationContext.className().text
-        val functionContexts = classDeclarationContext.classBody().function()
         val metaData = MetaData(classDeclarationContext.className().text, "java.lang.Object")
 
         this.scope = Scope(metaData)
 
+        val className = classDeclarationContext.className().text
+        val fieldVisitor = FieldVisitor(this.scope)
+        val fields = classDeclarationContext.classBody()
+                .field()
+                .map { it ->
+                    val field = it.accept(fieldVisitor)
+
+                    this.scope.addField(field)
+
+                    field
+                }
+
         val functionSignatureVisitor = FunctionSignatureVisitor(this.scope)
+        val functionContexts = classDeclarationContext.classBody().function()
 
         functionContexts.map { it.functionDeclaration().accept(functionSignatureVisitor) }
                 .forEach { this.scope.addFunctionSignature(it) }
@@ -48,7 +59,7 @@ class ClassVisitor : HachiBaseVisitor<ClassDeclaration>() {
             methods.add(this.getGeneratedMainMethod())
         }
 
-        return ClassDeclaration(className, methods)
+        return ClassDeclaration(className, fields, methods)
     }
 
     private fun getDefaultConstructor(): Constructor {

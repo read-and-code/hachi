@@ -13,6 +13,8 @@ class StatementVisitor(val scope: Scope) : HachiBaseVisitor<Statement>() {
 
     private val variableDeclarationStatementVisitor = VariableDeclarationStatementVisitor(this.expressionVisitor, this.scope)
 
+    private val assignmentStatementVisitor = AssignmentStatementVisitor(this.expressionVisitor)
+
     private val returnStatementVisitor = ReturnStatementVisitor(this.expressionVisitor)
 
     private val blockStatementVisitor = BlockStatementVisitor(this.scope)
@@ -27,6 +29,10 @@ class StatementVisitor(val scope: Scope) : HachiBaseVisitor<Statement>() {
 
     override fun visitVariableDeclaration(variableDeclarationContext: HachiParser.VariableDeclarationContext): Statement {
         return this.variableDeclarationStatementVisitor.visitVariableDeclaration(variableDeclarationContext)
+    }
+
+    override fun visitAssignmentStatement(assignmentStatementContext: HachiParser.AssignmentStatementContext): Statement {
+        return this.assignmentStatementVisitor.visitAssignmentStatement(assignmentStatementContext)
     }
 
     override fun visitReturnVoid(returnVoidContext: HachiParser.ReturnVoidContext): Statement {

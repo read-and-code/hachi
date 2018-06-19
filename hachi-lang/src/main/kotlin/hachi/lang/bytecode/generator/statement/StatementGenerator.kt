@@ -4,11 +4,12 @@ import hachi.lang.bytecode.generator.expression.ExpressionGenerator
 import hachi.lang.domain.node.expression.ConditionalExpression
 import hachi.lang.domain.node.expression.ConstructorCall
 import hachi.lang.domain.node.expression.EmptyExpression
+import hachi.lang.domain.node.expression.FieldReference
 import hachi.lang.domain.node.expression.FunctionCall
 import hachi.lang.domain.node.expression.FunctionParameter
+import hachi.lang.domain.node.expression.LocalVariableReference
 import hachi.lang.domain.node.expression.SuperCall
 import hachi.lang.domain.node.expression.Value
-import hachi.lang.domain.node.expression.VariableReference
 import hachi.lang.domain.node.expression.arithmetic.Addition
 import hachi.lang.domain.node.expression.arithmetic.Division
 import hachi.lang.domain.node.expression.arithmetic.Multiplication
@@ -38,7 +39,7 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
 
     private val returnStatementGenerator = ReturnStatementGenerator(this.expressionGenerator, this.methodVisitor)
 
-    private val assignmentStatementGenerator = AssignmentStatementGenerator(this.methodVisitor, this.scope)
+    private val assignmentStatementGenerator = AssignmentStatementGenerator(this.methodVisitor, this.expressionGenerator, this.scope)
 
     fun generate(printStatement: PrintStatement) {
         this.printStatementGenerator.generate(printStatement)
@@ -108,8 +109,12 @@ class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Sc
         this.expressionGenerator.generate(value)
     }
 
-    fun generate(variableReference: VariableReference) {
-        this.expressionGenerator.generate(variableReference)
+    fun generate(localVariableReference: LocalVariableReference) {
+        this.expressionGenerator.generate(localVariableReference)
+    }
+
+    fun generate(fieldReference: FieldReference) {
+        this.expressionGenerator.generate(fieldReference)
     }
 
     fun generate(emptyExpression: EmptyExpression) {

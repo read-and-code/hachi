@@ -1,3 +1,5 @@
 package hachi.lang.domain
 
-class ClassDeclaration(val name: String, val methods: Collection<Function>)
+import hachi.lang.domain.scope.Field
+
+class ClassDeclaration(val name: String, val fields: List<Field>, val methods: List<Function>)

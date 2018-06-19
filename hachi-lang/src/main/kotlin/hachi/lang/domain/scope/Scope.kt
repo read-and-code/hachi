@@ -5,27 +5,32 @@ import hachi.lang.domain.node.expression.FunctionArgument
 import hachi.lang.domain.type.BuiltInType
 import hachi.lang.domain.type.ClassType
 import hachi.lang.domain.type.Type
+import hachi.lang.exception.FieldNotFoundException
 import hachi.lang.exception.FunctionSignatureNotFoundException
 import hachi.lang.exception.LocalVariableNotFoundException
 import hachi.lang.exception.MethodWithNameAlreadyDefinedException
 
 class Scope {
-    var localVariables: MutableList<LocalVariable>
+    var metaData: MetaData
 
     var functionSignatures: MutableList<FunctionSignature>
 
-    var metaData: MetaData
+    var localVariables: MutableList<LocalVariable>
+
+    var fields: MutableList<Field>
 
     constructor(metaData: MetaData) {
-        this.localVariables = mutableListOf()
-        this.functionSignatures = mutableListOf()
         this.metaData = metaData
+        this.functionSignatures = mutableListOf()
+        this.localVariables = mutableListOf()
+        this.fields = mutableListOf()
     }
 
     constructor(scope: Scope) {
-        this.localVariables = ArrayList(scope.localVariables)
-        this.functionSignatures = ArrayList(scope.functionSignatures)
         this.metaData = scope.metaData
+        this.functionSignatures = ArrayList(scope.functionSignatures)
+        this.localVariables = ArrayList(scope.localVariables)
+        this.fields = ArrayList(scope.fields)
     }
 
     fun addFunctionSignature(functionSignature: FunctionSignature) {
@@ -91,12 +96,16 @@ class Scope {
                 ?: throw FunctionSignatureNotFoundException(identifier, functionArguments)
     }
 
+    fun localVariableExists(variableName: String): Boolean {
+        return this.localVariables.any { it.getName() == variableName }
+    }
+
     fun addLocalVariable(localVariable: LocalVariable) {
         this.localVariables.add(localVariable)
     }
 
     fun getLocalVariable(variableName: String): LocalVariable {
-        return this.localVariables.firstOrNull { it.name == variableName }
+        return this.localVariables.firstOrNull { it.getName() == variableName }
                 ?: throw LocalVariableNotFoundException(this, variableName)
     }
 
@@ -104,6 +113,18 @@ class Scope {
         val localVariable = this.getLocalVariable(variableName)
 
         return this.localVariables.indexOf(localVariable)
+    }
+
+    fun fieldExists(fieldName: String): Boolean {
+        return this.fields.any { it.getName() == fieldName }
+    }
+
+    fun addField(field: Field) {
+        this.fields.add(field)
+    }
+
+    fun getField(fieldName: String): Field {
+        return this.fields.firstOrNull { it.getName() == fieldName } ?: throw FieldNotFoundException(this, fieldName)
     }
 
     fun getClassName(): String {
@@ -124,10 +145,6 @@ class Scope {
 
     fun getSuperClassInternalName(): String {
         return ClassType(this.getSuperClassName()).getInternalName()
-    }
-
-    fun localVariableExists(variableName: String): Boolean {
-        return this.localVariables.any { it.name == variableName }
     }
 
     override fun toString(): String {

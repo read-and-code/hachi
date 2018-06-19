@@ -1,4 +1,5 @@
 package hachi.lang.domain.node.expression
 
-interface Reference {
+interface Reference : Expression {
+    fun getName(): String
 }

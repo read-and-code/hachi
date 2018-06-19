@@ -3,8 +3,9 @@ package hachi.lang.bytecode.generator.statement
 import hachi.lang.bytecode.generator.expression.ExpressionGenerator
 import hachi.lang.domain.CompareSign
 import hachi.lang.domain.node.expression.ConditionalExpression
-import hachi.lang.domain.node.expression.VariableReference
+import hachi.lang.domain.node.expression.LocalVariableReference
 import hachi.lang.domain.node.statement.RangedForStatement
+import hachi.lang.domain.scope.LocalVariable
 import jdk.internal.org.objectweb.asm.Label
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
@@ -20,7 +21,8 @@ class ForStatementGenerator(val methodVisitor: MethodVisitor) {
         val endLoopSection = Label()
         val iteratorVariableName = rangedForStatement.iteratorVariableName
         val endExpression = rangedForStatement.endExpression
-        val iteratorVariable = VariableReference(iteratorVariableName, rangedForStatement.getType())
+        val variable = LocalVariable(iteratorVariableName, rangedForStatement.getType())
+        val iteratorVariable = LocalVariableReference(variable)
         val iteratorGreaterThanEndCondition = ConditionalExpression(iteratorVariable, endExpression, CompareSign.GREATER_THAN)
         val iteratorLessThanEndCondition = ConditionalExpression(iteratorVariable, endExpression, CompareSign.LESS_THAN)
 
