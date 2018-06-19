@@ -1,6 +1,10 @@
 class app {
+    int field
+
     start() {
-        for i from 1 to 5 {
+        field = 5
+
+        for i from 1 to field {
             print(i)
         }
     }
