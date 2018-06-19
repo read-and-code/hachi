@@ -1,7 +1,7 @@
 class app {
     start() {
-        var library = new Library()
-
-        print(library.add(1, 1))
+        for i from 1 to 5 {
+            print(i)
+        }
     }
 }

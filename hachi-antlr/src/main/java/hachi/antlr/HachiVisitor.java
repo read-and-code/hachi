@@ -37,6 +37,12 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassBody(HachiParser.ClassBodyContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link HachiParser#field}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitField(HachiParser.FieldContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link HachiParser#function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -115,11 +121,29 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableDeclaration(HachiParser.VariableDeclarationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link HachiParser#assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment(HachiParser.AssignmentContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link HachiParser#printStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPrintStatement(HachiParser.PrintStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HachiParser#forStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForStatement(HachiParser.ForStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HachiParser#forCondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForCondition(HachiParser.ForConditionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code returnWithValue}
 	 * labeled alternative in {@link HachiParser#returnStatement}.
@@ -140,18 +164,6 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIfStatement(HachiParser.IfStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HachiParser#forStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForStatement(HachiParser.ForStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HachiParser#forCondition}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForCondition(HachiParser.ForConditionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HachiParser#name}.
 	 * @param ctx the parse tree

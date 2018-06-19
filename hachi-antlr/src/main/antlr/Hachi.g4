@@ -8,7 +8,8 @@ grammar Hachi;
 compilationUnit : classDeclaration EOF;
 classDeclaration : 'class' className '{' classBody '}';
 className : qualifiedName;
-classBody : function*;
+classBody : field* function*;
+field: type name;
 function : functionDeclaration functionBody;
 functionDeclaration : (type)? functionName '('? functionParameterList? ')'?;
 functionName : ID;
@@ -32,6 +33,7 @@ primitiveType : 'boolean' ('[' ']')*
 classType : qualifiedName ('[' ']')*;
 statement : blockStatement
             | variableDeclaration
+            | assignment
             | printStatement
             | forStatement
             | returnStatement
@@ -39,12 +41,13 @@ statement : blockStatement
             | expression;
 blockStatement : '{' statement* '}';
 variableDeclaration : VARIABLE name EQUALS expression;
+assignment: name EQUALS expression;
 printStatement : PRINT '('expression')';
+forStatement : 'for' ('(')? forCondition (')')? statement;
+forCondition : iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;
 returnStatement : 'return' expression #returnWithValue
             | 'return' #returnVoid;
 ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
-forStatement : 'for' ('(')? forCondition (')')? statement;
-forCondition : iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;
 name : ID;
 functionArgument: expression;
 functionArgumentList: functionArgument? (',' functionArgument)* #unnamedFunctionArgumentList
