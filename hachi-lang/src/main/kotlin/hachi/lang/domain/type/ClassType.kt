@@ -2,7 +2,33 @@ package hachi.lang.domain.type
 
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class ClassType(private val name: String) : Type {
+class ClassType(name: String) : Type {
+    private val nameShortcuts = mapOf("List" to "java.util.ArrayList")
+
+    private val name = this.nameShortcuts[name] ?: name
+
+    companion object {
+        fun Integer(): ClassType {
+            return ClassType("java.lang.Integer")
+        }
+
+        fun Double(): ClassType {
+            return ClassType("java.lang.Double")
+        }
+
+        fun Boolean(): ClassType {
+            return ClassType("java.lang.Boolean")
+        }
+
+        fun Float(): ClassType {
+            return ClassType("java.lang.Float")
+        }
+
+        fun String(): ClassType {
+            return ClassType("java.lang.String")
+        }
+    }
+
     override fun getName(): String {
         return this.name
     }
