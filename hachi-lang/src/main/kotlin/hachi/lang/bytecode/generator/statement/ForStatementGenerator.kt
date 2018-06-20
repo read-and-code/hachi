@@ -10,7 +10,7 @@ import jdk.internal.org.objectweb.asm.Label
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class ForStatementGenerator(val methodVisitor: MethodVisitor) {
+class ForStatementGenerator(private val methodVisitor: MethodVisitor) {
     fun generate(rangedForStatement: RangedForStatement) {
         val newScope = rangedForStatement.scope
         val statementGenerator = StatementGenerator(this.methodVisitor, newScope)

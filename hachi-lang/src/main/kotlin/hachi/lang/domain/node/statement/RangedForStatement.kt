@@ -7,7 +7,7 @@ import hachi.lang.domain.type.Type
 import hachi.lang.exception.UnsupportedRangedLoopTypes
 import hachi.lang.util.TypeChecker
 
-class RangedForStatement(val iteratorVariable: Statement, private val startExpression: Expression, val endExpression: Expression, val statement: Statement, val iteratorVariableName: String, val scope: Scope) : Statement {
+class RangedForStatement(val iteratorVariable: Statement, val startExpression: Expression, val endExpression: Expression, val statement: Statement, val iteratorVariableName: String, val scope: Scope) : Statement {
     init {
         if (!TypeChecker.isInt(this.startExpression.getType()) || !TypeChecker.isInt(this.endExpression.getType())) {
             throw UnsupportedRangedLoopTypes()

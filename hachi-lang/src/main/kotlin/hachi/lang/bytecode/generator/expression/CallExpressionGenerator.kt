@@ -16,7 +16,7 @@ import hachi.lang.util.DescriptorFactory
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class CallExpressionGenerator(val expressionGenerator: ExpressionGenerator, private val methodVisitor: MethodVisitor, val scope: Scope) {
+class CallExpressionGenerator(private val expressionGenerator: ExpressionGenerator, private val methodVisitor: MethodVisitor, private val scope: Scope) {
     fun generate(constructorCall: ConstructorCall) {
         val functionSignature = this.scope.getConstructorCallSignature(constructorCall.getIdentifier(), constructorCall.getArguments())
         val ownerDescriptor = ClassType(functionSignature.functionName).getDescriptor()

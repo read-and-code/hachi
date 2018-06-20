@@ -6,7 +6,7 @@ import jdk.internal.org.objectweb.asm.Label
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class IfStatementGenerator(val statementGenerator: StatementGenerator, val expressionGenerator: ExpressionGenerator, val methodVisitor: MethodVisitor) {
+class IfStatementGenerator(private val statementGenerator: StatementGenerator, private val expressionGenerator: ExpressionGenerator, private val methodVisitor: MethodVisitor) {
     fun generate(ifStatement: IfStatement) {
         ifStatement.condition.accept(this.expressionGenerator)
 

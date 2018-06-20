@@ -5,7 +5,7 @@ import jdk.internal.org.objectweb.asm.Label
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class ConditionalExpressionGenerator(val expressionGenerator: ExpressionGenerator, val methodVisitor: MethodVisitor) {
+class ConditionalExpressionGenerator(private val expressionGenerator: ExpressionGenerator, private val methodVisitor: MethodVisitor) {
     fun generate(conditionalExpression: ConditionalExpression) {
         val leftExpression = conditionalExpression.leftExpression
         val rightExpression = conditionalExpression.rightExpression

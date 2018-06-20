@@ -6,7 +6,7 @@ import hachi.lang.domain.scope.Scope
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class ReferenceExpressionGenerator(val methodVisitor: MethodVisitor, val scope: Scope) {
+class ReferenceExpressionGenerator(private val methodVisitor: MethodVisitor, private val scope: Scope) {
     fun generate(localVariableReference: LocalVariableReference) {
         val variableName = localVariableReference.getName()
         val index = this.scope.getLocalVariableIndex(variableName)

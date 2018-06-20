@@ -9,18 +9,16 @@ import hachi.lang.util.TypeChecker
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class ArithmeticExpressionGenerator(val expressionGenerator: ExpressionGenerator, val methodVisitor: MethodVisitor) {
+class ArithmeticExpressionGenerator(private val expressionGenerator: ExpressionGenerator, private val methodVisitor: MethodVisitor) {
     fun generate(addition: Addition) {
         val type = addition.getType()
 
         if (TypeChecker.isString(type)) {
             this.generateStringAppend(addition)
-
-            return
+        } else {
+            this.evaluateArithmeticComponents(addition)
+            this.methodVisitor.visitInsn(type.getAddOpcode())
         }
-
-        this.evaluateArithmeticComponents(addition)
-        this.methodVisitor.visitInsn(type.getAddOpcode())
     }
 
     fun generate(subtraction: Subtraction) {

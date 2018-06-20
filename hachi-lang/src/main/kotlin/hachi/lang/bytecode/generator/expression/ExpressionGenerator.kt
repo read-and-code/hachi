@@ -16,7 +16,7 @@ import hachi.lang.domain.node.expression.arithmetic.Subtraction
 import hachi.lang.domain.scope.Scope
 import jdk.internal.org.objectweb.asm.MethodVisitor
 
-class ExpressionGenerator(private val methodVisitor: MethodVisitor, val scope: Scope) {
+class ExpressionGenerator(private val methodVisitor: MethodVisitor, private val scope: Scope) {
     private val referenceExpressionGenerator = ReferenceExpressionGenerator(this.methodVisitor, this.scope)
 
     private val valueExpressionGenerator = ValueExpressionGenerator(this.methodVisitor)

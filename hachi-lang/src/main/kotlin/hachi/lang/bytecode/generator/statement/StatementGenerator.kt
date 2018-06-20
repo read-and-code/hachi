@@ -24,7 +24,7 @@ import hachi.lang.domain.node.statement.VariableDeclarationStatement
 import hachi.lang.domain.scope.Scope
 import jdk.internal.org.objectweb.asm.MethodVisitor
 
-class StatementGenerator(private val methodVisitor: MethodVisitor, val scope: Scope) {
+class StatementGenerator(private val methodVisitor: MethodVisitor, private val scope: Scope) {
     private val expressionGenerator = ExpressionGenerator(methodVisitor, scope)
 
     private val printStatementGenerator = PrintStatementGenerator(this.expressionGenerator, this.methodVisitor)

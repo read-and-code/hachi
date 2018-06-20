@@ -6,7 +6,7 @@ import hachi.lang.domain.type.ClassType
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class PrintStatementGenerator(val expressionGenerator: ExpressionGenerator, val methodVisitor: MethodVisitor) {
+class PrintStatementGenerator(private val expressionGenerator: ExpressionGenerator, private val methodVisitor: MethodVisitor) {
     fun generate(printStatement: PrintStatement) {
         this.methodVisitor.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;")
 

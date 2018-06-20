@@ -6,7 +6,7 @@ import hachi.lang.domain.scope.Scope
 import jdk.internal.org.objectweb.asm.MethodVisitor
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class AssignmentStatementGenerator(val methodVisitor: MethodVisitor, val expressionGenerator: ExpressionGenerator, val scope: Scope) {
+class AssignmentStatementGenerator(private val methodVisitor: MethodVisitor, private val expressionGenerator: ExpressionGenerator, private val scope: Scope) {
     fun generate(assignmentStatement: AssignmentStatement) {
         val variableName = assignmentStatement.variableName
         val expression = assignmentStatement.expression

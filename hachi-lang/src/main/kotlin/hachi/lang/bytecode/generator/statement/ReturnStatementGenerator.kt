@@ -4,7 +4,7 @@ import hachi.lang.bytecode.generator.expression.ExpressionGenerator
 import hachi.lang.domain.node.statement.ReturnStatement
 import jdk.internal.org.objectweb.asm.MethodVisitor
 
-class ReturnStatementGenerator(val expressionGenerator: ExpressionGenerator, val methodVisitor: MethodVisitor) {
+class ReturnStatementGenerator(private val expressionGenerator: ExpressionGenerator, private val methodVisitor: MethodVisitor) {
     fun generate(returnStatement: ReturnStatement) {
         val expression = returnStatement.expression
 

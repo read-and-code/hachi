@@ -4,7 +4,7 @@ import hachi.lang.bytecode.generator.expression.ExpressionGenerator
 import hachi.lang.domain.node.statement.AssignmentStatement
 import hachi.lang.domain.node.statement.VariableDeclarationStatement
 
-class VariableDeclarationStatementGenerator(val statementGenerator: StatementGenerator, val expressionGenerator: ExpressionGenerator) {
+class VariableDeclarationStatementGenerator(private val statementGenerator: StatementGenerator, private val expressionGenerator: ExpressionGenerator) {
     fun generate(variableDeclarationStatement: VariableDeclarationStatement) {
         val expression = variableDeclarationStatement.expression
 
