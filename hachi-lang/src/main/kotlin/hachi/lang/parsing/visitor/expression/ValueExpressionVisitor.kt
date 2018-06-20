@@ -8,7 +8,7 @@ import hachi.lang.util.TypeResolver
 class ValueExpressionVisitor : HachiBaseVisitor<Value>() {
     override fun visitValue(valueContext: HachiParser.ValueContext): Value {
         val value = valueContext.text
-        val type = TypeResolver.getFromValue(valueContext.text)
+        val type = TypeResolver.getFromValue(value)
 
         return Value(value, type)
     }

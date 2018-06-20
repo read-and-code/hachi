@@ -3,12 +3,12 @@ package hachi.lang.domain
 import jdk.internal.org.objectweb.asm.Opcodes
 
 enum class CompareSign(private val sign: String, val opcode: Int) {
-    EQUAL("==", Opcodes.IF_ICMPEQ),
-    NOT_EQUAL("!=", Opcodes.IF_ICMPNE),
-    LESS_THAN("<", Opcodes.IF_ICMPLT),
-    GREATER_THAN(">", Opcodes.IF_ICMPGT),
-    LESS_THAN_OR_EQUAL("<=", Opcodes.IF_ICMPLE),
-    GREATER_THAN_OR_EQUAL(">=", Opcodes.IF_ICMPGE);
+    EQUAL("==", Opcodes.IFEQ),
+    NOT_EQUAL("!=", Opcodes.IFNE),
+    LESS_THAN("<", Opcodes.IFLT),
+    GREATER_THAN(">", Opcodes.IFGT),
+    LESS_THAN_OR_EQUAL("<=", Opcodes.IFLE),
+    GREATER_THAN_OR_EQUAL(">=", Opcodes.IFGE);
 
     companion object {
         fun fromString(sign: String): CompareSign {
