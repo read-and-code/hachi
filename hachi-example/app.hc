@@ -1,11 +1,9 @@
 class app {
-    int field
-
     start() {
-        field = 5
+        var a = new java.lang.Integer(455)
+        var b = new java.lang.Integer(455)
 
-        for i from 1 to field {
-            print(i)
-        }
+        print(a == b)
+        print(a > b)
     }
 }
