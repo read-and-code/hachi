@@ -2,7 +2,7 @@ package hachi.lang.domain.type
 
 import jdk.internal.org.objectweb.asm.Opcodes
 
-class ClassType(private var name: String) : Type {
+class ClassType(private val name: String) : Type {
     override fun getName(): String {
         return this.name
     }

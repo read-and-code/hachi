@@ -11,14 +11,14 @@ class FunctionParameterListExpressionVisitor(private val expressionVisitor: Expr
         val functionParameterExpressionVisitor = FunctionParameterExpressionVisitor(this.expressionVisitor)
         val parameters = emptyList<FunctionParameter>().toMutableList()
 
-        if (functionParameterContexts != null) {
-            parameters.addAll(functionParameterContexts.map { it.accept(functionParameterExpressionVisitor) })
+        functionParameterContexts?.let {
+            parameters.addAll(it.map { it.accept(functionParameterExpressionVisitor) })
         }
 
         val functionParameterWithDefaultValueContexts = functionParameterListContext?.functionParameterWithDefaultValue()
 
-        if (functionParameterWithDefaultValueContexts != null) {
-            parameters.addAll(functionParameterWithDefaultValueContexts.map { it.accept(functionParameterExpressionVisitor) })
+        functionParameterWithDefaultValueContexts?.let {
+            parameters.addAll(it.map { it.accept(functionParameterExpressionVisitor) })
         }
 
         return parameters

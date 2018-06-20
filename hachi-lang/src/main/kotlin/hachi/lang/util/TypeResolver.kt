@@ -7,11 +7,10 @@ import hachi.lang.domain.type.Type
 
 object TypeResolver {
     fun getFromTypeContext(typeContext: HachiParser.TypeContext?): Type {
-        if (typeContext == null) {
-            return BuiltInType.VOID
+        return when (typeContext) {
+            null -> BuiltInType.VOID
+            else -> this.getFromTypeName(typeContext.text)
         }
-
-        return this.getFromTypeName(typeContext.text)
     }
 
     fun getFromTypeName(typeName: String): Type {

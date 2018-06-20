@@ -3,13 +3,13 @@ package hachi.lang.domain.scope
 import hachi.lang.bytecode.generator.FieldGenerator
 import hachi.lang.domain.type.Type
 
-class Field(private val fieldName: String, private val owner: Type, private val fieldType: Type) : Variable {
+class Field(private val name: String, private val owner: Type, private val type: Type) : Variable {
     override fun getName(): String {
-        return this.fieldName
+        return this.name
     }
 
     override fun getType(): Type {
-        return this.fieldType
+        return this.type
     }
 
     fun getOwnerInternalName(): String {

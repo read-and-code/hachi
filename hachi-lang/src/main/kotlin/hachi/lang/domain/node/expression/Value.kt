@@ -4,9 +4,9 @@ import hachi.lang.bytecode.generator.expression.ExpressionGenerator
 import hachi.lang.bytecode.generator.statement.StatementGenerator
 import hachi.lang.domain.type.Type
 
-class Value(val value: String, private val valueType: Type) : Expression {
+class Value(val value: String, private val type: Type) : Expression {
     override fun getType(): Type {
-        return this.valueType
+        return this.type
     }
 
     override fun accept(expressionGenerator: ExpressionGenerator) {

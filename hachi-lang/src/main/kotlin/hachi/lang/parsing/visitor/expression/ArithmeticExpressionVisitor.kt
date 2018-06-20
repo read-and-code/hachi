@@ -8,7 +8,7 @@ import hachi.lang.domain.node.expression.arithmetic.Division
 import hachi.lang.domain.node.expression.arithmetic.Multiplication
 import hachi.lang.domain.node.expression.arithmetic.Subtraction
 
-class ArithmeticExpressionVisitor(val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<ArithmeticExpression>() {
+class ArithmeticExpressionVisitor(private val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<ArithmeticExpression>() {
     override fun visitAdd(addContext: HachiParser.AddContext): ArithmeticExpression {
         val leftExpressionContext = addContext.expression(0)
         val rightExpressionContext = addContext.expression(1)

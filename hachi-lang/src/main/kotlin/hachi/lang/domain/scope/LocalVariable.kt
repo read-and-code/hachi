@@ -2,12 +2,12 @@ package hachi.lang.domain.scope
 
 import hachi.lang.domain.type.Type
 
-class LocalVariable(private val variableName: String, private val variableType: Type) : Variable {
+class LocalVariable(private val name: String, private val type: Type) : Variable {
     override fun getName(): String {
-        return this.variableName
+        return this.name
     }
 
     override fun getType(): Type {
-        return this.variableType
+        return this.type
     }
 }

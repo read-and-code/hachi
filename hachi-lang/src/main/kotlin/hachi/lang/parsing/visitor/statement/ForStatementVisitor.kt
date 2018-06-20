@@ -9,7 +9,7 @@ import hachi.lang.domain.scope.LocalVariable
 import hachi.lang.domain.scope.Scope
 import hachi.lang.parsing.visitor.expression.ExpressionVisitor
 
-class ForStatementVisitor(val scope: Scope) : HachiBaseVisitor<RangedForStatement>() {
+class ForStatementVisitor(private val scope: Scope) : HachiBaseVisitor<RangedForStatement>() {
     private val expressionVisitor = ExpressionVisitor(this.scope)
 
     override fun visitForStatement(forStatementContext: HachiParser.ForStatementContext): RangedForStatement {

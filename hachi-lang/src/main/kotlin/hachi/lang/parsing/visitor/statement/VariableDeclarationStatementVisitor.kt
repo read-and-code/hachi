@@ -7,7 +7,7 @@ import hachi.lang.domain.scope.LocalVariable
 import hachi.lang.domain.scope.Scope
 import hachi.lang.parsing.visitor.expression.ExpressionVisitor
 
-class VariableDeclarationStatementVisitor(val expressionVisitor: ExpressionVisitor, val scope: Scope) : HachiBaseVisitor<VariableDeclarationStatement>() {
+class VariableDeclarationStatementVisitor(private val expressionVisitor: ExpressionVisitor, val scope: Scope) : HachiBaseVisitor<VariableDeclarationStatement>() {
     override fun visitVariableDeclaration(variableDeclarationContext: HachiParser.VariableDeclarationContext): VariableDeclarationStatement {
         val variableName = variableDeclarationContext.name().text
         val expressionContext = variableDeclarationContext.expression()

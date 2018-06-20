@@ -6,7 +6,7 @@ import hachi.lang.domain.node.expression.Expression
 import hachi.lang.domain.scope.Scope
 import hachi.lang.parsing.visitor.expression.function.CallExpressionVisitor
 
-class ExpressionVisitor(val scope: Scope) : HachiBaseVisitor<Expression>() {
+class ExpressionVisitor(private val scope: Scope) : HachiBaseVisitor<Expression>() {
     private val arithmeticExpressionVisitor = ArithmeticExpressionVisitor(this)
 
     private val variableReferenceExpressionVisitor = VariableReferenceExpressionVisitor(this.scope)

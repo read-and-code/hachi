@@ -11,7 +11,7 @@ import hachi.lang.domain.scope.Scope
 import hachi.lang.parsing.visitor.statement.StatementVisitor
 
 class FunctionVisitor(scope: Scope) : HachiBaseVisitor<Function>() {
-    val scope = Scope(scope)
+    private val scope = Scope(scope)
 
     override fun visitFunction(functionContext: HachiParser.FunctionContext): Function {
         val functionSignature = functionContext.functionDeclaration().accept(FunctionSignatureVisitor(this.scope))

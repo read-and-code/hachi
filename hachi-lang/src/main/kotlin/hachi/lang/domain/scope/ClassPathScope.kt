@@ -2,6 +2,8 @@ package hachi.lang.domain.scope
 
 import hachi.lang.domain.type.Type
 import hachi.lang.util.FunctionSignatureFactory
+import org.apache.commons.lang3.reflect.ConstructorUtils
+import org.apache.commons.lang3.reflect.MethodUtils
 
 class ClassPathScope {
     fun getFunctionSignature(owner: Type?, functionName: String, arguments: List<Type>): FunctionSignature? {
@@ -9,7 +11,7 @@ class ClassPathScope {
             val methodOwnerClass = owner?.getTypeClass()
             val parameters = arguments.map { it.getTypeClass() }
                     .toTypedArray()
-            val method = methodOwnerClass!!.getMethod(functionName, *parameters)
+            val method = MethodUtils.getMatchingAccessibleMethod(methodOwnerClass, functionName, *parameters)
 
             FunctionSignatureFactory.fromMethod(method)
         } catch (e: Exception) {
@@ -22,7 +24,7 @@ class ClassPathScope {
             val methodOwnerClass = Class.forName(className)
             val parameters = arguments.map { it.getTypeClass() }
                     .toTypedArray()
-            val constructor = methodOwnerClass.getConstructor(*parameters)
+            val constructor = ConstructorUtils.getMatchingAccessibleConstructor(methodOwnerClass, *parameters)
 
             return FunctionSignatureFactory.fromConstructor(constructor)
         } catch (e: Exception) {

@@ -7,7 +7,7 @@ import hachi.lang.domain.node.statement.ReturnStatement
 import hachi.lang.domain.type.BuiltInType
 import hachi.lang.parsing.visitor.expression.ExpressionVisitor
 
-class ReturnStatementVisitor(val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<ReturnStatement>() {
+class ReturnStatementVisitor(private val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<ReturnStatement>() {
     override fun visitReturnVoid(returnVoidContext: HachiParser.ReturnVoidContext): ReturnStatement {
         return ReturnStatement(EmptyExpression(BuiltInType.VOID))
     }

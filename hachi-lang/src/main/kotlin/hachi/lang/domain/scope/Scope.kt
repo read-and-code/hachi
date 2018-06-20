@@ -11,13 +11,13 @@ import hachi.lang.exception.LocalVariableNotFoundException
 import hachi.lang.exception.MethodWithNameAlreadyDefinedException
 
 class Scope {
-    var metaData: MetaData
+    private val metaData: MetaData
 
-    var functionSignatures: MutableList<FunctionSignature>
+    private val functionSignatures: MutableList<FunctionSignature>
 
-    var localVariables: MutableList<LocalVariable>
+    private val localVariables: MutableList<LocalVariable>
 
-    var fields: MutableList<Field>
+    private val fields: MutableList<Field>
 
     constructor(metaData: MetaData) {
         this.metaData = metaData

@@ -52,12 +52,13 @@ class CallExpressionVisitor(private val expressionVisitor: ExpressionVisitor, pr
     }
 
     private fun getArgumentsForCall(functionArgumentListContext: HachiParser.FunctionArgumentListContext?): List<FunctionArgument> {
-        return if (functionArgumentListContext != null) {
-            val argumentExpressionsListVisitor = FunctionArgumentListExpressionVisitor(this.expressionVisitor)
+        return when (functionArgumentListContext) {
+            null -> emptyList()
+            else -> {
+                val argumentExpressionsListVisitor = FunctionArgumentListExpressionVisitor(this.expressionVisitor)
 
-            functionArgumentListContext.accept(argumentExpressionsListVisitor)
-        } else {
-            emptyList()
+                functionArgumentListContext.accept(argumentExpressionsListVisitor)
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ import hachi.lang.domain.node.expression.LocalVariableReference
 import hachi.lang.domain.node.expression.Reference
 import hachi.lang.domain.scope.Scope
 
-class VariableReferenceExpressionVisitor(val scope: Scope) : HachiBaseVisitor<Reference>() {
+class VariableReferenceExpressionVisitor(private val scope: Scope) : HachiBaseVisitor<Reference>() {
     override fun visitVariableReference(variableReferenceContext: HachiParser.VariableReferenceContext): Reference {
         val variableName = variableReferenceContext.text
 

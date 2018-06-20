@@ -6,7 +6,7 @@ import hachi.lang.domain.node.statement.Statement
 import hachi.lang.domain.scope.Scope
 import hachi.lang.parsing.visitor.expression.ExpressionVisitor
 
-class StatementVisitor(val scope: Scope) : HachiBaseVisitor<Statement>() {
+class StatementVisitor(private val scope: Scope) : HachiBaseVisitor<Statement>() {
     private val expressionVisitor = ExpressionVisitor(scope)
 
     private val printStatementVisitor = PrintStatementVisitor(this.expressionVisitor)

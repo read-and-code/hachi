@@ -7,7 +7,7 @@ import hachi.lang.domain.node.expression.ConditionalExpression
 import hachi.lang.domain.node.expression.Value
 import hachi.lang.domain.type.BuiltInType
 
-class ConditionalExpressionVisitor(val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<ConditionalExpression>() {
+class ConditionalExpressionVisitor(private val expressionVisitor: ExpressionVisitor) : HachiBaseVisitor<ConditionalExpression>() {
     override fun visitConditionalExpression(conditionalExpressionContext: HachiParser.ConditionalExpressionContext): ConditionalExpression {
         val leftExpressionContext = conditionalExpressionContext.expression(0)
         val rightExpressionContext = conditionalExpressionContext.expression(1)

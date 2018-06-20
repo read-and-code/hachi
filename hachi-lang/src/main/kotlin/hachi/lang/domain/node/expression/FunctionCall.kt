@@ -5,7 +5,7 @@ import hachi.lang.bytecode.generator.statement.StatementGenerator
 import hachi.lang.domain.scope.FunctionSignature
 import hachi.lang.domain.type.Type
 
-class FunctionCall(val functionSignature: FunctionSignature, private val functionCallFunctionArguments: List<FunctionArgument>, val owner: Expression) : Call {
+class FunctionCall(val functionSignature: FunctionSignature, private val arguments: List<FunctionArgument>, val owner: Expression) : Call {
     private val functionCallType = this.functionSignature.returnType
 
     constructor(functionSignature: FunctionSignature, functionArguments: List<FunctionArgument>, ownerType: Type) : this(functionSignature, functionArguments, EmptyExpression(ownerType))
@@ -23,7 +23,7 @@ class FunctionCall(val functionSignature: FunctionSignature, private val functio
     }
 
     override fun getArguments(): List<FunctionArgument> {
-        return this.functionCallFunctionArguments
+        return this.arguments
     }
 
     override fun accept(expressionGenerator: ExpressionGenerator) {

@@ -8,7 +8,7 @@ import hachi.lang.parsing.visitor.expression.ExpressionVisitor
 import hachi.lang.parsing.visitor.expression.function.FunctionParameterListExpressionVisitor
 import hachi.lang.util.TypeResolver
 
-class FunctionSignatureVisitor(val scope: Scope) : HachiBaseVisitor<FunctionSignature>() {
+class FunctionSignatureVisitor(private val scope: Scope) : HachiBaseVisitor<FunctionSignature>() {
     private val expressionVisitor = ExpressionVisitor(this.scope)
 
     override fun visitFunctionDeclaration(functionDeclarationContext: HachiParser.FunctionDeclarationContext): FunctionSignature {
