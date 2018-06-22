@@ -50,6 +50,16 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitClassBody(HachiParser.ClassBodyContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link HachiParser#constructor}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstructor(HachiParser.ConstructorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HachiParser#constructor}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstructor(HachiParser.ConstructorContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link HachiParser#field}.
 	 * @param ctx the parse tree
 	 */
@@ -79,6 +89,16 @@ public interface HachiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionDeclaration(HachiParser.FunctionDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HachiParser#constructorDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HachiParser#constructorDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HachiParser#functionName}.
 	 * @param ctx the parse tree

@@ -31,23 +31,29 @@ class ClassVisitor : HachiBaseVisitor<ClassDeclaration>() {
                 }
 
         val functionSignatureVisitor = FunctionSignatureVisitor(this.scope)
+        val constructorContexts = classDeclarationContext.classBody().constructor()
         val functionContexts = classDeclarationContext.classBody().function()
+
+        constructorContexts.map { it.constructorDeclaration().accept(functionSignatureVisitor) }
+                .forEach { this.scope.addFunctionSignature(it) }
 
         functionContexts.map { it.functionDeclaration().accept(functionSignatureVisitor) }
                 .forEach { this.scope.addFunctionSignature(it) }
 
-        val defaultConstructorExists = this.scope.zeroParameterFunctionSignatureExists(className)
+        val constructors = constructorContexts.map { it.accept(ConstructorVisitor(this.scope)) }
+                .toMutableList()
+        val defaultConstructorExists = this.scope.functionSignatureExists(className, emptyList())
 
         if (!defaultConstructorExists) {
             this.addDefaultConstructorSignatureToScope(className)
+
+            constructors.add(this.getDefaultConstructor())
         }
 
         val methods = functionContexts.map { it.accept(FunctionVisitor(this.scope)) }
                 .toMutableList()
 
-        if (!defaultConstructorExists) {
-            methods.add(this.getDefaultConstructor())
-        }
+        methods.addAll(constructors)
 
         return ClassDeclaration(className, fields, methods)
     }

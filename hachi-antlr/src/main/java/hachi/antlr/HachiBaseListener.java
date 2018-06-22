@@ -66,6 +66,18 @@ public class HachiBaseListener implements HachiListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterConstructor(HachiParser.ConstructorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstructor(HachiParser.ConstructorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterField(HachiParser.FieldContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -97,6 +109,18 @@ public class HachiBaseListener implements HachiListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionDeclaration(HachiParser.FunctionDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -37,6 +37,12 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassBody(HachiParser.ClassBodyContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link HachiParser#constructor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstructor(HachiParser.ConstructorContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link HachiParser#field}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -54,6 +60,12 @@ public interface HachiVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunctionDeclaration(HachiParser.FunctionDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HachiParser#constructorDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HachiParser#functionName}.
 	 * @param ctx the parse tree
