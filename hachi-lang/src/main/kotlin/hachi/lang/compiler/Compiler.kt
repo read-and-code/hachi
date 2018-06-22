@@ -10,14 +10,14 @@ class Compiler {
     fun compile(file: File) {
         val compilationUnit = Parser().getCompilationUnit(file.absolutePath)
 
-        this.saveBytecodeToClassFile(compilationUnit)
+        this.saveBytecodeToClassFile(compilationUnit, file.parent)
     }
 
-    private fun saveBytecodeToClassFile(compilationUnit: CompilationUnit) {
+    private fun saveBytecodeToClassFile(compilationUnit: CompilationUnit, path: String) {
         val bytecodeGenerator = BytecodeGenerator()
         val byteCode = bytecodeGenerator.generate(compilationUnit)
         val className = compilationUnit.getClassName()
-        val fileName = "%s.class".format(className)
+        val fileName = "%s/%s.class".format(path, className)
         val outputStream = FileOutputStream(fileName)
 
         outputStream.write(byteCode)

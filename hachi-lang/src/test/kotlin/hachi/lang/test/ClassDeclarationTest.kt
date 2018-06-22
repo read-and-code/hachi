@@ -9,6 +9,6 @@ class ClassDeclarationTest : BaseTest() {
         val compilationUnit = this.getCompilationUnit("EmptyClass.hc")
         val classDeclaration = compilationUnit.classDeclaration
 
-        Assert.assertEquals("App", classDeclaration.name)
+        Assert.assertEquals("EmptyClass", classDeclaration.name)
     }
 }
