@@ -6,9 +6,9 @@ import org.junit.Test
 class ClassDeclarationTest : BaseTest() {
     @Test
     fun shouldReturnClassName() {
-        val compilationUnit = this.getCompilationUnit("EmptyClass.hc")
+        val compilationUnit = this.getCompilationUnit("ClassDeclaration.hc")
         val classDeclaration = compilationUnit.classDeclaration
 
-        Assert.assertEquals("EmptyClass", classDeclaration.name)
+        Assert.assertEquals("ClassDeclaration", classDeclaration.name)
     }
 }

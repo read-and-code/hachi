@@ -1,0 +1,4 @@
+class InvalidConstructor {
+    int InvalidConstructor() {
+    }
+}

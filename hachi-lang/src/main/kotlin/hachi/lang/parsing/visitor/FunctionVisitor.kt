@@ -8,6 +8,8 @@ import hachi.lang.domain.node.statement.Statement
 import hachi.lang.domain.scope.FunctionSignature
 import hachi.lang.domain.scope.LocalVariable
 import hachi.lang.domain.scope.Scope
+import hachi.lang.domain.type.BuiltInType
+import hachi.lang.exception.ConstructorShouldNotHaveReturnTypeException
 import hachi.lang.parsing.visitor.statement.StatementVisitor
 
 class FunctionVisitor(scope: Scope) : HachiBaseVisitor<Function>() {
@@ -22,6 +24,10 @@ class FunctionVisitor(scope: Scope) : HachiBaseVisitor<Function>() {
         val functionBody = this.getFunctionBody(functionContext)
 
         return if (functionSignature.functionName == this.scope.getClassName()) {
+            if (functionSignature.returnType != BuiltInType.VOID) {
+                throw ConstructorShouldNotHaveReturnTypeException(functionSignature.functionName)
+            }
+
             Constructor(functionSignature, functionBody)
         } else {
             Function(functionSignature, functionBody)
