@@ -45,7 +45,7 @@ class Scope {
         return this.functionSignatureExists(identifier, emptyList())
     }
 
-    private fun functionSignatureExists(identifier: String, functionArguments: List<FunctionArgument>): Boolean {
+    fun functionSignatureExists(identifier: String, functionArguments: List<FunctionArgument>): Boolean {
         if (identifier == "super") {
             return true
         }
