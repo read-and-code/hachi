@@ -8,6 +8,6 @@ class VariableDeclarationTest : BaseTest() {
     fun shouldPrintOne() {
         val output = this.run("VariableDeclaration.hc")
 
-        Assert.assertEquals("1", output)
+        Assert.assertEquals(listOf("1"), output)
     }
 }

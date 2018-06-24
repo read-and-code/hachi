@@ -17,7 +17,7 @@ abstract class BaseTest {
         return Paths.get(this::class.java.classLoader.getResource(fileName).toURI()).toString()
     }
 
-    fun run(fileName: String): String {
+    fun run(fileName: String): List<String> {
         val file = File(this.getResourceFileAbsolutePath(fileName))
 
         Compiler().compile(file)
@@ -26,14 +26,14 @@ abstract class BaseTest {
         val bufferedReader = BufferedReader(InputStreamReader(process.inputStream))
 
         var line = bufferedReader.readLine()
-        val output = StringBuilder()
+        val output = mutableListOf<String>()
 
         while (line != null) {
-            output.append(line)
+            output.add(line)
 
             line = bufferedReader.readLine()
         }
 
-        return output.toString()
+        return output
     }
 }

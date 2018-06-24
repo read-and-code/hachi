@@ -8,6 +8,6 @@ class ConstructorTest : BaseTest() {
     fun shouldPrintOne() {
         val output = this.run("Constructor.hc")
 
-        Assert.assertEquals("1", output)
+        Assert.assertEquals(listOf("1"), output)
     }
 }
