@@ -50,6 +50,16 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitClassBody(HachiParser.ClassBodyContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link HachiParser#field}.
+	 * @param ctx the parse tree
+	 */
+	void enterField(HachiParser.FieldContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HachiParser#field}.
+	 * @param ctx the parse tree
+	 */
+	void exitField(HachiParser.FieldContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link HachiParser#constructor}.
 	 * @param ctx the parse tree
 	 */
@@ -60,15 +70,15 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitConstructor(HachiParser.ConstructorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HachiParser#field}.
+	 * Enter a parse tree produced by {@link HachiParser#constructorDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterField(HachiParser.FieldContext ctx);
+	void enterConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HachiParser#field}.
+	 * Exit a parse tree produced by {@link HachiParser#constructorDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitField(HachiParser.FieldContext ctx);
+	void exitConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HachiParser#function}.
 	 * @param ctx the parse tree
@@ -89,16 +99,6 @@ public interface HachiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionDeclaration(HachiParser.FunctionDeclarationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HachiParser#constructorDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HachiParser#constructorDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitConstructorDeclaration(HachiParser.ConstructorDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HachiParser#functionName}.
 	 * @param ctx the parse tree
@@ -190,16 +190,6 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitStatement(HachiParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HachiParser#blockStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterBlockStatement(HachiParser.BlockStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HachiParser#blockStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitBlockStatement(HachiParser.BlockStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link HachiParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -220,16 +210,6 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitAssignmentStatement(HachiParser.AssignmentStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HachiParser#printStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterPrintStatement(HachiParser.PrintStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HachiParser#printStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitPrintStatement(HachiParser.PrintStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link HachiParser#forStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -249,6 +229,16 @@ public interface HachiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitForCondition(HachiParser.ForConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HachiParser#ifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfStatement(HachiParser.IfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HachiParser#ifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfStatement(HachiParser.IfStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code returnWithValue}
 	 * labeled alternative in {@link HachiParser#returnStatement}.
@@ -274,15 +264,25 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitReturnVoid(HachiParser.ReturnVoidContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HachiParser#ifStatement}.
+	 * Enter a parse tree produced by {@link HachiParser#printStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterIfStatement(HachiParser.IfStatementContext ctx);
+	void enterPrintStatement(HachiParser.PrintStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HachiParser#ifStatement}.
+	 * Exit a parse tree produced by {@link HachiParser#printStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitIfStatement(HachiParser.IfStatementContext ctx);
+	void exitPrintStatement(HachiParser.PrintStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HachiParser#blockStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlockStatement(HachiParser.BlockStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HachiParser#blockStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlockStatement(HachiParser.BlockStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HachiParser#name}.
 	 * @param ctx the parse tree
@@ -398,18 +398,6 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitConditionalExpression(HachiParser.ConditionalExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code functionCall}
-	 * labeled alternative in {@link HachiParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctionCall(HachiParser.FunctionCallContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code functionCall}
-	 * labeled alternative in {@link HachiParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctionCall(HachiParser.FunctionCallContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code subtract}
 	 * labeled alternative in {@link HachiParser#expression}.
 	 * @param ctx the parse tree
@@ -422,17 +410,17 @@ public interface HachiListener extends ParseTreeListener {
 	 */
 	void exitSubtract(HachiParser.SubtractContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code constructorCall}
+	 * Enter a parse tree produced by the {@code functionCall}
 	 * labeled alternative in {@link HachiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterConstructorCall(HachiParser.ConstructorCallContext ctx);
+	void enterFunctionCall(HachiParser.FunctionCallContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code constructorCall}
+	 * Exit a parse tree produced by the {@code functionCall}
 	 * labeled alternative in {@link HachiParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitConstructorCall(HachiParser.ConstructorCallContext ctx);
+	void exitFunctionCall(HachiParser.FunctionCallContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code divide}
 	 * labeled alternative in {@link HachiParser#expression}.
@@ -445,6 +433,18 @@ public interface HachiListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDivide(HachiParser.DivideContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code constructorCall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstructorCall(HachiParser.ConstructorCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code constructorCall}
+	 * labeled alternative in {@link HachiParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstructorCall(HachiParser.ConstructorCallContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code multiply}
 	 * labeled alternative in {@link HachiParser#expression}.

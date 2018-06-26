@@ -9,11 +9,11 @@ compilationUnit: classDeclaration EOF;
 classDeclaration: 'class' className '{' classBody '}';
 className: qualifiedName;
 classBody: field* constructor* function*;
-constructor: constructorDeclaration functionBody;
 field: type name;
+constructor: constructorDeclaration functionBody;
+constructorDeclaration: 'constructor' '('? functionParameterList? ')'?;
 function: functionDeclaration functionBody;
 functionDeclaration: (type)? functionName '('? functionParameterList? ')'?;
-constructorDeclaration: 'constructor' '('? functionParameterList? ')'?;
 functionName: ID;
 functionParameterList: functionParameter (',' functionParameter)*
           |  functionParameter (',' functionParameterWithDefaultValue)*
@@ -33,34 +33,30 @@ primitiveType: 'boolean' ('[' ']')*
               | 'double' ('[' ']')*
               | 'void' ('[' ']')*;
 classType: qualifiedName ('[' ']')*;
-statement: blockStatement
-            | variableDeclaration
+statement: variableDeclaration
             | assignmentStatement
-            | printStatement
             | forStatement
-            | returnStatement
             | ifStatement
+            | returnStatement
+            | printStatement
+            | blockStatement
             | expression;
-blockStatement: '{' statement* '}';
 variableDeclaration: VARIABLE name EQUALS expression;
 assignmentStatement: name EQUALS expression;
-printStatement: PRINT '('expression')';
 forStatement: 'for' ('(')? forCondition (')')? statement;
 forCondition: iterator=variableReference 'from' startExpression=expression range='to' endExpression=expression;
+ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
 returnStatement: 'return' expression #returnWithValue
             | 'return' #returnVoid;
-ifStatement: 'if' ('(')? expression (')')? trueStatement=statement ('else' falseStatement=statement)?;
+printStatement: PRINT '('expression')';
+blockStatement: '{' statement* '}';
 name: ID;
 functionArgument: expression;
 functionArgumentList: functionArgument? (',' functionArgument)* #unnamedFunctionArgumentList
             | namedFunctionArgument? (',' namedFunctionArgument)* #namedFunctionArgumentList;
 namedFunctionArgument: name '->' expression;
-expression: variableReference #variableReferenceLabel
-           | owner=expression '.' functionName '(' functionArgumentList ')' #functionCall
-           | functionName '(' functionArgumentList ')' #functionCall
-           | superCall='super' '('functionArgumentList ')' #supercall
-           | newCall='new' className '('functionArgumentList ')' #constructorCall
-           | value #valueLabel
+expression: value #valueLabel
+           | variableReference #variableReferenceLabel
            | '('expression '*' expression')' #multiply
            | expression '*' expression #multiply
            | '(' expression '/' expression ')' #divide
@@ -74,7 +70,11 @@ expression: variableReference #variableReferenceLabel
            | expression cmp='==' expression #conditionalExpression
            | expression cmp='!=' expression #conditionalExpression
            | expression cmp='>=' expression #conditionalExpression
-           | expression cmp='<=' expression #conditionalExpression;
+           | expression cmp='<=' expression #conditionalExpression
+           | owner=expression '.' functionName '(' functionArgumentList ')' #functionCall
+           | functionName '(' functionArgumentList ')' #functionCall
+           | superCall='super' '('functionArgumentList ')' #supercall
+           | newCall='new' className '('functionArgumentList ')' #constructorCall;
 variableReference: ID;
 value: NUMBER
       | STRING
