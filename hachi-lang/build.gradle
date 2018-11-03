@@ -2,12 +2,12 @@ apply plugin: "jacoco"
 
 dependencies {
     compile project(':hachi-antlr')
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
-    testCompile 'junit:junit:4.11'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+    testCompile 'junit:junit:4.12'
 }
 
 jacoco {
-    toolVersion = "0.8.1"
+    toolVersion = "0.8.2"
 }
 
 jacocoTestReport {
