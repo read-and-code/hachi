@@ -1,9 +1,9 @@
 apply plugin: "jacoco"
 
 dependencies {
-    compile project(':hachi-antlr')
-    compile 'org.apache.commons:commons-lang3:3.8.1'
-    testCompile 'junit:junit:4.12'
+    implementation project(':hachi-antlr')
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+    testImplementation 'junit:junit:4.12'
 }
 
 jacoco {
