@@ -2,7 +2,7 @@ apply plugin: "jacoco"
 
 dependencies {
     implementation project(':hachi-antlr')
-    implementation 'org.apache.commons:commons-lang3:3.11'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
     testImplementation 'junit:junit:4.13.2'
 }
 
