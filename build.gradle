@@ -32,7 +32,7 @@ subprojects {
 
         dependencies {
             implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-            ktlint "com.github.shyiko:ktlint:0.29.0"
+            ktlint "com.github.shyiko:ktlint:0.31.0"
         }
 
         compileKotlin {
